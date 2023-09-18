@@ -28,6 +28,9 @@
     <Filter Include="GameEngine\Primitives\Triangle">
       <UniqueIdentifier>{bb22d17a-6bb3-42d4-9093-3d3072c58ba0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Primitives\Quad">
+      <UniqueIdentifier>{24d14ba9-e447-4544-b3bc-32155ecc15b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,8 +54,11 @@
     <ClCompile Include="VertexBuffer.cpp">
       <Filter>GameEngine\GraphicsEngine\VertexBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp">
+    <ClCompile Include="TrianglePrimitive.cpp">
       <Filter>GameEngine\Primitives\Triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadPrimitive.cpp">
+      <Filter>GameEngine\Primitives\Quad</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,8 +80,11 @@
     <ClInclude Include="VertexBuffer.h">
       <Filter>GameEngine\GraphicsEngine\VertexBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="Triangle.h">
+    <ClInclude Include="TrianglePrimitive.h">
       <Filter>GameEngine\Primitives\Triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadPrimitive.h">
+      <Filter>GameEngine\Primitives\Quad</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

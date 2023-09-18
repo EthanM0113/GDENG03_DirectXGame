@@ -23,8 +23,9 @@
     <ClCompile Include="DeviceContext.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="QuadPrimitive.cpp" />
     <ClCompile Include="SwapChain.cpp" />
-    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="TrianglePrimitive.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -32,8 +33,9 @@
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="GraphicsEngine.h" />
+    <ClInclude Include="QuadPrimitive.h" />
     <ClInclude Include="SwapChain.h" />
-    <ClInclude Include="Triangle.h" />
+    <ClInclude Include="TrianglePrimitive.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

@@ -4,8 +4,8 @@
 #include "SwapChain.h"
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
-#include "Triangle.h"
-
+#include "TrianglePrimitive.h"
+#include "QuadPrimitive.h"
 
 class AppWindow : public Window
 {
@@ -20,6 +20,11 @@ public:
 
 private:
 	SwapChain* m_swap_chain;
-	VertexBuffer* m_vb;
+	//VertexBuffer* m_vb;
+
+	// Primitives
+	QuadPrimitive* quad_1 = new QuadPrimitive();
+	QuadPrimitive* quad_2 = new QuadPrimitive();
+	QuadPrimitive* quad_3 = new QuadPrimitive();
 };
 
