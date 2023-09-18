@@ -27,11 +27,13 @@ void AppWindow::onCreate()
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
+	/*
 	vertex list[] =
 	{
 		{-0.5f, -0.5f, 0.0f}, // POS 1
 		{0.0f, 0.5f, 0.0f}, // POS 2
-		{0.5f, -0.5f, 0.0f} // POS 3
+		{0.5f, -0.5f, 0.0f}, // POS 3
+		{0.3f, 0.7f, 0.0f}, // POS 4
 	};
 
 	void* shader_byte_code = nullptr;
@@ -43,6 +45,10 @@ void AppWindow::onCreate()
 	GraphicsEngine::get()->getShaderBufferAndSize(&shader_byte_code, &size_shader);
 
 	m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
+	*/
+
+	Triangle* triangle_1 = new Triangle({ -0.5f, -0.5f, 0.0f }, { 0.0f, 0.5f, 0.0f }, { 0.0f, 0.5f, 0.0f });
+
 }
  
 void AppWindow::onUpdate()
@@ -55,7 +61,7 @@ void AppWindow::onUpdate()
 	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 	GraphicsEngine::get()->setShaders();
 	GraphicsEngine::get()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
-	GraphicsEngine::get()->getImmediateDeviceContext()->drawTriangleList(m_vb->getSizeVertexList(), 0);
+	GraphicsEngine::get()->getImmediateDeviceContext()->drawTriangleStrip(m_vb->getSizeVertexList(), 0);
 
 	m_swap_chain->present(false);
 }

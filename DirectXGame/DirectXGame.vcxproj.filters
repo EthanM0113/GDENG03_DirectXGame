@@ -22,6 +22,12 @@
     <Filter Include="GameEngine\GraphicsEngine\VertexBuffer">
       <UniqueIdentifier>{f71e1789-9718-42f3-8e7a-92d694e29673}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Primitives">
+      <UniqueIdentifier>{b8da0a93-0182-47e0-8dfa-fccb06fad4d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Primitives\Triangle">
+      <UniqueIdentifier>{bb22d17a-6bb3-42d4-9093-3d3072c58ba0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,6 +51,9 @@
     <ClCompile Include="VertexBuffer.cpp">
       <Filter>GameEngine\GraphicsEngine\VertexBuffer</Filter>
     </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>GameEngine\Primitives\Triangle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -64,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="VertexBuffer.h">
       <Filter>GameEngine\GraphicsEngine\VertexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>GameEngine\Primitives\Triangle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
