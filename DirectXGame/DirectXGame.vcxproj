@@ -24,6 +24,12 @@
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="QuadPrimitive.cpp" />
+    <ClCompile Include="shader.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </DeploymentContent>
+    </ClCompile>
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="TrianglePrimitive.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />

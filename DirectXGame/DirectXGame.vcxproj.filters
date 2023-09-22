@@ -31,6 +31,9 @@
     <Filter Include="GameEngine\Primitives\Quad">
       <UniqueIdentifier>{24d14ba9-e447-4544-b3bc-32155ecc15b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{eadf47df-075f-4126-b934-844cb0221947}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -59,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="QuadPrimitive.cpp">
       <Filter>GameEngine\Primitives\Quad</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.fx">
+      <Filter>Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
