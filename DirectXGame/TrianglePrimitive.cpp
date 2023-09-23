@@ -16,9 +16,8 @@ void TrianglePrimitive::InitializeTriangle(vertex positions[3])
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
 	size_list = ARRAYSIZE(list);
 
-	GraphicsEngine::get()->createShaders();
+
 	size_shader = 0;
-	GraphicsEngine::get()->getShaderBufferAndSize(&shader_byte_code, &size_shader);
 
 	m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
 	
@@ -43,7 +42,6 @@ VertexBuffer* TrianglePrimitive::GetVertexBuffer()
 
 void TrianglePrimitive::DrawTriangle()
 {
-	GraphicsEngine::get()->setShaders();
 	GraphicsEngine::get()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
 	GraphicsEngine::get()->getImmediateDeviceContext()->drawTriangleList(m_vb->getSizeVertexList(), 0);
 }

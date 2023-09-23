@@ -11,15 +11,23 @@ public:
 	void InitializeQuad(vertex positions[4]);
 	UINT GetListSize();
 	VertexBuffer* GetVertexBuffer();
-	void DrawQuad();
+	void ReleaseBuffer();
+	void ReleaseShaders();
+	void UpdateQuad();
 
 private:
 	static const int maxLimit = 4;
 	UINT size_list;
-	UINT size_shader;
+	size_t size_shader;
 	vertex list[maxLimit];
 	void* shader_byte_code;
 	VertexBuffer* m_vb;
+	VertexShader* m_vs;
+	PixelShader* m_ps;
+	ConstantBuffer* m_cb;
 
+	unsigned long m_old_time = 0;
+	float m_delta_time = 0;
+	float m_angle = 0;
 };
 
