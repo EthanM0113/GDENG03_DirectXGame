@@ -29,16 +29,16 @@ void AppWindow::onCreate()
 	triangle_1->InitializeTriangle(triangle_1_coords);
 	*/
 
-	/*
+	
 	vertex quad_1_coords[] =
 	{
-		{-0.8f, 0.5f, 0.0f}, // POS 1 (bottom left)
-		{-0.8f, 0.8f, 0.0f}, // POS 2 (top left)
-		{-0.5f, 0.5f, 0.0f}, // POS 3 (bottom right)
-		{-0.5f, 0.8f, 0.0f} // POS 4 (top right)
+		{-0.8f, 0.5f, 0.0f,		-0.6f,0.30f,0.0f,	0,0,0,	0,1,0 }, // POS 1 (bottom left)
+		{-0.8f, 0.8f, 0.0f,		-0.6f,0.70f,0.0f,	1,1,0,	0,1,1 }, // POS 2 (top left)
+		{-0.5f, 0.5f, 0.0f,		-0.4f,0.2f,0.0f,	0,0,1,	1,0,0 }, // POS 3 (bottom right)
+		{-0.5f, 0.8f, 0.0f,		-0.46,0.7f,0.0f,	1,1,1,	0,0,1 } // POS 4 (top right)
 	};
 	quad_1->InitializeQuad(quad_1_coords);
-	*/
+	quadList.push_back(quad_1);
 
 	vertex rgb_quad_coords[] =
 	{
@@ -49,6 +49,7 @@ void AppWindow::onCreate()
 		{ 0.5f,0.5f,0.0f,      0.88f,0.77f,0.0f,    1,1,1,  0,0,1 } // POS4
 	};
 	rgb_quad->InitializeQuad(rgb_quad_coords);
+	quadList.push_back(rgb_quad);
 
 	/*
 	vertex quad_3_coords[] =
@@ -75,7 +76,7 @@ void AppWindow::onUpdate()
 
 	// Draw Primitives
 	//triangle_1->DrawTriangle();
-	//quad_1->UpdateQuad();
+	quad_1->UpdateQuad();
 	rgb_quad->UpdateQuad();
 	//quad_3->UpdateQuad();
 
@@ -86,7 +87,7 @@ void AppWindow::onDestroy()
 {
 	Window::onDestroy();
 	//triangle_1->GetVertexBuffer()->release();
-	//quad_1->ReleaseBuffer();
+	quad_1->ReleaseBuffer();
 	rgb_quad->ReleaseBuffer();
 	//quad_3->ReleaseBuffer();
 	m_swap_chain->release();
@@ -95,3 +96,51 @@ void AppWindow::onDestroy()
 	//quad_3->ReleaseShaders();
 	GraphicsEngine::get()->release();
 }
+
+
+void AppWindow::initializeQuadList()
+{
+	/*
+	// Single Vertex Buffer
+	m_vb = GraphicsEngine::get()->createVertexBuffer();
+	
+
+	for (int i = 0; i < quadList.size(); i++)
+	{
+		vertex* list = quadList[i]->GetVertexList();
+
+		size_list = ARRAYSIZE(list);
+
+		shader_byte_code = nullptr;
+		size_shader = 0;
+		//GraphicsEngine::get()->getShaderBufferAndSize(&shader_byte_code, &size_shader);
+
+		GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
+		m_vs = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
+		m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
+
+		GraphicsEngine::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
+		m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
+		GraphicsEngine::get()->releaseCompiledShader();
+
+		constant cc;
+		cc.m_angle = 0;
+
+		m_cb = GraphicsEngine::get()->createConstantBuffer();
+		m_cb->load(&cc, sizeof(constant));
+
+	}
+	*/
+}
+
+void AppWindow::updateQuadList()
+{
+	for (int i = 0; i < quadList.size(); i++)
+	{
+
+	}
+
+
+}
+
+

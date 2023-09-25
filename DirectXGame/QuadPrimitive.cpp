@@ -49,6 +49,11 @@ UINT QuadPrimitive::GetListSize()
 	return size_list;
 }
 
+vertex* QuadPrimitive::GetVertexList()
+{
+	return list;
+}
+
 VertexBuffer* QuadPrimitive::GetVertexBuffer()
 {
 	return m_vb;

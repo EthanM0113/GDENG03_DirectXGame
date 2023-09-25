@@ -10,6 +10,7 @@ public:
 	~QuadPrimitive();
 	void InitializeQuad(vertex positions[4]);
 	UINT GetListSize();
+	vertex* GetVertexList();
 	VertexBuffer* GetVertexBuffer();
 	void ReleaseBuffer();
 	void ReleaseShaders();

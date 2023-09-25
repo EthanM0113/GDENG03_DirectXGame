@@ -7,7 +7,9 @@
 #include "ConstantBuffer.h"
 #include "TrianglePrimitive.h"
 #include "QuadPrimitive.h"
+#include <vector>
 
+using namespace std;
 
 class AppWindow : public Window
 {
@@ -22,11 +24,19 @@ public:
 
 private:
 	SwapChain* m_swap_chain;
-	//VertexBuffer* m_vb;
-
+	
 	// Primitives
 	QuadPrimitive* quad_1 = new QuadPrimitive();
 	QuadPrimitive* rgb_quad = new QuadPrimitive();
 	QuadPrimitive* quad_3 = new QuadPrimitive();
+
+	// Main Vertex Buffer
+	VertexBuffer* m_vb;
+	UINT size_list;
+	vector<QuadPrimitive*> quadList;
+	void initializeQuadList();
+	void updateQuadList(); // Update and Draw Methods
+
+	
 };
 
