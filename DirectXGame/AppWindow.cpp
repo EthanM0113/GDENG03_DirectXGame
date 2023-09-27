@@ -54,6 +54,7 @@ void AppWindow::onCreate()
 	/*
 	vertex quad_3_coords[] =
 	{
+
 		{0.2f, 0.2f, 0.0f}, // POS 1
 		{0.2f, 0.8f, 0.0f}, // POS 2
 		{0.8f, 0.2f, 0.0f}, // POS 3
@@ -61,6 +62,7 @@ void AppWindow::onCreate()
 	};
 	quad_3->InitializeQuad(quad_3_coords);
 	*/
+
 
 }
  

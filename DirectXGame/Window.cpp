@@ -1,5 +1,9 @@
 #include "Window.h"
 
+#include "EngineTime.h"
+
+using namespace std;
+
 Window* window = nullptr;
 
 Window::Window()
@@ -61,7 +65,8 @@ bool Window::init()
 	::ShowWindow(m_hwnd, SW_SHOW);
 	::UpdateWindow(m_hwnd);
 
-	
+	// Initialize Engine Time
+	EngineTime::initialize();
 
 	m_is_run = true;
 	return true;
@@ -69,6 +74,8 @@ bool Window::init()
 
 bool Window::broadcast()
 {
+	EngineTime::LogFrameStart();
+
 	MSG msg;
 
     window->onUpdate();
@@ -80,6 +87,9 @@ bool Window::broadcast()
 	}
 
 	Sleep(1);
+
+	EngineTime::LogFrameEnd();
+	cout << EngineTime::getDeltaTime() << " seconds elapsed\n";
 
 	return true;
 }

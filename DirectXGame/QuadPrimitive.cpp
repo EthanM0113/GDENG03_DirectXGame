@@ -78,7 +78,7 @@ void QuadPrimitive::UpdateQuad()
 	m_delta_time = new_time / 1000.0f;
 	m_old_time = ::GetTickCount();
 
-	m_angle += 1.57 * m_delta_time;
+ 	m_angle += 1.57 * m_delta_time;
 	constant cc;
 	cc.m_angle = m_angle;
 
