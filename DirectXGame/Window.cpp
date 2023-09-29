@@ -89,7 +89,7 @@ bool Window::broadcast()
 	Sleep(1);
 
 	EngineTime::LogFrameEnd();
-	cout << EngineTime::getDeltaTime() << " seconds elapsed\n";
+	
 
 	return true;
 }

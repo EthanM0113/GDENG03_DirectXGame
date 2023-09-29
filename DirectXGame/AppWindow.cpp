@@ -1,6 +1,8 @@
 #include "AppWindow.h"
 #include <Windows.h>
 
+#include "EngineTime.h"
+
 AppWindow::AppWindow()
 {
 }
@@ -29,7 +31,7 @@ void AppWindow::onCreate()
 	triangle_1->InitializeTriangle(triangle_1_coords);
 	*/
 
-	
+	/*
 	vertex quad_1_coords[] =
 	{
 		{-0.8f, 0.5f, 0.0f,		-0.6f,0.30f,0.0f,	0,0,0,	0,1,0 }, // POS 1 (bottom left)
@@ -39,14 +41,15 @@ void AppWindow::onCreate()
 	};
 	quad_1->InitializeQuad(quad_1_coords);
 	quadList.push_back(quad_1);
+	*/
 
 	vertex rgb_quad_coords[] =
 	{
 		//X - Y - Z
-		{-0.5f,-0.5f,0.0f,    -0.32f,-0.11f,0.0f,   0,0,0,  0,1,0 }, // POS1
-		{-0.5f,0.5f,0.0f,     -0.11f,0.78f,0.0f,    1,1,0,  0,1,1 }, // POS2
-		{ 0.5f,-0.5f,0.0f,     0.75f,-0.73f,0.0f,   0,0,1,  1,0,0 },// POS3
-		{ 0.5f,0.5f,0.0f,      0.88f,0.77f,0.0f,    1,1,1,  0,0,1 } // POS4
+		{-0.7f,-0.9f,0.0f,    -0.32f,-0.11f,0.0f,   0,0,0,  0,1,0 }, // POS1
+		{-0.9f,0.1f,0.0f,     -0.11f,0.68f,0.0f,    1,1,0,  0,1,1 }, // POS2
+		{ 0.9f,-0.4f,0.0f,     0.1f,-0.73f,0.0f,   0,0,1,  1,0,0 },// POS3
+		{ -0.7f,-0.9f,0.0f,      0.8f,0.7f,1.0f,    1,1,1,  0,0,1 } // POS4
 	};
 	rgb_quad->InitializeQuad(rgb_quad_coords);
 	quadList.push_back(rgb_quad);
@@ -78,7 +81,7 @@ void AppWindow::onUpdate()
 
 	// Draw Primitives
 	//triangle_1->DrawTriangle();
-	quad_1->UpdateQuad();
+	//quad_1->UpdateQuad();
 	rgb_quad->UpdateQuad();
 	//quad_3->UpdateQuad();
 
@@ -89,7 +92,7 @@ void AppWindow::onDestroy()
 {
 	Window::onDestroy();
 	//triangle_1->GetVertexBuffer()->release();
-	quad_1->ReleaseBuffer();
+	//quad_1->ReleaseBuffer();
 	rgb_quad->ReleaseBuffer();
 	//quad_3->ReleaseBuffer();
 	m_swap_chain->release();

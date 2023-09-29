@@ -16,9 +16,9 @@ struct vertex
 };
 
 __declspec(align(16))
-struct constant
+struct CBData
 {
-	float m_angle;
+	float time;
 };
 
 class TrianglePrimitive

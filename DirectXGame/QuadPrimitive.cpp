@@ -3,6 +3,11 @@
 #include "ConstantBuffer.h"
 #include "PixelShader.h"
 #include "VertexShader.h"
+#include <iostream>
+
+#include "EngineTime.h"
+
+using namespace std;
 
 QuadPrimitive::QuadPrimitive()
 {
@@ -31,11 +36,11 @@ void QuadPrimitive::InitializeQuad(vertex positions[4])
 	m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
 	GraphicsEngine::get()->releaseCompiledShader();
 
-	constant cc;
-	cc.m_angle = 0;
+	CBData cc;
+	cc.time = 0;
 
 	m_cb = GraphicsEngine::get()->createConstantBuffer();
-	m_cb->load(&cc, sizeof(constant));
+	m_cb->load(&cc, sizeof(CBData));
 }
 
 QuadPrimitive::~QuadPrimitive()
@@ -72,15 +77,14 @@ void QuadPrimitive::ReleaseShaders()
 
 void QuadPrimitive::UpdateQuad()
 {
-	unsigned long new_time = 0;
-	if (m_old_time)
-		new_time = ::GetTickCount() - m_old_time;
-	m_delta_time = new_time / 1000.0f;
-	m_old_time = ::GetTickCount();
+	//time ++ 1.57 * EngineTime::getDeltaTime();
+	time += EngineTime::getDeltaTime();
+	speed = maxSpeed * sin(time);
+	CBData cc;
+	cc.time= speed;
 
- 	m_angle += 1.57 * m_delta_time;
-	constant cc;
-	cc.m_angle = m_angle;
+	cout << "Time: " << time << endl;
+	cout << "Speed : " << speed << endl;
 
 	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
 
@@ -93,5 +97,6 @@ void QuadPrimitive::UpdateQuad()
 	GraphicsEngine::get()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
 
 	GraphicsEngine::get()->getImmediateDeviceContext()->drawTriangleStrip(m_vb->getSizeVertexList(), 0);
+
 }
 

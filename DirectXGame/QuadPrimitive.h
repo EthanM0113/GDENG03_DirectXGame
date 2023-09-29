@@ -27,8 +27,8 @@ private:
 	PixelShader* m_ps;
 	ConstantBuffer* m_cb;
 
-	unsigned long m_old_time = 0;
-	float m_delta_time = 0;
-	float m_angle = 0;
+	float time = 0;
+	float speed = 0;
+	const float maxSpeed = 10.0;
 };
 
