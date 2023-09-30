@@ -79,12 +79,12 @@ void QuadPrimitive::UpdateQuad()
 {
 	//time ++ 1.57 * EngineTime::getDeltaTime();
 	time += EngineTime::getDeltaTime();
-	speed = maxSpeed * sin(time);
+	speed = (maxSpeed * (sin(time * 0.1)));
 	CBData cc;
 	cc.time= speed;
 
-	cout << "Time: " << time << endl;
-	cout << "Speed : " << speed << endl;
+	//cout << "Time: " << time << endl;
+	//cout << "Speed : " << speed << endl;
 
 	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
 

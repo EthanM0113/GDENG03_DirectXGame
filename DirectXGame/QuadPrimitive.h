@@ -29,6 +29,6 @@ private:
 
 	float time = 0;
 	float speed = 0;
-	const float maxSpeed = 10.0;
+	const float maxSpeed = 100.0f;
 };
 
