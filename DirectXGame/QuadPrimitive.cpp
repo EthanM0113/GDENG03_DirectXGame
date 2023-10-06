@@ -14,7 +14,7 @@ QuadPrimitive::QuadPrimitive()
 
 }
 
-void QuadPrimitive::InitializeQuad(vertex positions[4])
+void QuadPrimitive::InitializeQuad(vertex positions[maxLimit])
 {
 	list[0] = positions[0];
 	list[1] = positions[1];

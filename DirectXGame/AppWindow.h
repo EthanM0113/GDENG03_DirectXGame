@@ -11,6 +11,7 @@
 #include "Matrix4x4.h"
 #include "TrianglePrimitive.h"
 #include "QuadPrimitive.h"
+#include "Cube.h"
 #include <vector>
 
 using namespace std;
@@ -33,6 +34,13 @@ private:
 	QuadPrimitive* quad_1 = new QuadPrimitive();
 	QuadPrimitive* rgb_quad = new QuadPrimitive();
 	QuadPrimitive* quad_3 = new QuadPrimitive();
+
+	// Game Objects
+	Cube* cube1 = new Cube();
+	Cube* cube2 = new Cube();
+	Cube* cube3 = new Cube();
+	Cube* cube4 = new Cube();
+	Cube* cube5 = new Cube();
 
 private:
 	long m_old_delta;

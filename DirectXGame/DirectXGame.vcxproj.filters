@@ -37,20 +37,26 @@
     <Filter Include="GameEngine\EngineTime">
       <UniqueIdentifier>{710010a3-0491-454d-abd6-2cf422938916}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\WindowingSystem\Primitives">
-      <UniqueIdentifier>{b8da0a93-0182-47e0-8dfa-fccb06fad4d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\WindowingSystem\Primitives\Triangle">
-      <UniqueIdentifier>{bb22d17a-6bb3-42d4-9093-3d3072c58ba0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\WindowingSystem\Primitives\Quad">
-      <UniqueIdentifier>{24d14ba9-e447-4544-b3bc-32155ecc15b0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\Math">
       <UniqueIdentifier>{0d8e5aa9-b0ba-4870-97db-93d5936594eb}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameEngine\GraphicsEngine\IndexBuffer">
       <UniqueIdentifier>{81b89c04-33f3-499b-bf85-bd4f697751b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Primitives">
+      <UniqueIdentifier>{b8da0a93-0182-47e0-8dfa-fccb06fad4d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Primitives\Triangle">
+      <UniqueIdentifier>{bb22d17a-6bb3-42d4-9093-3d3072c58ba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Primitives\Quad">
+      <UniqueIdentifier>{24d14ba9-e447-4544-b3bc-32155ecc15b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObject">
+      <UniqueIdentifier>{004be4ef-b23f-4b49-a04c-a6b1718ecb14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObject\Cube">
+      <UniqueIdentifier>{af4277c9-91b7-4971-ada7-b4072369e39d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -76,10 +82,10 @@
       <Filter>GameEngine\GraphicsEngine\VertexBuffer</Filter>
     </ClCompile>
     <ClCompile Include="TrianglePrimitive.cpp">
-      <Filter>GameEngine\WindowingSystem\Primitives\Triangle</Filter>
+      <Filter>GameEngine\Primitives\Triangle</Filter>
     </ClCompile>
     <ClCompile Include="QuadPrimitive.cpp">
-      <Filter>GameEngine\WindowingSystem\Primitives\Quad</Filter>
+      <Filter>GameEngine\Primitives\Quad</Filter>
     </ClCompile>
     <ClCompile Include="shader.fx">
       <Filter>Shader</Filter>
@@ -98,6 +104,12 @@
     </ClCompile>
     <ClCompile Include="IndexBuffer.cpp">
       <Filter>GameEngine\GraphicsEngine\IndexBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameEngine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>GameEngine\GameObject\Cube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,10 +132,10 @@
       <Filter>GameEngine\GraphicsEngine\VertexBuffer</Filter>
     </ClInclude>
     <ClInclude Include="TrianglePrimitive.h">
-      <Filter>GameEngine\WindowingSystem\Primitives\Triangle</Filter>
+      <Filter>GameEngine\Primitives\Triangle</Filter>
     </ClInclude>
     <ClInclude Include="QuadPrimitive.h">
-      <Filter>GameEngine\WindowingSystem\Primitives\Quad</Filter>
+      <Filter>GameEngine\Primitives\Quad</Filter>
     </ClInclude>
     <ClInclude Include="VertexShader.h">
       <Filter>GameEngine\GraphicsEngine\VertexShader</Filter>
@@ -145,6 +157,12 @@
     </ClInclude>
     <ClInclude Include="IndexBuffer.h">
       <Filter>GameEngine\GraphicsEngine\IndexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameEngine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>GameEngine\GameObject\Cube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

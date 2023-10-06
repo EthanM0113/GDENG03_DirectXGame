@@ -85,9 +85,30 @@ void AppWindow::onCreate()
 
 	};
 
+	cube1->SetOrigin(Vector3D(0, 0, 0));
+	cube1->SetScale(Vector3D(0.5, 0.5, 0.5));
+	cube1->Initialize(vertex_list);
+
+	cube2->SetOrigin(Vector3D(-0.9, 0.7, 0));
+	cube2->SetScale(Vector3D(0.5, 0.5, 0.5));
+	cube2->Initialize(vertex_list);
+
+	cube3->SetOrigin(Vector3D(0.9, 0.7, 0));
+	cube3->SetScale(Vector3D(0.5, 0.5, 0.5));
+	cube3->Initialize(vertex_list);
+
+	cube4->SetOrigin(Vector3D(0.9, -0.7, 0));
+	cube4->SetScale(Vector3D(0.5, 0.5, 0.5));
+	cube4->Initialize(vertex_list);
+
+	cube5->SetOrigin(Vector3D(-0.9, -0.7, 0));
+	cube5->SetScale(Vector3D(0.5, 0.5, 0.5));
+	cube5->Initialize(vertex_list);
+
+	/*
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
 	UINT size_list = ARRAYSIZE(vertex_list);
-
+	cout << "Array Size: " << size_list << endl;
 
 	unsigned int index_list[] =
 	{
@@ -136,6 +157,7 @@ void AppWindow::onCreate()
 
 	m_cb = GraphicsEngine::get()->createConstantBuffer();
 	m_cb->load(&cc, sizeof(constant));
+	*/
 }
  
 void AppWindow::onUpdate()
@@ -155,20 +177,26 @@ void AppWindow::onUpdate()
 	//quad_3->UpdateQuad();
 
 	// For Cube
-	UpdateQuadPosition(m_delta_time);
+	cube1->SetAnimationSpeed(0.55);
+	cube1->Update(m_delta_time, rc);
+	cube1->Draw();
 
-	GraphicsEngine::get()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
-	GraphicsEngine::get()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
+	cube2->SetAnimationSpeed(0.20);
+	cube2->Update(m_delta_time, rc);
+	cube2->Draw();
 
-	GraphicsEngine::get()->getImmediateDeviceContext()->setVertexShader(m_vs);
-	GraphicsEngine::get()->getImmediateDeviceContext()->setPixelShader(m_ps);
+	cube3->SetAnimationSpeed(1.3);
+	cube3->Update(m_delta_time, rc);
+	cube3->Draw();
 
-	GraphicsEngine::get()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
+	cube4->SetAnimationSpeed(5.4);
+	cube4->Update(m_delta_time, rc);
+	cube4->Draw();
 
-	GraphicsEngine::get()->getImmediateDeviceContext()->setIndexBuffer(m_ib);
+	cube5->SetAnimationSpeed(0.01);
+	cube5->Update(m_delta_time, rc);
+	cube5->Draw();
 
-	// Draw Triangles for Cube
-	GraphicsEngine::get()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
 	m_swap_chain->present(true);
 
 	m_old_delta = m_new_delta;
@@ -190,17 +218,13 @@ void AppWindow::onDestroy()
 	//rgb_quad->ReleaseShaders();
 	//quad_3->ReleaseShaders();
 
-	// Release in cube
-	m_vb->release();
-	m_vs->release();
-	m_ps->release();
-	m_cb->release();
-	m_ib->release();
-
+	// Release Cubes
+	cube1->Release();
+	cube2->Release();
+	cube3->Release();
+	cube4->Release();
+	cube5->Release();
 	GraphicsEngine::get()->release();
-
-	
-	
 }
 
 void AppWindow::UpdateQuadPosition(float m_delta_time)
@@ -211,15 +235,15 @@ void AppWindow::UpdateQuadPosition(float m_delta_time)
 	if (m_delta_pos > 1.0f)
 		m_delta_pos = 0;
 
-	m_delta_scale += m_delta_time / 0.55f;
+	m_delta_scale += m_delta_time / 0.55f; // the lower the denominator, the faster the spin
 
+	/* Lerp Implementation
 	//cc.m_world.setScale(Vector3D::lerp(Vector3D(0.5, 0.5, 0), Vector3D(1.0f, 1.0f, 0), (sin(m_delta_scale) + 1.0f) / 2.0f));
-
 	//temp.setTranslation(Vector3D::lerp(Vector3D(-1.5f, -1.5f, 0), Vector3D(1.5f,1.5f, 0), m_delta_pos));
-
 	//cc.m_world *= temp;
-
-	cc.m_world.setScale(Vector3D(1.0, 1.0, 1.0));
+	*/
+	// Scale -> Rotate -> Transform
+	cc.m_world.setScale(Vector3D(0.2, 0.2, 0.2));
 
 	temp.setIdentity();
 	temp.setRotationZ(m_delta_scale);
@@ -233,6 +257,9 @@ void AppWindow::UpdateQuadPosition(float m_delta_time)
 	temp.setRotationX(m_delta_scale);
 	cc.m_world *= temp;
 
+	temp.setIdentity();
+	temp.setTranslation(Vector3D(1.0, 0, 0));
+	cc.m_world *= temp;
 
 	cc.m_view.setIdentity();
 	cc.m_proj.setOrthoLH
@@ -242,9 +269,14 @@ void AppWindow::UpdateQuadPosition(float m_delta_time)
 		-4.0f,
 		4.0f
 	);
-
+	
 
 	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
 }
 
+/*
+Proper Order of Transformation:
+https://gamedev.stackexchange.com/questions/16719/what-is-the-correct-order-to-multiply-scale-rotation-and-translation-matrices-f
+ 
+*/
 
