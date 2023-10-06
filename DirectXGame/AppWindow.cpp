@@ -131,7 +131,7 @@ void AppWindow::onCreate()
 	m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
 	GraphicsEngine::get()->releaseCompiledShader();
 
-	constant cc;
+
 	cc.m_time = 0;
 
 	m_cb = GraphicsEngine::get()->createConstantBuffer();
@@ -205,17 +205,13 @@ void AppWindow::onDestroy()
 
 void AppWindow::UpdateQuadPosition(float m_delta_time)
 {
-	constant cc;
 	cc.m_time = ::GetTickCount();
 
 	m_delta_pos += m_delta_time / 10.0f;
 	if (m_delta_pos > 1.0f)
 		m_delta_pos = 0;
 
-
-	Matrix4x4 temp;
-
-	m_delta_scale += m_delta_time / 0.55f; // higher the delta scale, the slower the animation speed
+	m_delta_scale += m_delta_time / 0.55f;
 
 	//cc.m_world.setScale(Vector3D::lerp(Vector3D(0.5, 0.5, 0), Vector3D(1.0f, 1.0f, 0), (sin(m_delta_scale) + 1.0f) / 2.0f));
 
@@ -223,7 +219,7 @@ void AppWindow::UpdateQuadPosition(float m_delta_time)
 
 	//cc.m_world *= temp;
 
-	cc.m_world.setScale(Vector3D(1, 1, 1));
+	cc.m_world.setScale(Vector3D(1.0, 1.0, 1.0));
 
 	temp.setIdentity();
 	temp.setRotationZ(m_delta_scale);

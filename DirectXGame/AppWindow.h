@@ -8,6 +8,7 @@
 #include "IndexBuffer.h"
 #include "PixelShader.h"
 #include "VertexShader.h"
+#include "Matrix4x4.h"
 #include "TrianglePrimitive.h"
 #include "QuadPrimitive.h"
 #include <vector>
@@ -40,6 +41,8 @@ private:
 
 // Cube Stuff
 private:
+	constant cc;
+	Matrix4x4 temp;
 	void UpdateQuadPosition(float m_delta_time);
 	float m_delta_pos;
 	float m_delta_scale;
