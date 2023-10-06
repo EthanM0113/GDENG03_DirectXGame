@@ -36,11 +36,11 @@ void QuadPrimitive::InitializeQuad(vertex positions[4])
 	m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
 	GraphicsEngine::get()->releaseCompiledShader();
 
-	CBData cc;
-	cc.time = 0;
+	constant cc;
+	cc.m_time = 0;
 
 	m_cb = GraphicsEngine::get()->createConstantBuffer();
-	m_cb->load(&cc, sizeof(CBData));
+	m_cb->load(&cc, sizeof(constant));
 }
 
 QuadPrimitive::~QuadPrimitive()
@@ -75,16 +75,45 @@ void QuadPrimitive::ReleaseShaders()
 	m_ps->release();
 }
 
-void QuadPrimitive::UpdateQuad()
+void QuadPrimitive::UpdateQuadPosition(RECT rc, float m_delta_time)
 {
+	/* For HO
 	//time ++ 1.57 * EngineTime::getDeltaTime();
+	
 	time += EngineTime::getDeltaTime();
 	speed = (maxSpeed * (sin(time * 0.1)));
-	CBData cc;
+	constant cc;
 	cc.time= speed;
+	*/
 
-	//cout << "Time: " << time << endl;
-	//cout << "Speed : " << speed << endl;
+	constant cc;
+	cc.m_time = ::GetTickCount();
+
+	m_delta_pos += m_delta_time / 10.0f;
+	if (m_delta_pos > 1.0f)
+		m_delta_pos = 0;
+
+
+	Matrix4x4 temp;
+
+	m_delta_scale += m_delta_time / 0.15f;
+
+	cc.m_world.setScale(Vector3D::lerp(Vector3D(0.5, 0.5, 0), Vector3D(1.0f, 1.0f, 0), (sin(m_delta_scale) + 1.0f) / 2.0f));
+
+	temp.setTranslation(Vector3D::lerp(Vector3D(-1.5f, -1.5f, 0), Vector3D(1.5f, 1.5f, 0), m_delta_pos));
+
+	cc.m_world *= temp;
+
+
+	cc.m_view.setIdentity();
+	cc.m_proj.setOrthoLH
+	(
+		(rc.right - rc.left) / 400.0f,
+		(rc.bottom - rc.top) / 400.0f,
+		-4.0f,
+		4.0f
+	);
+
 
 	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
 

@@ -5,6 +5,9 @@
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
 #include "ConstantBuffer.h"
+#include "IndexBuffer.h"
+#include "PixelShader.h"
+#include "VertexShader.h"
 #include "TrianglePrimitive.h"
 #include "QuadPrimitive.h"
 #include <vector>
@@ -30,13 +33,24 @@ private:
 	QuadPrimitive* rgb_quad = new QuadPrimitive();
 	QuadPrimitive* quad_3 = new QuadPrimitive();
 
-	// Main Vertex Buffer
-	VertexBuffer* m_vb;
-	UINT size_list;
-	vector<QuadPrimitive*> quadList;
-	void initializeQuadList();
-	void updateQuadList(); // Update and Draw Methods
+private:
+	long m_old_delta;
+	long m_new_delta;
+	float m_delta_time;
 
-	
+// Cube Stuff
+private:
+	void UpdateQuadPosition(float m_delta_time);
+	float m_delta_pos;
+	float m_delta_scale;
+	float m_delta_rot;
+	UINT size_list;
+	VertexBuffer* m_vb;
+	VertexShader* m_vs;
+	PixelShader* m_ps;
+	ConstantBuffer* m_cb;
+	IndexBuffer* m_ib;
+
+
 };
 

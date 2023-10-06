@@ -3,10 +3,13 @@
 #include "DeviceContext.h"
 #include  "VertexBuffer.h"
 #include "ConstantBuffer.h"
+#include "IndexBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
 
 #include <d3dcompiler.h>
+
+
 
 GraphicsEngine::GraphicsEngine()
 {
@@ -92,6 +95,11 @@ DeviceContext* GraphicsEngine::getImmediateDeviceContext()
 VertexBuffer* GraphicsEngine::createVertexBuffer()
 {
 	return new VertexBuffer();
+}
+
+IndexBuffer* GraphicsEngine::createIndexBuffer()
+{
+	return new IndexBuffer();
 }
 
 ConstantBuffer* GraphicsEngine::createConstantBuffer()

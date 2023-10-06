@@ -1,24 +1,23 @@
 #pragma once
 #include "GraphicsEngine.h"
 #include "VertexBuffer.h"
-
-struct vec3
-{
-	float x, y, z;
-};
+#include "Vector3D.h"
+#include "Matrix4x4.h"
 
 struct vertex
 {
-	vec3 position;
-	vec3 position1;
-	vec3 color;
-	vec3 color1;
+	Vector3D position;
+	Vector3D color;
+	Vector3D color1;
 };
 
 __declspec(align(16))
-struct CBData
+struct constant
 {
-	float time;
+	Matrix4x4 m_world;
+	Matrix4x4 m_view;
+	Matrix4x4 m_proj;
+	float m_time;
 };
 
 class TrianglePrimitive

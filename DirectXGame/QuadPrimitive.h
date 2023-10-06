@@ -14,7 +14,7 @@ public:
 	VertexBuffer* GetVertexBuffer();
 	void ReleaseBuffer();
 	void ReleaseShaders();
-	void UpdateQuad();
+	void UpdateQuadPosition(RECT rc, float m_delta_time);
 
 private:
 	static const int maxLimit = 4;
@@ -30,5 +30,9 @@ private:
 	float time = 0;
 	float speed = 0;
 	const float maxSpeed = 100.0f;
+
+	float m_delta_pos;
+	float m_delta_scale;
+	float m_delta_rot;
 };
 
