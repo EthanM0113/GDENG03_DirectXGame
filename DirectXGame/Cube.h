@@ -1,8 +1,8 @@
 #pragma once
-#include "GameObject.h"
+#include "AGameObject.h"
 #include "TrianglePrimitive.h"
 
-class Cube : public GameObject
+class Cube : public AGameObject
 {
 public:
 	Cube();

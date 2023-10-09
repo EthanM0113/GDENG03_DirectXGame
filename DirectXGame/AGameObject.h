@@ -3,7 +3,7 @@
 #include "TrianglePrimitive.h"
 #include "Vector3D.h"
 
-class GameObject
+class AGameObject
 {
 public:
 	void SetOrigin(Vector3D originalPos);

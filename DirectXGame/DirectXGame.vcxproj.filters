@@ -58,6 +58,12 @@
     <Filter Include="GameEngine\GameObject\Cube">
       <UniqueIdentifier>{af4277c9-91b7-4971-ada7-b4072369e39d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\InputSystem">
+      <UniqueIdentifier>{7a5b1f56-9b62-4bc9-8fce-5c78c675ce48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\InputSystem\InputListener">
+      <UniqueIdentifier>{8314653e-7cfc-4ed0-b594-2972c91c5765}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -105,11 +111,20 @@
     <ClCompile Include="IndexBuffer.cpp">
       <Filter>GameEngine\GraphicsEngine\IndexBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="AGameObject.cpp">
       <Filter>GameEngine\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>GameEngine\GameObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>GameEngine\InputSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="InputListener.cpp">
+      <Filter>GameEngine\InputSystem\InputListener</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>GameEngine\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,11 +173,20 @@
     <ClInclude Include="IndexBuffer.h">
       <Filter>GameEngine\GraphicsEngine\IndexBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="AGameObject.h">
       <Filter>GameEngine\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>GameEngine\GameObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>GameEngine\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="InputListener.h">
+      <Filter>GameEngine\InputSystem\InputListener</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>GameEngine\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
