@@ -66,11 +66,9 @@ void Cube::Initialize(vertex vertex_list[maxLimit])
 
 	GraphicsEngine::get()->releaseCompiledShader();
 
-
 	GraphicsEngine::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
 	m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
 	GraphicsEngine::get()->releaseCompiledShader();
-
 
 	cc.m_time = 0;
 
