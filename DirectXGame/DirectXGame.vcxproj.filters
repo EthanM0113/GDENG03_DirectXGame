@@ -64,6 +64,9 @@
     <Filter Include="GameEngine\InputSystem\InputListener">
       <UniqueIdentifier>{8314653e-7cfc-4ed0-b594-2972c91c5765}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Utilities">
+      <UniqueIdentifier>{d85f5e68-3c83-4107-bca4-5156c54277d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -126,6 +129,18 @@
     <ClCompile Include="Point.cpp">
       <Filter>GameEngine\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Vector3D.cpp">
+      <Filter>GameEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4x4.cpp">
+      <Filter>GameEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="MathUtils.cpp">
+      <Filter>GameEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>GameEngine\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -187,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="Point.h">
       <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtils.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>GameEngine\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

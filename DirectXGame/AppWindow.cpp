@@ -1,282 +1,140 @@
 #include "AppWindow.h"
-#include <Windows.h>
-#include "EngineTime.h"
+#define _USE_MATH_DEFINES
+#include <iostream>
+#include <math.h>
+
+#include "Cube.h"
 #include "Vector3D.h"
-
-
-AppWindow::AppWindow()
-{
-}
-
-AppWindow::~AppWindow()
-{
-}
+#include "EngineTime.h"
+#include "GraphicsEngine.h"
+#include "InputSystem.h"
+#include "MathUtils.h"
+#include "Matrix4x4.h"
 
 void AppWindow::onCreate()
 {
 	GraphicsEngine::get()->init();
+	GraphicsEngine* graphEngine = GraphicsEngine::get();
+	EngineTime::initialize();
+	InputSystem::initialize();
+	InputSystem::getInstance()->addListener(this);
+
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
 
-	RECT rc = this->getClientWindowRect();
+	RECT rc = getClientWindowRect();
+
+	std::cout << "hwnd: " << this->m_hwnd;
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
-	// Create Primitives
-	/* Triangle Primitive Example
-	vertex triangle_1_coords[] =
-	{
-		{-0.5f, -0.5f, 0.0f}, // POS 1
-		{0.0f, 0.5f, 0.0f}, // POS 2
-		{0.5f, -0.5f, 0.0f} // POS 3
-	};
-	triangle_1->InitializeTriangle(triangle_1_coords);
-	*/
+	void* shaderByteCode = nullptr;
+	size_t sizeShader = 0;
 
-	/* Moving Quad 
-	vertex quad_1_coords[] =
-	{
-		{Vector3D(-0.5f,-0.5f,0.0f),    Vector3D(-0.32f,-0.11f,0.0f),   Vector3D(0,0,0), Vector3D(0,1,0) }, // POS1 (bottom left)
-		{Vector3D(-0.5f,0.5f,0.0f),     Vector3D(-0.11f,0.78f,0.0f),   Vector3D(1,1,0), Vector3D(0,1,1) }, // POS2 (top left)
-		{ Vector3D(0.5f,-0.5f,0.0f),     Vector3D(0.75f,-0.73f,0.0f), Vector3D(0,0,1),  Vector3D(1,0,0) },// POS3 (bottom right)
-		{ Vector3D(0.5f,0.5f,0.0f),     Vector3D(0.88f,0.77f,0.0f),    Vector3D(1,1,1), Vector3D(0,0,1) } // POS 4 (top right)
-	};
-	quad_1->InitializeQuad(quad_1_coords);
-	quadList.push_back(quad_1);
-	*/
+	//compile basic vertex shader
+	graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
+	this->m_vertex_shader = graphEngine->createVertexShader(shaderByteCode, sizeShader);
 
-	/*
-	vertex rgb_quad_coords[] =
-	{
-		//X - Y - Z
-		{-0.7f,-0.9f,0.0f,    -0.32f,-0.11f,0.0f,   0,0,0,  0,1,0 }, // POS1
-		{-0.9f,0.1f,0.0f,     -0.11f,0.68f,0.0f,    1,1,0,  0,1,1 }, // POS2
-		{ 0.9f,-0.4f,0.0f,     0.1f,-0.73f,0.0f,   0,0,1,  1,0,0 },// POS3
-		{ -0.7f,-0.9f,0.0f,      0.8f,0.7f,1.0f,    1,1,1,  0,0,1 } // POS4
-	};
-	rgb_quad->InitializeQuad(rgb_quad_coords);
-	quadList.push_back(rgb_quad);
-	*/
+	for (int i = 0; i < 100; i++) {
+		float x = MathUtils::randomFloat(-0.75, 0.75f);
+		float y = MathUtils::randomFloat(-0.75, 0.75f);
+		float z = MathUtils::randomFloat(-0.75, 0.75f);
 
-	/*
-	vertex quad_3_coords[] =
-	{
+		Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
+		cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
+		cubeObject->setPosition(Vector3D(x, y, z));
+		cubeObject->setScale(Vector3D(0.25, 0.25, 0.25));
+		this->cubeList.push_back(cubeObject);
+	}
 
-		{0.2f, 0.2f, 0.0f}, // POS 1
-		{0.2f, 0.8f, 0.0f}, // POS 2
-		{0.8f, 0.2f, 0.0f}, // POS 3
-		{0.8f, 0.8f, 0.0f} // POS 4
-	};
-	quad_3->InitializeQuad(quad_3_coords);
-	*/
+	graphEngine->releaseCompiledShader(); // this must be called after compilation of each shader
 
-	vertex vertex_list[] =
-	{
-		//X - Y - Z
-		//FRONT FACE
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(0.2f,0,0) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(0.2f,0.2f,0) },
-		{ Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(0.2f,0.2f,0) },
-		{ Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(0.2f,0,0) },
-
-		//BACK FACE
-		{ Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,0.2f,0) },
-		{ Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,0.2f,0.2f) },
-		{ Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,0.2f,0.2f) },
-		{ Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,0.2f,0) }
-
-	};
-
-	cube1->SetOrigin(Vector3D(0, 0, 0));
-	cube1->SetScale(Vector3D(0.5, 0.5, 0.5));
-	cube1->Initialize(vertex_list);
-
-	cube2->SetOrigin(Vector3D(-0.9, 0.7, 0));
-	cube2->SetScale(Vector3D(0.5, 0.5, 0.5));
-	cube2->Initialize(vertex_list);
-
-	cube3->SetOrigin(Vector3D(0.9, 0.7, 0));
-	cube3->SetScale(Vector3D(0.5, 0.5, 0.5));
-	cube3->Initialize(vertex_list);
-
-	cube4->SetOrigin(Vector3D(0.9, -0.7, 0));
-	cube4->SetScale(Vector3D(0.5, 0.5, 0.5));
-	cube4->Initialize(vertex_list);
-
-	cube5->SetOrigin(Vector3D(-0.9, -0.7, 0));
-	cube5->SetScale(Vector3D(0.5, 0.5, 0.5));
-	cube5->Initialize(vertex_list);
-
-	/*
-	m_vb = GraphicsEngine::get()->createVertexBuffer();
-	UINT size_list = ARRAYSIZE(vertex_list);
-	cout << "Array Size: " << size_list << endl;
-
-	unsigned int index_list[] =
-	{
-		//FRONT SIDE
-		0,1,2,  //FIRST TRIANGLE
-		2,3,0,  //SECOND TRIANGLE
-		//BACK SIDE
-		4,5,6,
-		6,7,4,
-		//TOP SIDE
-		1,6,5,
-		5,2,1,
-		//BOTTOM SIDE
-		7,0,3,
-		3,4,7,
-		//RIGHT SIDE
-		3,2,5,
-		5,4,3,
-		//LEFT SIDE
-		7,6,1,
-		1,0,7
-	};
-
-
-	m_ib = GraphicsEngine::get()->createIndexBuffer();
-	UINT size_index_list = ARRAYSIZE(index_list);
-
-	m_ib->load(index_list, size_index_list);
-
-	void* shader_byte_code = nullptr;
-	size_t size_shader = 0;
-	GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
-
-	m_vs = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
-	m_vb->load(vertex_list, sizeof(vertex), size_list, shader_byte_code, size_shader);
-
-	GraphicsEngine::get()->releaseCompiledShader();
-
-
-	GraphicsEngine::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
-	m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
-	GraphicsEngine::get()->releaseCompiledShader();
-
-
-	cc.m_time = 0;
-
-	m_cb = GraphicsEngine::get()->createConstantBuffer();
-	m_cb->load(&cc, sizeof(constant));
-	*/
+	//compile basic pixel shader
+	graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &sizeShader);
+	this->m_pixel_shader = graphEngine->createPixelShader(shaderByteCode, sizeShader);
+	graphEngine->releaseCompiledShader();
 }
- 
+
 void AppWindow::onUpdate()
 {
-	// Clear Render Target
-	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,
-		0, 0, 0.3, 1);
+	ticks += EngineTime::getDeltaTime() * 1.0f;
 
-	// Set Viewport
-	RECT rc = this->getClientWindowRect();
-	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
+	InputSystem::getInstance()->update();
 
-	// Draw Primitives
-	//triangle_1->DrawTriangle();
-	//quad_1->UpdateQuadPosition(rc, m_delta_time);
-	//rgb_quad->UpdateQuad();
-	//quad_3->UpdateQuad();
+	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, 0, 0, 0.5f, 1);
 
-	// For Cube
-	cube1->SetAnimationSpeed(0.55);
-	cube1->Update(m_delta_time, rc);
-	cube1->Draw();
+	RECT rc = getClientWindowRect();
+	int width = rc.right - rc.left;
+	int height = rc.bottom - rc.top;
 
-	cube2->SetAnimationSpeed(0.20);
-	cube2->Update(m_delta_time, rc);
-	cube2->Draw();
+	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(width, height);
 
-	cube3->SetAnimationSpeed(1.3);
-	cube3->Update(m_delta_time, rc);
-	cube3->Draw();
-
-	cube4->SetAnimationSpeed(5.4);
-	cube4->Update(m_delta_time, rc);
-	cube4->Draw();
-
-	cube5->SetAnimationSpeed(0.01);
-	cube5->Update(m_delta_time, rc);
-	cube5->Draw();
+	for (int i = 0; i < cubeList.size(); i++) {
+		cubeList[i]->update(EngineTime::getDeltaTime());
+		cubeList[i]->draw(width, height, m_vertex_shader, m_pixel_shader);
+	}
 
 	m_swap_chain->present(true);
-
-	m_old_delta = m_new_delta;
-	m_new_delta = ::GetTickCount();
-
-	m_delta_time = (m_old_delta) ? ((m_new_delta - m_old_delta) / 1000.0f) : 0;
 }
-
 
 void AppWindow::onDestroy()
 {
 	Window::onDestroy();
-	//triangle_1->GetVertexBuffer()->release();
-	//quad_1->ReleaseBuffer();
-	//rgb_quad->ReleaseBuffer();
-	//quad_3->ReleaseBuffer();
 	m_swap_chain->release();
-	//quad_1->ReleaseShaders();
-	//rgb_quad->ReleaseShaders();
-	//quad_3->ReleaseShaders();
+	m_vertex_buffer->release();
+	m_index_buffer->release();
+	m_constant_buffer->release();
 
-	// Release Cubes
-	cube1->Release();
-	cube2->Release();
-	cube3->Release();
-	cube4->Release();
-	cube5->Release();
+	m_vertex_shader->release();
+	m_pixel_shader->release();
+
+	InputSystem::destroy();
 	GraphicsEngine::get()->release();
 }
 
-void AppWindow::UpdateQuadPosition(float m_delta_time)
+void AppWindow::onKeyDown(int key)
 {
-	cc.m_time = ::GetTickCount();
-
-	m_delta_pos += m_delta_time / 10.0f;
-	if (m_delta_pos > 1.0f)
-		m_delta_pos = 0;
-
-	m_delta_scale += m_delta_time / 0.55f; // the lower the denominator, the faster the spin
-
-	/* Lerp Implementation
-	//cc.m_world.setScale(Vector3D::lerp(Vector3D(0.5, 0.5, 0), Vector3D(1.0f, 1.0f, 0), (sin(m_delta_scale) + 1.0f) / 2.0f));
-	//temp.setTranslation(Vector3D::lerp(Vector3D(-1.5f, -1.5f, 0), Vector3D(1.5f,1.5f, 0), m_delta_pos));
-	//cc.m_world *= temp;
-	*/
-	// Scale -> Rotate -> Transform
-	cc.m_world.setScale(Vector3D(0.2, 0.2, 0.2));
-
-	temp.setIdentity();
-	temp.setRotationZ(m_delta_scale);
-	cc.m_world *= temp;
-
-	temp.setIdentity();
-	temp.setRotationY(m_delta_scale);
-	cc.m_world *= temp;
-
-	temp.setIdentity();
-	temp.setRotationX(m_delta_scale);
-	cc.m_world *= temp;
-
-	temp.setIdentity();
-	temp.setTranslation(Vector3D(1.0, 0, 0));
-	cc.m_world *= temp;
-
-	cc.m_view.setIdentity();
-	cc.m_proj.setOrthoLH
-	(
-		(this->getClientWindowRect().right - this->getClientWindowRect().left) / 300.0f,
-		(this->getClientWindowRect().bottom - this->getClientWindowRect().top) / 300.0f,
-		-4.0f,
-		4.0f
-	);
-	
-
-	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
+	cout << "onkeydown:\n";
+	if (InputSystem::getInstance()->isKeyDown('W'))
+	{
+		cout << "W pressed\n";
+	}
 }
 
-/*
-Proper Order of Transformation:
-https://gamedev.stackexchange.com/questions/16719/what-is-the-correct-order-to-multiply-scale-rotation-and-translation-matrices-f
- 
-*/
+void AppWindow::onKeyUp(int key)
+{
+	cout << "onkeyup:\n";
+	if (InputSystem::getInstance()->isKeyUp('W'))
+	{
+		cout << "W released\n";
+	}
+}
 
+void AppWindow::onMouseMove(const Point deltaPos)
+{
+	cout << " mouse moved: " << deltaPos.getX() << ", " << deltaPos.getY() << "\n";
+}
+
+void AppWindow::onLeftMouseDown(const Point deltaPos)
+{
+}
+
+void AppWindow::onLeftMouseUp(const Point deltaPos)
+{
+}
+
+void AppWindow::onRightMouseDown(const Point deltaPos)
+{
+}
+
+void AppWindow::onRightMouseUp(const Point deltaPos)
+{
+}
+
+AppWindow::AppWindow()
+{
+
+}
+
+AppWindow::~AppWindow()
+{
+
+}

@@ -124,14 +124,12 @@ PixelShader* GraphicsEngine::createPixelShader(const void* shader_byte_code, siz
 {
 	PixelShader* ps = new PixelShader();
 
-	if (!ps->init(shader_byte_code, byte_code_size))
-	{
+	if (!ps->init(shader_byte_code, byte_code_size)) {
 		ps->release();
 		return nullptr;
 	}
 
 	return ps;
-
 }
 
 bool GraphicsEngine::compileVertexShader(const wchar_t* file_name, const char* entry_point_name,

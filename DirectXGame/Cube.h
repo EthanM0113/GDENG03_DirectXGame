@@ -1,19 +1,25 @@
 #pragma once
 #include "AGameObject.h"
-#include "TrianglePrimitive.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "ConstantBuffer.h"
 
 class Cube : public AGameObject
 {
 public:
-	Cube();
+	Cube(string name, void* shaderByteCode, size_t sizeShader);
 	~Cube();
-	void Initialize(vertex *vertex_list);
-	void SetAnimationSpeed(float newAnimationSpeed);
-	void Update(float m_delta_time, RECT rc);
-	void Draw();
-	void Release();
+
+	void update(float deltaTime) override;
+	void draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader) override;
+	void setAnimSpeed(float speed);
 
 private:
-	float animationSpeed = 1.0;
+	VertexBuffer* vertexBuffer;
+	IndexBuffer* indexBuffer;
+	ConstantBuffer* constantBuffer;
+	float ticks = 0.0f;
+	float deltaPos = 0.0f;
+	float deltaTime = 0.0f;
+	float speed = 10.0f;
 };
-
