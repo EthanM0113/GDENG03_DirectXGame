@@ -1,5 +1,7 @@
 #include "InputSystem.h"
 
+#include <unordered_set>
+
 InputSystem* InputSystem::sharedInstance = nullptr;
 
 InputSystem* InputSystem::getInstance()
@@ -185,4 +187,9 @@ void InputSystem::callOnRightMouseUp(Point deltaPt)
 	for (int i = 0; i < this->inputListenerList.size(); i++) {
 		this->inputListenerList[i]->onRightMouseUp(deltaPt);
 	}
+}
+
+void InputSystem::setCursorPosition(const Point& pos)
+{
+	::SetCursorPos(pos.getX(), pos.getY());
 }

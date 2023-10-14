@@ -15,23 +15,44 @@ Window::Window()
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
+	//GetWindowLong(hwnd,)
 	switch (msg)
 	{
 	case WM_CREATE:
 	{
+		// Event fired when the window is created
+		// collected here..
 		Window* window = (Window*)((LPCREATESTRUCT)lparam)->lpCreateParams;
+		// .. and then stored for later lookup
 		SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)window);
 		window->setHWND(hwnd);
 		window->onCreate();
 		break;
 	}
+	case WM_SETFOCUS:
+	{
+		// Event fired when the window get focus
+		Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+		window->onFocus();
+		break;
+	}
+	case WM_KILLFOCUS:
+	{
+		// Event fired when the window lost focus
+		Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+		window->onKillFocus();
+		break;
+	}
 	case WM_DESTROY:
 	{
+		// Event fired when the window is destroyed
 		Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 		window->onDestroy();
 		::PostQuitMessage(0);
 		break;
 	}
+
+
 	default:
 		return ::DefWindowProc(hwnd, msg, wparam, lparam);
 	}
@@ -66,7 +87,7 @@ bool Window::init()
 	m_hwnd = ::CreateWindowEx(
 		WS_EX_OVERLAPPEDWINDOW, class_name, L"John Nathaniel Manucat Game Engine",
 		WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
-		1024, 768, nullptr, nullptr, moduleHandle, this
+		1920, 1080, nullptr, nullptr, moduleHandle, this
 	);
 
 	if (!m_hwnd)
@@ -133,6 +154,14 @@ void Window::setHWND(HWND hwnd)
 void Window::onDestroy()
 {
 	m_is_running = false;
+}
+
+void Window::onFocus()
+{
+}
+
+void Window::onKillFocus()
+{
 }
 
 Window::~Window()

@@ -18,6 +18,7 @@ private:
 	VertexBuffer* vertexBuffer;
 	IndexBuffer* indexBuffer;
 	ConstantBuffer* constantBuffer;
+	CBData cbData;
 	float ticks = 0.0f;
 	float deltaPos = 0.0f;
 	float deltaTime = 0.0f;

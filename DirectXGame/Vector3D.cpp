@@ -49,6 +49,16 @@ Vector3D Vector3D::zeros()
 	return Vector3D(0.0f, 0.0f, 0.0f);
 }
 
+Vector3D Vector3D::operator*(float num)
+{
+	return Vector3D(x * num, y * num, z * num);
+}
+
+Vector3D Vector3D::operator+(Vector3D vec)
+{
+	return Vector3D(x + vec.x, y + vec.y, z + vec.z);
+}
+
 Vector3D::~Vector3D()
 {
 }

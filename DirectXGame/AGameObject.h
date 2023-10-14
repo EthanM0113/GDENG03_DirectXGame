@@ -10,8 +10,15 @@ class PixelShader;
 
 class AGameObject
 {
-
 public:
+	_declspec(align(16)) //make CBData a size of 16-bytes.
+		struct CBData {
+		Matrix4x4 worldMatrix;
+		Matrix4x4 viewMatrix;
+		Matrix4x4 projMatrix;
+		float time;
+	};
+
 	AGameObject(string name);
 	~AGameObject();
 
@@ -39,13 +46,7 @@ public:
 		Vector3D color2;
 	};
 
-	_declspec(align(16)) //make CBData a size of 16-bytes.
-		struct CBData {
-		Matrix4x4 worldMatrix;
-		Matrix4x4 viewMatrix;
-		Matrix4x4 projMatrix;
-		float time;
-	};
+
 
 protected:
 	string name;

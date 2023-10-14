@@ -1,12 +1,12 @@
 #include "MathUtils.h"
+
+#include <ctime>
 #include <stdlib.h>
 
 float MathUtils::randomFloat(float a, float b)
 {
-    float random = ((float)rand()) / (float)RAND_MAX;
-    float diff = b - a;
-    float r = random * diff;
-    return a + r;
+    float random = a + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (b - a)));
+    return random;
 }
 
 int MathUtils::randomInt(int a, int b)

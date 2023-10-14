@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <unordered_set>
+
 #include "InputListener.h"
 #include <Windows.h>
 #include <vector>
@@ -24,6 +26,7 @@ public:
 	// Global methods for checking key input status
 	bool isKeyDown(int key);
 	bool isKeyUp(int key);
+	void setCursorPosition(const Point& pos);
 
 private:
 	static InputSystem* sharedInstance;
@@ -41,6 +44,7 @@ private:
 
 	vector<InputListener*> inputListenerList;
 	// keyboard data
+	unordered_set<InputListener*> m_set_listeners;
 	unsigned char keyStates[256] = {};
 	unsigned char oldKeyStates[256] = {};
 	// mouse data

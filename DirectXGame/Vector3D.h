@@ -20,6 +20,12 @@ public:
 	static Vector3D ones();
 	static Vector3D zeros();
 
+	Vector3D operator *(float num);
+	Vector3D operator +(Vector3D vec);
+	
+
+
+
 private:
 	float x = 0.0f;
 	float y = 0.0f;

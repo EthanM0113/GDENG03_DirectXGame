@@ -67,6 +67,9 @@
     <Filter Include="GameEngine\Utilities">
       <UniqueIdentifier>{d85f5e68-3c83-4107-bca4-5156c54277d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\GameObject\Camera">
+      <UniqueIdentifier>{7772803b-efbf-4c19-b0c3-27d5281cc34a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -141,6 +144,12 @@
     <ClCompile Include="Utilities.cpp">
       <Filter>GameEngine\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>GameEngine\GameObject\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneCameraHandler.cpp">
+      <Filter>GameEngine\GameObject\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -208,6 +217,15 @@
     </ClInclude>
     <ClInclude Include="Utilities.h">
       <Filter>GameEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4D.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>GameEngine\GameObject\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneCameraHandler.h">
+      <Filter>GameEngine\GameObject\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
