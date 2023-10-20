@@ -27,13 +27,6 @@ void AppWindow::onCreate()
 
 	RECT rc = getClientWindowRect();
 
-	// Set World Cam Spawn Translation
-	temp.setIdentity();
-	temp.setTranslation(Vector3D(0, 0, -100.0));
-	//world_cam *= temp;
-	SceneCameraHandler::getInstance()->getSceneCameraViewMatrix().multiplyTo(temp);
-	
-
 	m_vertex_buffer = GraphicsEngine::get()->createVertexBuffer();
 	m_index_buffer = GraphicsEngine::get()->createIndexBuffer();
 
@@ -54,10 +47,25 @@ void AppWindow::onCreate()
 	srand(seed);
 
 
+	/* Multiple Cubes Instantiation
 	for (int i = 0; i < 10; i++) {
 		float x = MathUtils::randomFloat(-0.75, 0.75f);
 		float y = MathUtils::randomFloat(-0.75, 0.75f);
 		float z = MathUtils::randomFloat(-0.75, 0.75f);
+
+		Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
+		//cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
+		cubeObject->setAnimSpeed(0.0f);
+		cubeObject->setPosition(Vector3D(x, y, z));
+		cubeObject->setScale(Vector3D(0.25, 0.25, 0.25));
+		this->cubeList.push_back(cubeObject);
+	}
+	*/
+
+	for (int i = 0; i < 1; i++) {
+		float x = 0;
+		float y = 0;
+		float z = 0;
 
 		Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
 		//cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
@@ -129,7 +137,7 @@ void AppWindow::onUpdate()
 
 	ticks += EngineTime::getDeltaTime() * 1.0f;
 
-	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, 0, 0, 0.5f, 1);
+	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, 0.16, 0.16, 0.16, 1);
 
 	RECT rc = getClientWindowRect();
 	int width = rc.right - rc.left;
@@ -178,6 +186,7 @@ void AppWindow::onKillFocus()
 
 void AppWindow::onKeyDown(int key)
 {
+	/*
 	if (InputSystem::getInstance()->isKeyDown('W'))
 	{
 		for (int i = 0; i < cubeList.size(); i++) {
@@ -190,6 +199,7 @@ void AppWindow::onKeyDown(int key)
 			cubeList[i]->setAnimSpeed(-3.75f);
 		}
 	}
+	*/
 }
 
 void AppWindow::onKeyUp(int key)

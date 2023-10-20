@@ -27,6 +27,7 @@ void Matrix4x4::setIdentity()
 
 void Matrix4x4::setTranslation(const Vector3D translation)
 {
+	this->setIdentity();
 	Vector3D::Vect vect = translation.getValues();
 	this->matrix[3][0] = translation.getValues().x;
 	this->matrix[3][1] = translation.getValues().y;
@@ -35,7 +36,7 @@ void Matrix4x4::setTranslation(const Vector3D translation)
 
 void Matrix4x4::setScale(const Vector3D scale)
 {
-
+	this->setIdentity();
 	Vector3D::Vect vect = scale.getValues();
 	this->matrix[0][0] = vect.x;
 	this->matrix[1][1] = vect.y;
@@ -44,7 +45,7 @@ void Matrix4x4::setScale(const Vector3D scale)
 
 void Matrix4x4::setRotationX(float x)
 {
-
+	this->setIdentity();
 	this->matrix[1][1] = cos(x);
 	this->matrix[1][2] = sin(x);
 	this->matrix[2][1] = -sin(x);
@@ -53,6 +54,7 @@ void Matrix4x4::setRotationX(float x)
 
 void Matrix4x4::setRotationY(float y)
 {
+	this->setIdentity();
 	this->matrix[0][0] = cos(y);
 	this->matrix[0][2] = -sin(y);
 	this->matrix[2][0] = sin(y);
@@ -62,6 +64,7 @@ void Matrix4x4::setRotationY(float y)
 
 void Matrix4x4::setRotationZ(float z)
 {
+	this->setIdentity();
 	this->matrix[0][0] = cos(z);
 	this->matrix[0][1] = sin(z);
 	this->matrix[1][0] = -sin(z);
@@ -70,6 +73,7 @@ void Matrix4x4::setRotationZ(float z)
 
 void Matrix4x4::setOrthoLH(float width, float height, float near_plane, float far_plane)
 {
+	this->setIdentity();
 	this->matrix[0][0] = 2.0f / width;
 	this->matrix[1][1] = 2.0f / height;
 	this->matrix[2][2] = 1.0f / (far_plane - near_plane);
@@ -170,9 +174,22 @@ Vector3D Matrix4x4::getXDirection()
 	return Vector3D(matrix[0][0], matrix[0][1], matrix[0][2]);
 }
 
+Vector3D Matrix4x4::getYDirection()
+{
+	return Vector3D(matrix[1][0], matrix[1][1], matrix[1][2]);
+}
+
 Vector3D Matrix4x4::getTranslation()
 {
 	return Vector3D(matrix[3][0], matrix[3][1], matrix[3][2]);
+}
+
+Matrix4x4 Matrix4x4::clone()
+{
+	Matrix4x4 copy;
+	::memcpy(copy.matrix, this->matrix, sizeof(float) * 16);
+
+	return copy;
 }
 
 void Matrix4x4::setPerspectiveFovLH(float fov, float aspect, float znear, float zfar)

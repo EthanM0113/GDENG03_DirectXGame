@@ -23,6 +23,6 @@ private:
 	static SceneCameraHandler* sharedInstance;
 
 	// For now just 1 camera
-	Camera* sceneCamera = new Camera("Camera1");
+	Camera* sceneCamera;
 };
 

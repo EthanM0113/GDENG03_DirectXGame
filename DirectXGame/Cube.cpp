@@ -6,6 +6,7 @@
 Cube::Cube(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(name)
 {
 	//create buffers for drawing. vertex data that needs to be drawn are temporarily placed here.
+	/* Rainbow Quad
 	Vertex quadList[] = {
 		//X, Y, Z
 		//FRONT FACE
@@ -20,6 +21,24 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(na
 		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,1,1) },
 		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,1,0) },
 	};
+	*/
+
+	// White Quad
+	Vertex quadList[] = {
+		//X, Y, Z
+		//FRONT FACE
+		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,1,1), Vector3D(1,1,1) },
+
+		//BACK FACE
+		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(1,1,1), Vector3D(1,1,1) },
+	};
+	
 
 	this->vertexBuffer = GraphicsEngine::get()->createVertexBuffer();
 	this->vertexBuffer->load(quadList, sizeof(Vertex), ARRAYSIZE(quadList), shaderByteCode, sizeShader);

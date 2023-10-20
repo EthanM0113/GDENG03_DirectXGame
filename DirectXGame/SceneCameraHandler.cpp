@@ -1,7 +1,7 @@
 #include "SceneCameraHandler.h"
 #include "Camera.h"
 
-SceneCameraHandler* SceneCameraHandler::sharedInstance = nullptr;
+SceneCameraHandler* SceneCameraHandler::sharedInstance = NULL;
 
 SceneCameraHandler* SceneCameraHandler::getInstance()
 {
@@ -40,7 +40,7 @@ Matrix4x4 SceneCameraHandler::getSceneCameraViewMatrix()
 
 SceneCameraHandler::SceneCameraHandler()
 {
-
+	sceneCamera = new Camera("Camera1");
 }
 
 

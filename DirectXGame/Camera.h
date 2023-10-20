@@ -14,6 +14,7 @@ public:
 	void onFocus();
 	void onKillFocus();
 	Matrix4x4 getViewMatrix();
+	void setSpawnPosition(float x, float y, float z);
 
 	virtual void onKeyUp(int key) override;
 	virtual void onKeyDown(int key) override;
@@ -33,5 +34,8 @@ private:
 	float rotZ;
 	float deltaTime;
 	bool isLeftClickHeld = false;
+	Vector3D forwardDirection;
+	Vector3D backwardDirection;
+	Matrix4x4 viewMatrix;
 };
 

@@ -30,3 +30,4 @@ int Point::getY() const
 {
 	return this->y;
 }
+

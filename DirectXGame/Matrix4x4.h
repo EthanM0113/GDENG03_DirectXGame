@@ -22,8 +22,10 @@ public:
 	void operator *= (const Matrix4x4& matrix);
 	void setMatrix(const Matrix4x4& newMatrix);
 	Vector3D getZDirection();
+	Vector3D getYDirection();
 	Vector3D getXDirection();
 	Vector3D getTranslation();
+	Matrix4x4 clone();
 	void setPerspectiveFovLH(float fov, float aspect, float znear, float zfar);
 
 	void debugPrint();

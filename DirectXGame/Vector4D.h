@@ -26,5 +26,7 @@ public:
 	}
 
 public:
-	float m_x, m_y, m_z, m_w;
+	float m_x = 0.0, m_y = 0.0, m_z = 0.0, m_w = 0.0;
+
+	friend class Matrix4x4;
 };
