@@ -10,16 +10,16 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(na
 	Vertex quadList[] = {
 		//X, Y, Z
 		//FRONT FACE
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(1,0,0) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(1,1,0) },
-		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(1,1,0) },
-		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(1,0,0) },
+		{Vector3D(-0.25f,-0.25f,-0.25f), Vector3D(1,0,0),  Vector3D(1,0,0)},
+		{Vector3D(-0.25f,0.25f,-0.25f), Vector3D(0,1,0), Vector3D(0,1,0)},
+		{Vector3D(0.25f,0.25f,-0.25f), Vector3D(0,0,1),  Vector3D(0,0,1)},
+		{Vector3D(0.25f,-0.25f,-0.25f), Vector3D(1,1,0), Vector3D(1,1,0)},
 
 		//BACK FACE
-		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,1,0) },
-		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,1,1) },
-		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,1,1) },
-		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,1,0) },
+		{Vector3D(0.25f,-0.25f,0.25f), Vector3D(0,1,0), Vector3D(0,1,0)},
+		{Vector3D(0.25f,0.25f,0.25f), Vector3D(0,1,1), Vector3D(0,1,1)},
+		{Vector3D(-0.25f,0.25f,0.25f), Vector3D(1,0,1),  Vector3D(1,0,1)},
+		{Vector3D(-0.25f,-0.25f,0.25f), Vector3D(1,1,1), Vector3D(1,1,1)},
 	};
 	*/
 
@@ -27,18 +27,35 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(na
 	Vertex quadList[] = {
 		//X, Y, Z
 		//FRONT FACE
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,1,1),  Vector3D(1,1,1) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
-		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
-		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(-1.0f,-1.0f,-1.0f),    Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{Vector3D(-1.0f,1.0f,-1.0f),    Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(1.0f,1.0f,-1.0f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{Vector3D(1.0f,-1.0f,-1.0f),     Vector3D(1,1,1), Vector3D(1,1,1) },
 
 		//BACK FACE
-		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
-		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
-		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
-		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(1.0f,-1.0f,1.0f),    Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(1.0f,1.0f,1.0f),    Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(-1.0f,1.0f,1.0f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{Vector3D(-1.0f,-1.0f,1.0f),     Vector3D(1,1,1), Vector3D(1,1,1) },
 	};
 	
+
+	/* Blue Quad
+	Vertex quadList[] = {
+		//X, Y, Z
+		//FRONT FACE
+		{Vector3D(-1.0f,-1.0f,-1.0f),    Vector3D(0,0,1),  Vector3D(1,0,0) },
+		{Vector3D(-1.0f,1.0f,-1.0f),    Vector3D(0,0,1), Vector3D(1,0,0) },
+		{Vector3D(1.0f,1.0f,-1.0f),   Vector3D(0,0,1),  Vector3D(1,0,0) },
+		{Vector3D(1.0f,-1.0f,-1.0f),     Vector3D(0,0,1), Vector3D(1,0,0) },
+
+		//BACK FACE
+		{Vector3D(1.0f,-1.0f,1.0f),    Vector3D(0,0,1), Vector3D(1,0,0) },
+		{Vector3D(1.0f,1.0f,1.0f),   Vector3D(0,0,1), Vector3D(1,0,0) },
+		{Vector3D(-1.0f,1.0f,1.0f),   Vector3D(0,0,1),   Vector3D(1,0,0) },
+		{Vector3D(-1.0f,-1.0f,1.0f),     Vector3D(0,0,1),  Vector3D(1,0,0) },
+	};
+	*/
 
 	this->vertexBuffer = GraphicsEngine::get()->createVertexBuffer();
 	this->vertexBuffer->load(quadList, sizeof(Vertex), ARRAYSIZE(quadList), shaderByteCode, sizeShader);
@@ -83,6 +100,7 @@ Cube::~Cube()
 
 void Cube::update(float deltaTime)
 {
+	
 	this->ticks += deltaTime;
 
 	float rotSpeed = this->ticks * this->speed;
@@ -102,6 +120,35 @@ void Cube::update(float deltaTime)
 		this->setRotation(rotSpeed, rotSpeed, rotSpeed);
 	}
 	
+	/*Test Case 3
+	this->ticks += deltaTime;
+
+	m_time += 1.57f * deltaTime;
+	float lerpSpeed = (sin(m_time) + 1.0f) / 2.0f;
+	// Lerp Scale
+	Vector3D oldScale = { 1.0f, 1.0f, 1.0f };
+	Vector3D newScale = { 0.25, 0.25, 0.25 };
+	Vector3D lerpScale = lerpScale.lerp(oldScale, newScale, lerpSpeed);
+	setScale(lerpScale.getValues().x, lerpScale.getValues().y, lerpScale.getValues().z);
+
+	// Lerp Position (Move in X and Y axis, move diagonally)
+	Vector3D oldPos = { 0.0f, 0.0f, 0.0f };
+	Vector3D newPos = { 1.0f, 1.0f, 0.0f};
+	Vector3D lerpPos = lerpPos.lerp(oldPos, newPos, lerpSpeed);
+	setPosition(lerpPos.getValues().x, lerpPos.getValues().y, lerpPos.getValues().z);
+	*/
+	/*Test Case 4
+	this->ticks += deltaTime;
+
+	m_time += 1.57f * deltaTime;
+	float lerpSpeed = (sin(m_time) + 1.0f) / 2.0f;
+	// Lerp Scale
+	Vector3D newScale = { 1.0f, 0.0f, 1.0f };
+	Vector3D lerpScale = lerpScale.lerp(oldScale, newScale, 0.57f * deltaTime);
+	oldScale = lerpScale;
+	cout << "LerpScale, X: " << lerpScale.getValues().x << ", Y: " << lerpScale.getValues().y << ", Z: " << lerpScale.getValues().z << endl;
+	setScale(lerpScale.getValues().x, lerpScale.getValues().y, lerpScale.getValues().z);
+	*/
 }
 
 void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader)
@@ -110,7 +157,9 @@ void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* 
 	DeviceContext* deviceContext = graphEngine->getImmediateDeviceContext();
 
 	cbData = {};
-	cbData.time = this->ticks * this->speed;
+	//cbData.time = this->ticks * this->speed;
+	// Test Case 4
+	cbData.time = this->ticks * 0.07f;
 
 	if (this->deltaPos > 1.0f) {
 		this->deltaPos = 0.0f;
@@ -164,7 +213,6 @@ void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* 
 	// set shaders
 	deviceContext->setVertexShader(vertexShader);
 	deviceContext->setPixelShader(pixelShader);
-
 
 	this->constantBuffer->update(deviceContext, &cbData);
 	deviceContext->setConstantBuffer(vertexShader, this->constantBuffer);

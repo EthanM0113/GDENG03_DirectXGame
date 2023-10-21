@@ -62,6 +62,7 @@ void AppWindow::onCreate()
 	}
 	*/
 
+	/*
 	for (int i = 0; i < 1; i++) {
 		float x = 0;
 		float y = 0;
@@ -69,11 +70,51 @@ void AppWindow::onCreate()
 
 		Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
 		//cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
-		cubeObject->setAnimSpeed(0.0f);
+		cubeObject->setAnimSpeed(1.0f);
 		cubeObject->setPosition(Vector3D(x, y, z));
-		cubeObject->setScale(Vector3D(0.25, 0.25, 0.25));
+		cubeObject->setScale(Vector3D(1, 1, 1));
 		this->cubeList.push_back(cubeObject);
 	}
+	*/
+
+	// Test Case 6 + 7
+	for (int i = 0; i < 3; i++) {
+		float x = 0;
+		float y = 0;
+		float z = 0;
+		if(i == 0)
+		{
+			x = -1.5f;
+			y = 1.0f;
+			z = -3.0f;
+		}
+		if (i == 1)
+		{
+			x = 0.0f;
+			y = 1.0f;
+			z = 0.0f;
+		}
+		if (i == 2)
+		{
+			x = 2.6f;
+			y = 1.0f;
+			z = 2.0f;
+		}
+
+		Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
+		//cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
+		cubeObject->setAnimSpeed(0.0f);
+		cubeObject->setPosition(Vector3D(x, y, z));
+		cubeObject->setScale(Vector3D(0.5f, 0.5f, 0.5f));
+		this->cubeList.push_back(cubeObject);
+	}
+
+	// Make Plane (Cube w/ 0 Y Scale)
+	Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
+	cubeObject->setAnimSpeed(0.0f);
+	cubeObject->setPosition(Vector3D(0, -1, 0));
+	cubeObject->setScale(Vector3D(7, 0, 7));
+	this->cubeList.push_back(cubeObject);
 
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
@@ -204,12 +245,14 @@ void AppWindow::onKeyDown(int key)
 
 void AppWindow::onKeyUp(int key)
 {
+	/*
 	if (InputSystem::getInstance()->isKeyUp('W') || InputSystem::getInstance()->isKeyUp('S'))
 	{
 		for (int i = 0; i < cubeList.size(); i++) {
 			cubeList[i]->setAnimSpeed(0.0f);
 		}
 	}
+	*/
 }
 
 void AppWindow::onMouseMove(const Point& deltaPos)

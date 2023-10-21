@@ -23,4 +23,6 @@ private:
 	float deltaPos = 0.0f;
 	float deltaTime = 0.0f;
 	float speed = 10.0f;
+	float m_time = 0;
+	Vector3D oldScale = { 1.0f, 1.0f, 1.0f };
 };
