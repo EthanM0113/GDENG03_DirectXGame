@@ -7,4 +7,4 @@ Programmed by John Nathaniel P. Manucat.
 ## Instructions
 
 Download the code as a ZIP and open the solution in Visual Studio. Press the Local Window Debugger at the top to run the Rendering System. 
-The mentry class file which contains the main function can be found in main.cpp.
+The entry class file which contains the main function can be found in main.cpp.
