@@ -13,6 +13,10 @@
 #include "AGameObject.h"
 #include "SceneCameraHandler.h"
 
+#include "imgui.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx11.h"
+
 
 void AppWindow::onCreate()
 {
@@ -47,20 +51,20 @@ void AppWindow::onCreate()
 	srand(seed);
 
 
-	/* Multiple Cubes Instantiation
-	for (int i = 0; i < 10; i++) {
-		float x = MathUtils::randomFloat(-0.75, 0.75f);
-		float y = MathUtils::randomFloat(-0.75, 0.75f);
-		float z = MathUtils::randomFloat(-0.75, 0.75f);
+	// Multiple Cubes Instantiation
+	for (int i = 0; i < 50; i++) {
+		float x = MathUtils::randomFloat(-1.0f, 1.0f);
+		float y = MathUtils::randomFloat(-1.0f, 1.0f);
+		float z = MathUtils::randomFloat(-1.0f, 1.0f);
 
 		Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
 		//cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
-		cubeObject->setAnimSpeed(0.0f);
+		cubeObject->setAnimSpeed(1.0);
 		cubeObject->setPosition(Vector3D(x, y, z));
-		cubeObject->setScale(Vector3D(0.25, 0.25, 0.25));
+		cubeObject->setScale(Vector3D(1.0, 1.0, 1.0));
 		this->cubeList.push_back(cubeObject);
 	}
-	*/
+	
 
 	/*
 	for (int i = 0; i < 1; i++) {
@@ -77,44 +81,6 @@ void AppWindow::onCreate()
 	}
 	*/
 
-	// Test Case 6 + 7
-	for (int i = 0; i < 3; i++) {
-		float x = 0;
-		float y = 0;
-		float z = 0;
-		if(i == 0)
-		{
-			x = -1.5f;
-			y = 1.0f;
-			z = -3.0f;
-		}
-		if (i == 1)
-		{
-			x = 0.0f;
-			y = 1.0f;
-			z = 0.0f;
-		}
-		if (i == 2)
-		{
-			x = 2.6f;
-			y = 1.0f;
-			z = 2.0f;
-		}
-
-		Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
-		//cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
-		cubeObject->setAnimSpeed(0.0f);
-		cubeObject->setPosition(Vector3D(x, y, z));
-		cubeObject->setScale(Vector3D(0.5f, 0.5f, 0.5f));
-		this->cubeList.push_back(cubeObject);
-	}
-
-	// Make Plane (Cube w/ 0 Y Scale)
-	Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
-	cubeObject->setAnimSpeed(0.0f);
-	cubeObject->setPosition(Vector3D(0, -1, 0));
-	cubeObject->setScale(Vector3D(7, 0, 7));
-	this->cubeList.push_back(cubeObject);
 
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
@@ -127,6 +93,18 @@ void AppWindow::onCreate()
 	graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &sizeShader);
 	this->m_pixel_shader = graphEngine->createPixelShader(shaderByteCode, sizeShader);
 	graphEngine->releaseCompiledShader();
+
+	// Setup Dear ImGui context
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO();
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
+
+	// Setup Platform/Renderer backends
+	ImGui_ImplWin32_Init(m_hwnd);
+	ImGui_ImplDX11_Init(GraphicsEngine::get()->getDevice(), GraphicsEngine::get()->getImmediateDeviceContext()->getDeviceContext());
 }
 
 void AppWindow::updateCamera()
@@ -176,9 +154,68 @@ void AppWindow::onUpdate()
 {
 	InputSystem::getInstance()->update();
 
+	/* Popup Demo Window
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+	ImGui::ShowDemoWindow(); // Show demo window! :)
+	*/
+
+	// Start the Dear ImGui frame
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+	
+	if (show_demo_window)
+		ImGui::ShowDemoWindow(&show_demo_window);
+
+	// Simple GUI Window HO
+	ImGui::SetNextWindowSize(ImVec2(500, 150));
+	ImGui::Begin("Scene Settings", nullptr, ImGuiWindowFlags_NoResize);                
+	{
+		// Disable Camera Mouse Controls if window is hovered
+		bool isWindowHovered = ImGui::IsWindowFocused();
+		SceneCameraHandler::getInstance()->setGUIHoverFlag(isWindowHovered);
+
+		ImGui::Text("Below are settings for configuring the Scene");     
+		ImGui::Checkbox("Show Demo Window", &show_demo_window);  // Edit bools storing our window open/close state
+		if (show_demo_window)
+			SceneCameraHandler::getInstance()->setGUIHoverFlag(true);
+
+		
+		ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+		// Disable Camera Mouse Controls if color edit 3 is active
+		if (ImGui::IsItemEdited())
+			SceneCameraHandler::getInstance()->setGUIHoverFlag(true);
+
+
+		if (ImGui::Button(animationButtonLabel)) // Buttons return true when clicked (most widgets return true when edited/activated)
+		{
+			if (!isAnimationPaused)
+			{
+				animationButtonLabel = "Resume Animation";
+				isAnimationPaused = true;
+				for (int i = 0; i < cubeList.size(); i++) {
+					cubeList[i]->setAnimSpeed(0.0f);
+				}
+			}
+			else
+			{
+				animationButtonLabel = "Pause Animation";
+				isAnimationPaused = false;
+				for (int i = 0; i < cubeList.size(); i++) {
+					cubeList[i]->setAnimSpeed(1.0f);
+				}
+			}
+		}
+
+		
+	}
+	ImGui::End();
+
 	ticks += EngineTime::getDeltaTime() * 1.0f;
 
-	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, 0.16, 0.16, 0.16, 1);
+	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, clear_color.x, clear_color.y, clear_color.z, 1);
 
 	RECT rc = getClientWindowRect();
 	int width = rc.right - rc.left;
@@ -193,6 +230,12 @@ void AppWindow::onUpdate()
 		cubeList[i]->update(EngineTime::getDeltaTime());
 		cubeList[i]->draw(width, height, m_vertex_shader, m_pixel_shader);
 	}
+
+	// Rendering
+	// (Your code clears your framebuffer, renders your other stuff etc.)
+	ImGui::Render();
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	// (Your code calls swapchain's Present() function)
 
 	m_swap_chain->present(true);
 }
@@ -209,6 +252,10 @@ void AppWindow::onDestroy()
 	m_pixel_shader->release();
 
 	InputSystem::destroy();
+
+	ImGui_ImplDX11_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
 	GraphicsEngine::get()->release();
 }
 

@@ -9,7 +9,7 @@ Camera::Camera(string name) : AGameObject(name)
 	this->backwardDirection = Vector3D(-1.0f, 0.0f, -1.0f);
 
 	// Set World Cam Spawn Translation
-	setPosition(0, 0, -2);
+	setPosition(0, 0, -8.0);
 	updateViewMatrix();
 
 	InputSystem::getInstance()->addListener(this);
@@ -143,6 +143,12 @@ void Camera::onKillFocus()
 	InputSystem::getInstance()->removeListener(this);
 }
 
+void Camera::setGUIHoverFlag(bool guiHoverFlag)
+{
+	// Check if gui window is hovered
+	isImGUIWindowHovered = guiHoverFlag;
+}
+
 Matrix4x4 Camera::getViewMatrix()
 {
 	return viewMatrix;
@@ -164,21 +170,24 @@ void Camera::onKeyDown(int key)
 
 void Camera::onMouseMove(const Point& deltaPos)
 {
-	if(isLeftClickHeld)
+	if(!isImGUIWindowHovered)
 	{
-		float sensitivity = 0.1f;
+		if (isLeftClickHeld)
+		{
+			float sensitivity = 0.1f;
 
-		Vector3D localRot = this->getLocalRotation();
-		rotX = localRot.getValues().x;
-		rotY = localRot.getValues().y;
-		rotZ = localRot.getValues().z;
+			Vector3D localRot = this->getLocalRotation();
+			rotX = localRot.getValues().x;
+			rotY = localRot.getValues().y;
+			rotZ = localRot.getValues().z;
 
-		rotX += deltaPos.getY() * deltaTime * sensitivity;
-		rotY += deltaPos.getX() * deltaTime * sensitivity;
+			rotX += deltaPos.getY() * deltaTime * sensitivity;
+			rotY += deltaPos.getX() * deltaTime * sensitivity;
 
-		setRotation(rotX, rotY, rotZ);
-		updateViewMatrix();
+			setRotation(rotX, rotY, rotZ);
+			updateViewMatrix();
 
+		}
 	}
 }
 

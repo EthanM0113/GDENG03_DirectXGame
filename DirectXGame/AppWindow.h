@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "Cube.h"
+#include "imgui.h"
 #include "InputListener.h"
 #include "Window.h"
 #include "SwapChain.h"
@@ -67,4 +68,13 @@ private:
 	AGameObject::CBData cc;
 	Matrix4x4 world_cam;
 	Matrix4x4 temp;
+
+// GUI Variables
+private:
+	bool show_demo_window = false;
+	ImVec4 clear_color = ImVec4(0.16f, 0.16f, 0.16f, 1.00f);
+	const char* animationButtonLabel = "Pause Animation";
+	bool isAnimationPaused = false;
+	bool isClearColorBeingEdited = false;
+
 };

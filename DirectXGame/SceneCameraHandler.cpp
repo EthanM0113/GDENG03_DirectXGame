@@ -33,6 +33,11 @@ void SceneCameraHandler::onKillFocus()
 	sceneCamera->onKillFocus();
 }
 
+void SceneCameraHandler::setGUIHoverFlag(bool guiHoverFlag)
+{
+	sceneCamera->setGUIHoverFlag(guiHoverFlag);
+}
+
 Matrix4x4 SceneCameraHandler::getSceneCameraViewMatrix()
 {
 	return sceneCamera->getViewMatrix();

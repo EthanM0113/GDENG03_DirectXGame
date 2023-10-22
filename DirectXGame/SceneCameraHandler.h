@@ -12,6 +12,7 @@ public:
 	void update(float deltaTime);
 	void onFocus();
 	void onKillFocus();
+	void setGUIHoverFlag(bool guiHoverFlag);
 
 	Matrix4x4 getSceneCameraViewMatrix();
 

@@ -27,6 +27,14 @@
     <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
+    <ClCompile Include="GUI\ImGui\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="GUI\ImGui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="GUI\ImGui\imgui.cpp" />
+    <ClCompile Include="GUI\ImGui\imgui_demo.cpp" />
+    <ClCompile Include="GUI\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="GUI\ImGui\imgui_tables.cpp" />
+    <ClCompile Include="GUI\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="GUI\ImGui\misc\cpp\imgui_stdlib.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputListener.cpp" />
     <ClCompile Include="InputSystem.cpp" />
@@ -60,6 +68,15 @@
     <ClInclude Include="EngineTime.h" />
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="GraphicsEngine.h" />
+    <ClInclude Include="GUI\ImGui\backends\imgui_impl_dx11.h" />
+    <ClInclude Include="GUI\ImGui\backends\imgui_impl_win32.h" />
+    <ClInclude Include="GUI\ImGui\imconfig.h" />
+    <ClInclude Include="GUI\ImGui\imgui.h" />
+    <ClInclude Include="GUI\ImGui\imgui_internal.h" />
+    <ClInclude Include="GUI\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="GUI\ImGui\imstb_textedit.h" />
+    <ClInclude Include="GUI\ImGui\imstb_truetype.h" />
+    <ClInclude Include="GUI\ImGui\misc\cpp\imgui_stdlib.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="InputListener.h" />
     <ClInclude Include="InputSystem.h" />
@@ -146,6 +163,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)GUI\ImGui\;$(ProjectDir)GUI\ImGui\backends;$(ProjectDir)GUI\ImGui\misc\cpp;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

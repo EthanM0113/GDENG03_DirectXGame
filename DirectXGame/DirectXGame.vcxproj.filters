@@ -70,6 +70,9 @@
     <Filter Include="GameEngine\GameObject\Camera">
       <UniqueIdentifier>{7772803b-efbf-4c19-b0c3-27d5281cc34a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUIElements">
+      <UniqueIdentifier>{9ae389fd-424a-4d6e-842f-487c7139b5da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -150,6 +153,30 @@
     <ClCompile Include="SceneCameraHandler.cpp">
       <Filter>GameEngine\GameObject\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="GUI\ImGui\imgui.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\imgui_demo.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\imgui_draw.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\backends\imgui_impl_dx11.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\backends\imgui_impl_win32.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\misc\cpp\imgui_stdlib.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\imgui_tables.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\imgui_widgets.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -226,6 +253,33 @@
     </ClInclude>
     <ClInclude Include="SceneCameraHandler.h">
       <Filter>GameEngine\GameObject\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\ImGui\imconfig.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\ImGui\imgui.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\ImGui\backends\imgui_impl_dx11.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\ImGui\backends\imgui_impl_win32.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\ImGui\imgui_internal.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\ImGui\misc\cpp\imgui_stdlib.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\ImGui\imstb_rectpack.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\ImGui\imstb_textedit.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\ImGui\imstb_truetype.h">
+      <Filter>GUIElements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

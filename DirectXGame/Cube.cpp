@@ -6,7 +6,7 @@
 Cube::Cube(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(name)
 {
 	//create buffers for drawing. vertex data that needs to be drawn are temporarily placed here.
-	/* Rainbow Quad
+	//Rainbow Quad
 	Vertex quadList[] = {
 		//X, Y, Z
 		//FRONT FACE
@@ -21,9 +21,9 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(na
 		{Vector3D(-0.25f,0.25f,0.25f), Vector3D(1,0,1),  Vector3D(1,0,1)},
 		{Vector3D(-0.25f,-0.25f,0.25f), Vector3D(1,1,1), Vector3D(1,1,1)},
 	};
-	*/
+	
 
-	// White Quad
+	/* White Quad
 	Vertex quadList[] = {
 		//X, Y, Z
 		//FRONT FACE
@@ -38,7 +38,7 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(na
 		{Vector3D(-1.0f,1.0f,1.0f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
 		{Vector3D(-1.0f,-1.0f,1.0f),     Vector3D(1,1,1), Vector3D(1,1,1) },
 	};
-	
+	*/
 
 	/* Blue Quad
 	Vertex quadList[] = {
@@ -100,26 +100,28 @@ Cube::~Cube()
 
 void Cube::update(float deltaTime)
 {
-	
-	this->ticks += deltaTime;
-
-	float rotSpeed = this->ticks * this->speed;
-	this->setRotation(rotSpeed, rotSpeed, rotSpeed);
-
-	
-	if (this->speed <= 1.0f) {
+	if(speed > 0.0f)
+	{
 		this->ticks += deltaTime;
-
 		float rotSpeed = this->ticks * this->speed;
 		this->setRotation(rotSpeed, rotSpeed, rotSpeed);
-	}
-	else if (this->speed >= 10.0f) {
-		this->ticks -= deltaTime;
 
-		float rotSpeed = this->ticks * this->speed;
-		this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+
+		if (this->speed <= 1.0f) {
+			this->ticks += deltaTime;
+
+			float rotSpeed = this->ticks * this->speed;
+			this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+		}
+		else if (this->speed >= 10.0f) {
+			this->ticks -= deltaTime;
+
+			float rotSpeed = this->ticks * this->speed;
+			this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+		}
+
 	}
-	
+
 	/*Test Case 3
 	this->ticks += deltaTime;
 
