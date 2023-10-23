@@ -76,5 +76,4 @@ private:
 	const char* animationButtonLabel = "Pause Animation";
 	bool isAnimationPaused = false;
 	bool isClearColorBeingEdited = false;
-
 };

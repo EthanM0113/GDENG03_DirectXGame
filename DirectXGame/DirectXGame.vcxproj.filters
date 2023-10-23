@@ -192,7 +192,21 @@
     <ClCompile Include="AUIScreen.cpp">
       <Filter>GameEngine\UI\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="Toolbar.cpp" />
+    <ClCompile Include="Toolbar.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneOutliner.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="InspectorWindow.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineProfiler.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameEngine\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -306,7 +320,21 @@
     <ClInclude Include="AUIScreen.h">
       <Filter>GameEngine\UI\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="Toolbar.h" />
+    <ClInclude Include="Toolbar.h">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneOutliner.h">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="InspectorWindow.h">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineProfiler.h">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>GameEngine\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

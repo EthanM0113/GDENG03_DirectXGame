@@ -22,6 +22,6 @@ private:
 	ID3D11InputLayout* m_layout;
 
 private:
-	friend  class DeviceContext;
+	friend class DeviceContext;
 };
 

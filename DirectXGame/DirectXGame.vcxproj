@@ -25,8 +25,10 @@
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
+    <ClCompile Include="EngineProfiler.cpp" />
     <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="AGameObject.cpp" />
+    <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="GUI\ImGui\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="GUI\ImGui\backends\imgui_impl_win32.cpp" />
@@ -39,6 +41,7 @@
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputListener.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="InspectorWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
@@ -46,6 +49,7 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="QuadPrimitive.cpp" />
     <ClCompile Include="SceneCameraHandler.cpp" />
+    <ClCompile Include="SceneOutliner.cpp" />
     <ClCompile Include="shader.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
@@ -70,8 +74,10 @@
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DeviceContext.h" />
+    <ClInclude Include="EngineProfiler.h" />
     <ClInclude Include="EngineTime.h" />
     <ClInclude Include="AGameObject.h" />
+    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="GUI\ImGui\backends\imgui_impl_dx11.h" />
     <ClInclude Include="GUI\ImGui\backends\imgui_impl_win32.h" />
@@ -85,12 +91,14 @@
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="InputListener.h" />
     <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="InspectorWindow.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="QuadPrimitive.h" />
     <ClInclude Include="SceneCameraHandler.h" />
+    <ClInclude Include="SceneOutliner.h" />
     <ClInclude Include="SwapChain.h" />
     <ClInclude Include="Toolbar.h" />
     <ClInclude Include="TrianglePrimitive.h" />
