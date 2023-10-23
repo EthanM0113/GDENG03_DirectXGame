@@ -70,8 +70,14 @@
     <Filter Include="GameEngine\GameObject\Camera">
       <UniqueIdentifier>{7772803b-efbf-4c19-b0c3-27d5281cc34a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUIElements">
+    <Filter Include="GameEngine\GUIElements">
       <UniqueIdentifier>{9ae389fd-424a-4d6e-842f-487c7139b5da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\UI">
+      <UniqueIdentifier>{89d9e3ed-8fc6-4b01-80fb-88b080d9b385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\UI\Screens">
+      <UniqueIdentifier>{54dc7eb9-26a0-4001-a843-1bb03adc7d08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -154,29 +160,39 @@
       <Filter>GameEngine\GameObject\Camera</Filter>
     </ClCompile>
     <ClCompile Include="GUI\ImGui\imgui.cpp">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClCompile>
     <ClCompile Include="GUI\ImGui\imgui_demo.cpp">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClCompile>
     <ClCompile Include="GUI\ImGui\imgui_draw.cpp">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClCompile>
     <ClCompile Include="GUI\ImGui\backends\imgui_impl_dx11.cpp">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClCompile>
     <ClCompile Include="GUI\ImGui\backends\imgui_impl_win32.cpp">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClCompile>
     <ClCompile Include="GUI\ImGui\misc\cpp\imgui_stdlib.cpp">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClCompile>
     <ClCompile Include="GUI\ImGui\imgui_tables.cpp">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClCompile>
     <ClCompile Include="GUI\ImGui\imgui_widgets.cpp">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClCompile>
+    <ClCompile Include="UINames.cpp">
+      <Filter>GameEngine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>GameEngine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="AUIScreen.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolbar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -255,32 +271,42 @@
       <Filter>GameEngine\GameObject\Camera</Filter>
     </ClInclude>
     <ClInclude Include="GUI\ImGui\imconfig.h">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClInclude>
     <ClInclude Include="GUI\ImGui\imgui.h">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClInclude>
     <ClInclude Include="GUI\ImGui\backends\imgui_impl_dx11.h">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClInclude>
     <ClInclude Include="GUI\ImGui\backends\imgui_impl_win32.h">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClInclude>
     <ClInclude Include="GUI\ImGui\imgui_internal.h">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClInclude>
     <ClInclude Include="GUI\ImGui\misc\cpp\imgui_stdlib.h">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClInclude>
     <ClInclude Include="GUI\ImGui\imstb_rectpack.h">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClInclude>
     <ClInclude Include="GUI\ImGui\imstb_textedit.h">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClInclude>
     <ClInclude Include="GUI\ImGui\imstb_truetype.h">
-      <Filter>GUIElements</Filter>
+      <Filter>GameEngine\GUIElements</Filter>
     </ClInclude>
+    <ClInclude Include="UINames.h">
+      <Filter>GameEngine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>GameEngine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="AUIScreen.h">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolbar.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

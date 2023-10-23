@@ -12,6 +12,7 @@
 #include "Matrix4x4.h"
 #include "AGameObject.h"
 #include "SceneCameraHandler.h"
+#include "UIManager.h"
 
 #include "imgui.h"
 #include "imgui_impl_win32.h"
@@ -26,6 +27,7 @@ void AppWindow::onCreate()
 	InputSystem::initialize();
 	InputSystem::getInstance()->addListener(this);
 	SceneCameraHandler::initialize();
+	UIManager::initialize(m_hwnd);
 
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
 
@@ -161,6 +163,7 @@ void AppWindow::onUpdate()
 	ImGui::ShowDemoWindow(); // Show demo window! :)
 	*/
 
+	/*
 	// Start the Dear ImGui frame
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
@@ -173,21 +176,10 @@ void AppWindow::onUpdate()
 	ImGui::SetNextWindowSize(ImVec2(500, 150));
 	ImGui::Begin("Scene Settings", nullptr, ImGuiWindowFlags_NoResize);                
 	{
-		// Disable Camera Mouse Controls if window is hovered
-		bool isWindowHovered = ImGui::IsWindowFocused();
-		SceneCameraHandler::getInstance()->setGUIHoverFlag(isWindowHovered);
-
 		ImGui::Text("Below are settings for configuring the Scene");     
 		ImGui::Checkbox("Show Demo Window", &show_demo_window);  // Edit bools storing our window open/close state
-		if (show_demo_window)
-			SceneCameraHandler::getInstance()->setGUIHoverFlag(true);
 
-		
 		ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-		// Disable Camera Mouse Controls if color edit 3 is active
-		if (ImGui::IsItemEdited())
-			SceneCameraHandler::getInstance()->setGUIHoverFlag(true);
-
 
 		if (ImGui::Button(animationButtonLabel)) // Buttons return true when clicked (most widgets return true when edited/activated)
 		{
@@ -212,6 +204,10 @@ void AppWindow::onUpdate()
 		
 	}
 	ImGui::End();
+	*/
+
+	// UI Manager
+	UIManager::getInstance()->drawAllUI();
 
 	ticks += EngineTime::getDeltaTime() * 1.0f;
 

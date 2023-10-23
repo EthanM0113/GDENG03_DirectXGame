@@ -143,12 +143,6 @@ void Camera::onKillFocus()
 	InputSystem::getInstance()->removeListener(this);
 }
 
-void Camera::setGUIHoverFlag(bool guiHoverFlag)
-{
-	// Check if gui window is hovered
-	isImGUIWindowHovered = guiHoverFlag;
-}
-
 Matrix4x4 Camera::getViewMatrix()
 {
 	return viewMatrix;
@@ -170,41 +164,40 @@ void Camera::onKeyDown(int key)
 
 void Camera::onMouseMove(const Point& deltaPos)
 {
-	if(!isImGUIWindowHovered)
+	if (isRightClickHeld)
 	{
-		if (isLeftClickHeld)
-		{
-			float sensitivity = 0.1f;
+		float sensitivity = 0.1f;
 
-			Vector3D localRot = this->getLocalRotation();
-			rotX = localRot.getValues().x;
-			rotY = localRot.getValues().y;
-			rotZ = localRot.getValues().z;
+		Vector3D localRot = this->getLocalRotation();
+		rotX = localRot.getValues().x;
+		rotY = localRot.getValues().y;
+		rotZ = localRot.getValues().z;
 
-			rotX += deltaPos.getY() * deltaTime * sensitivity;
-			rotY += deltaPos.getX() * deltaTime * sensitivity;
+		rotX += deltaPos.getY() * deltaTime * sensitivity;
+		rotY += deltaPos.getX() * deltaTime * sensitivity;
 
-			setRotation(rotX, rotY, rotZ);
-			updateViewMatrix();
+		setRotation(rotX, rotY, rotZ);
+		updateViewMatrix();
 
-		}
 	}
 }
 
 void Camera::onLeftMouseDown(const Point& deltaPos)
 {
-	isLeftClickHeld = true;
+
 }
 
 void Camera::onLeftMouseUp(const Point& deltaPos)
 {
-	isLeftClickHeld = false;
+
 }
 
 void Camera::onRightMouseDown(const Point& deltaPos)
 {
+	isRightClickHeld = true;
 }
 
 void Camera::onRightMouseUp(const Point& deltaPos)
 {
+	isRightClickHeld = false;
 }

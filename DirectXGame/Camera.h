@@ -13,7 +13,6 @@ public:
 	void updateViewMatrix();
 	void onFocus();
 	void onKillFocus();
-	void setGUIHoverFlag(bool guiHoverFlag);
 	Matrix4x4 getViewMatrix();
 	void setSpawnPosition(float x, float y, float z);
 
@@ -34,7 +33,7 @@ private:
 	float rotY;
 	float rotZ;
 	float deltaTime;
-	bool isLeftClickHeld = false;
+	bool isRightClickHeld = false;
 	bool isImGUIWindowHovered = false;
 	Vector3D forwardDirection;
 	Vector3D backwardDirection;
