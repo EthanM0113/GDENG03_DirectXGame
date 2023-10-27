@@ -38,6 +38,9 @@ public:
 	void setRotation(Vector3D rot);
 	Vector3D getLocalRotation();
 
+	void setEnabled(bool flag);
+	bool getEnabled();
+
 	string getName();
 
 	struct Vertex {
@@ -55,4 +58,5 @@ protected:
 	Vector3D localScale;
 	Vector3D localRotation;
 	Matrix4x4 localMatrix;
+	bool isEnabled;
 };

@@ -16,7 +16,7 @@ protected:
 	~AUIScreen();
 
 	String getName();
-	virtual void drawUI() = 0;
+	virtual void drawUI(void* shaderByteCode, size_t sizeShader) = 0;
 
 	String name;
 

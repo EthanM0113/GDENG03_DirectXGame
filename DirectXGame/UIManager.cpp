@@ -22,14 +22,14 @@ void UIManager::destroy()
     delete sharedInstance;
 }
 
-void UIManager::drawAllUI()
+void UIManager::drawAllUI(void* shaderByteCode, size_t sizeShader)
 {
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
     for (int i = 0; i < this->uiList.size(); i++) {
-        uiList[i]->drawUI();
+        uiList[i]->drawUI(shaderByteCode, sizeShader);
     }
 
     ImGui::Render();

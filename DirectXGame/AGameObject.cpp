@@ -6,6 +6,7 @@ AGameObject::AGameObject(string name)
 	this->localRotation = Vector3D::zeros();
 	this->localPosition = Vector3D::zeros();
 	this->localScale = Vector3D::ones();
+	this->isEnabled = true; // game objects are rendered by default
 }
 
 AGameObject::~AGameObject()
@@ -50,6 +51,16 @@ void AGameObject::setRotation(Vector3D rot)
 Vector3D AGameObject::getLocalRotation()
 {
 	return this->localRotation;
+}
+
+void AGameObject::setEnabled(bool flag)
+{
+	this->isEnabled = flag;
+}
+
+bool AGameObject::getEnabled()
+{
+	return this->isEnabled;
 }
 
 Vector3D AGameObject::getLocalScale()

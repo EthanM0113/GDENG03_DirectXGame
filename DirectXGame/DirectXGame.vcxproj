@@ -46,6 +46,7 @@
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="PixelShader.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="QuadPrimitive.cpp" />
     <ClCompile Include="SceneCameraHandler.cpp" />
@@ -95,6 +96,7 @@
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="PixelShader.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="QuadPrimitive.h" />
     <ClInclude Include="SceneCameraHandler.h" />

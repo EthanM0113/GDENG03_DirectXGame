@@ -7,6 +7,6 @@ public:
 	SceneOutliner(String name);
 	~SceneOutliner();
 
-	void drawUI() override;
+	void drawUI(void* shaderByteCode, size_t sizeShader) override;
 };
 

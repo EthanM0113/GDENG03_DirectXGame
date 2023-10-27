@@ -7,6 +7,6 @@ public:
 	Toolbar(String name);
 	~Toolbar();
 
-	void drawUI() override;
+	void drawUI(void* shaderByteCode, size_t sizeShader) override;
 };
 

@@ -8,7 +8,7 @@ EngineProfiler::~EngineProfiler()
 {
 }
 
-void EngineProfiler::drawUI()
+void EngineProfiler::drawUI(void* shaderByteCode, size_t sizeShader)
 {
 	ImGuiIO& io = ImGui::GetIO();
 	ImGui::SetNextWindowSize(ImVec2(340, 80));

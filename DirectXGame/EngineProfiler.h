@@ -7,6 +7,6 @@ public:
 	EngineProfiler(String name);
 	~EngineProfiler();
 
-	void drawUI() override;
+	void drawUI(void* shaderByteCode, size_t sizeShader) override;
 };
 

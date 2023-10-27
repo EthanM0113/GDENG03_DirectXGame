@@ -100,7 +100,8 @@ Cube::~Cube()
 
 void Cube::update(float deltaTime)
 {
-	if(speed > 0.0f)
+
+	if (speed > 0.0f)
 	{
 		this->ticks += deltaTime;
 		float rotSpeed = this->ticks * this->speed;
@@ -151,6 +152,7 @@ void Cube::update(float deltaTime)
 	cout << "LerpScale, X: " << lerpScale.getValues().x << ", Y: " << lerpScale.getValues().y << ", Z: " << lerpScale.getValues().z << endl;
 	setScale(lerpScale.getValues().x, lerpScale.getValues().y, lerpScale.getValues().z);
 	*/
+	
 }
 
 void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader)
@@ -169,7 +171,7 @@ void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* 
 	else {
 		this->deltaPos += this->deltaTime * 0.1f;
 	}
-	
+
 
 	Matrix4x4 allMatrix;
 	allMatrix.setIdentity();
@@ -206,7 +208,7 @@ void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* 
 
 	// from world space to view space of camera
 	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
-	cbData.viewMatrix = cameraMatrix; 
+	cbData.viewMatrix = cameraMatrix;
 	//cbData.viewMatrix.setIdentity();
 
 	cbData.projMatrix.setPerspectiveFovLH(1.57f, ((float)width / (float)height), 0.1f, 100.0f);
@@ -225,6 +227,7 @@ void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* 
 
 	deviceContext->drawIndexedTriangleList(this->indexBuffer->getSizeIndexList(), 0, 0);
 	//graphEngine->getSwapChain()->present(true); // we do not present immediately. We draw all objects first, before displaying
+	
 }
 
 void Cube::setAnimSpeed(float speed)

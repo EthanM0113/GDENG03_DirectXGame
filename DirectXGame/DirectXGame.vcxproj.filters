@@ -79,6 +79,9 @@
     <Filter Include="GameEngine\UI\Screens">
       <UniqueIdentifier>{54dc7eb9-26a0-4001-a843-1bb03adc7d08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\GameObject\Plane">
+      <UniqueIdentifier>{1bc01dfd-a4bc-431a-9c32-df14399bec36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -207,6 +210,9 @@
     <ClCompile Include="GameObjectManager.cpp">
       <Filter>GameEngine\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>GameEngine\GameObject\Plane</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -334,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="GameObjectManager.h">
       <Filter>GameEngine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>GameEngine\GameObject\Plane</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

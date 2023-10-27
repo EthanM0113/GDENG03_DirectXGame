@@ -21,7 +21,7 @@ public:
 	static void initialize(HWND windowHandle);
 	static void destroy();
 
-	void drawAllUI();
+	void drawAllUI(void* shaderByteCode, size_t sizeShader);
 
 	static const int WINDOW_WIDTH = 1440;
 	static const int WINDOW_HEIGHT = 900;

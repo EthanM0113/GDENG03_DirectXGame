@@ -7,6 +7,6 @@ public:
 	InspectorWindow(String name);
 	~InspectorWindow();
 
-	void drawUI() override;
+	void drawUI(void* shaderByteCode, size_t sizeShader) override;
 };
 

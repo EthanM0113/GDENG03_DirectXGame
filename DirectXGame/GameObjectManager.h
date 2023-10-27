@@ -42,6 +42,7 @@ private:
 	List gameObjectList;
 	HashTable gameObjectMap;
 	string selectedObjectName;
-
+	int cubeCount = 0;
+	int planeCount = 0;
 };
 

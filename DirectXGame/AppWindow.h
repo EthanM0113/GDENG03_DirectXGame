@@ -76,4 +76,6 @@ private:
 	const char* animationButtonLabel = "Pause Animation";
 	bool isAnimationPaused = false;
 	bool isClearColorBeingEdited = false;
+	void* shader_byte_code;
+	size_t size_shader;
 };
