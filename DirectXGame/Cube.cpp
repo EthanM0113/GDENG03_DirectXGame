@@ -100,6 +100,7 @@ Cube::~Cube()
 
 void Cube::update(float deltaTime)
 {
+	this->deltaTime = deltaTime;
 
 	if (speed > 0.0f)
 	{
@@ -162,6 +163,7 @@ void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* 
 
 	cbData = {};
 	//cbData.time = this->ticks * this->speed;
+	/*
 	// Test Case 4
 	cbData.time = this->ticks * 0.07f;
 
@@ -171,7 +173,7 @@ void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* 
 	else {
 		this->deltaPos += this->deltaTime * 0.1f;
 	}
-
+	*/
 
 	Matrix4x4 allMatrix;
 	allMatrix.setIdentity();

@@ -3,6 +3,7 @@
 #include "EngineProfiler.h"
 #include "InspectorWindow.h"
 #include "SceneOutliner.h"
+#include "ScenePlayWindow.h"
 
 UIManager* UIManager::sharedInstance = NULL;
 UINames uiNames;
@@ -54,6 +55,10 @@ UIManager::UIManager(HWND windowHandle)
     // Add Engine Profiler
     EngineProfiler* engineProfiler = new EngineProfiler(uiNames.PROFILER_SCREEN);
     uiList.push_back(engineProfiler);
+
+    // Add Scene Play Window
+    ScenePlayWindow* scenePlayWindow = new ScenePlayWindow(uiNames.SCENEPLAY_SCREEN);
+    uiList.push_back(scenePlayWindow);
 }
 
 UIManager::~UIManager()

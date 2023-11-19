@@ -16,6 +16,30 @@ Plane::Plane(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(
 		{Vector3D(1.0f,1.0f,0.0f), Vector3D(1, 1, 1),  Vector3D(1,1,1)}
 	};
 
+	unsigned int indexList[] =
+	{
+		//FRONT SIDE
+		0,1,2,  //FIRST TRIANGLE
+		2,3,0,  //SECOND TRIANGLE
+		//BACK SIDE
+		4,5,6,
+		6,7,4,
+		//TOP SIDE
+		1,6,5,
+		5,2,1,
+		//BOTTOM SIDE
+		7,0,3,
+		3,4,7,
+		//RIGHT SIDE
+		3,2,5,
+		5,4,3,
+		//LEFT SIDE
+		7,6,1,
+		1,0,7
+	};
+
+	this->indexBuffer = GraphicsEngine::get()->createIndexBuffer();
+	this->indexBuffer->load(indexList, ARRAYSIZE(indexList));
 
 	this->vertexBuffer = GraphicsEngine::get()->createVertexBuffer();
 	this->vertexBuffer->load(quadList, sizeof(Vertex), ARRAYSIZE(quadList), shaderByteCode, sizeShader);

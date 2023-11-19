@@ -82,6 +82,12 @@
     <Filter Include="GameEngine\GameObject\Plane">
       <UniqueIdentifier>{1bc01dfd-a4bc-431a-9c32-df14399bec36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Components">
+      <UniqueIdentifier>{832a71f0-d15b-466a-b708-83b1b67acdc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Components\ComponentSystems">
+      <UniqueIdentifier>{81963f31-c5c8-4c1b-9e5a-542cee3b6266}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -213,6 +219,27 @@
     <ClCompile Include="Plane.cpp">
       <Filter>GameEngine\GameObject\Plane</Filter>
     </ClCompile>
+    <ClCompile Include="BaseComponentSystem.cpp">
+      <Filter>GameEngine\Components\ComponentSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>GameEngine\Components\ComponentSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="AComponent.cpp">
+      <Filter>GameEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>GameEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsCube.cpp">
+      <Filter>GameEngine\GameObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsPlane.cpp">
+      <Filter>GameEngine\GameObject\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="ScenePlayWindow.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -343,6 +370,27 @@
     </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>GameEngine\GameObject\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseComponentSystem.h">
+      <Filter>GameEngine\Components\ComponentSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>GameEngine\Components\ComponentSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="AComponent.h">
+      <Filter>GameEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>GameEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsCube.h">
+      <Filter>GameEngine\GameObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsPlane.h">
+      <Filter>GameEngine\GameObject\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenePlayWindow.h">
+      <Filter>GameEngine\UI\Screens</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

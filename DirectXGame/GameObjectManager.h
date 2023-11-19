@@ -13,7 +13,9 @@ public:
 
 	enum PrimitiveType {
 		CUBE,
+		PHYSICS_CUBE,
 		PLANE,
+		PHYSICS_PLANE,
 		SPHERE
 	};
 
@@ -44,5 +46,7 @@ private:
 	string selectedObjectName;
 	int cubeCount = 0;
 	int planeCount = 0;
+	int physicsCubeCount = 0;
+	int physicsPlaneCount = 0;
 };
 

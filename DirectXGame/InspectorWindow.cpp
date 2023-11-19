@@ -35,19 +35,19 @@ void InspectorWindow::drawUI(void* shaderByteCode, size_t sizeShader)
 			// Change Position
 			Vector3D vector3DPos = selectedObj->getLocalPosition();
 			float newPos[4] = { vector3DPos.getValues().x, vector3DPos.getValues().y, vector3DPos.getValues().z, 1.0f };
-			ImGui::InputFloat3("Position", newPos);
+			ImGui::DragFloat3("Position", newPos, 0.1f);
 			selectedObj->setPosition(Vector3D(newPos[0], newPos[1], newPos[2]));
 
 			// Change Rotation
 			Vector3D vector3DRot = selectedObj->getLocalRotation();
 			float newRot[4] = { vector3DRot.getValues().x, vector3DRot.getValues().y, vector3DRot.getValues().z, 1.0f };
-			ImGui::InputFloat3("Rotation", newRot);
+			ImGui::DragFloat3("Rotation", newRot, 0.01f);
 			selectedObj->setRotation(Vector3D(newRot[0], newRot[1], newRot[2]));
 
 			// Change Scale
 			Vector3D vector3DScale = selectedObj->getLocalScale();
 			float newScale[4] = { vector3DScale.getValues().x, vector3DScale.getValues().y, vector3DScale.getValues().z, 1.0f };
-			ImGui::InputFloat3("Scale", newScale);
+			ImGui::DragFloat3("Scale", newScale, 0.1f);
 			selectedObj->setScale(Vector3D(newScale[0], newScale[1], newScale[2]));
 
 		}

@@ -1,9 +1,7 @@
 #include "Toolbar.h"
 
-#include "Cube.h"
 #include "GameObjectManager.h"
-#include "GraphicsEngine.h"
-#include "Plane.h"
+
 
 Toolbar::Toolbar(String name) : AUIScreen(name)
 {
@@ -29,18 +27,25 @@ void Toolbar::drawUI(void* shaderByteCode, size_t sizeShader)
 
 		if (ImGui::BeginMenu("GameObject"))
 		{
+			void* shaderByteCode = nullptr;
+			size_t sizeShader = 0;
+
 			if (ImGui::MenuItem("Create Cube"))
 			{
-				void* shaderByteCode = nullptr;
-				size_t sizeShader = 0;
 				GameObjectManager::getInstance()->createObject(GameObjectManager::CUBE, shaderByteCode, sizeShader);
+			}
+			if (ImGui::MenuItem("Create Physics Cube"))
+			{
+				GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_CUBE, shaderByteCode, sizeShader);
 			}
 			if (ImGui::MenuItem("Create Sphere")) {}
 			if (ImGui::MenuItem("Create Plane"))
 			{
-				void* shaderByteCode = nullptr;
-				size_t sizeShader = 0;
 				GameObjectManager::getInstance()->createObject(GameObjectManager::PLANE, shaderByteCode, sizeShader);
+			}
+			if (ImGui::MenuItem("Create Physics Plane"))
+			{
+				GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_PLANE, shaderByteCode, sizeShader);
 			}
 			if (ImGui::BeginMenu("Light"))
 			{

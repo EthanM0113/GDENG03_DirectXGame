@@ -164,6 +164,11 @@ void Matrix4x4::setMatrix(const Matrix4x4& newMatrix)
 	::memcpy(matrix, newMatrix.matrix, sizeof(float) * 16);
 }
 
+void Matrix4x4::setMatrix(float matrix[4][4])
+{
+	::memcpy(this->matrix, matrix, sizeof(float) * 16);
+}
+
 Vector3D Matrix4x4::getZDirection()
 {
 	return Vector3D(matrix[2][0], matrix[2][1], matrix[2][2]);
@@ -184,12 +189,22 @@ Vector3D Matrix4x4::getTranslation()
 	return Vector3D(matrix[3][0], matrix[3][1], matrix[3][2]);
 }
 
+Vector3D Matrix4x4::getScale()
+{
+	return Vector3D(matrix[0][0], matrix[1][1], matrix[2][2]);
+}
+
 Matrix4x4 Matrix4x4::clone()
 {
 	Matrix4x4 copy;
 	::memcpy(copy.matrix, this->matrix, sizeof(float) * 16);
 
 	return copy;
+}
+
+float* Matrix4x4::getMatrixAsArray()
+{
+	return *this->matrix;
 }
 
 void Matrix4x4::setPerspectiveFovLH(float fov, float aspect, float znear, float zfar)

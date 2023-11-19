@@ -14,11 +14,11 @@
 #include "SceneCameraHandler.h"
 #include "UIManager.h"
 #include "GameObjectManager.h"
+#include "BaseComponentSystem.h"
 
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
-
 
 void AppWindow::onCreate()
 {
@@ -29,6 +29,7 @@ void AppWindow::onCreate()
 	InputSystem::getInstance()->addListener(this);
 	SceneCameraHandler::initialize();
 	UIManager::initialize(m_hwnd);
+	BaseComponentSystem::initialize();
 	GameObjectManager::getInstance()->initialize();
 
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
@@ -217,12 +218,6 @@ void AppWindow::onUpdate()
 
 	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(width, height);
 
-	//updateCamera();
-	SceneCameraHandler::getInstance()->update(EngineTime::getDeltaTime());
-
-	// UI Updates
-	UIManager::getInstance()->drawAllUI(shader_byte_code, size_shader);
-
 	// Game Object Updates
 	/*
 	for (int i = 0; i < cubeList.size(); i++) {
@@ -231,13 +226,18 @@ void AppWindow::onUpdate()
 	}
 	*/
 	GameObjectManager::getInstance()->updateAll(EngineTime::getDeltaTime());
+
+	// Physics System Update
+	BaseComponentSystem::getInstance()->getPhysicsSystem()->updateAllComponents(EngineTime::getDeltaTime());
+
+	// Game Object Rendering
 	GameObjectManager::getInstance()->renderAll(width, height, m_vertex_shader, m_pixel_shader);
 
-	// Rendering
-	// (Your code clears your framebuffer, renders your other stuff etc.)
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-	// (Your code calls swapchain's Present() function)
+	//updateCamera();
+	SceneCameraHandler::getInstance()->update(EngineTime::getDeltaTime());
+
+	// UI Updates
+	UIManager::getInstance()->drawAllUI(shader_byte_code, size_shader);
 
 	m_swap_chain->present(true);
 }

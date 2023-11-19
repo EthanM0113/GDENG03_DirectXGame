@@ -9,7 +9,7 @@ Camera::Camera(string name) : AGameObject(name)
 	this->backwardDirection = Vector3D(-1.0f, 0.0f, -1.0f);
 
 	// Set World Cam Spawn Translation
-	setPosition(0, 0, -8.0);
+	setPosition(0, 0, -3.0);
 	updateViewMatrix();
 
 	InputSystem::getInstance()->addListener(this);
@@ -32,7 +32,6 @@ void Camera::update(float deltaTime)
 	// posZ is = m_forward, posX = m_rightward
 	if (InputSystem::getInstance()->isKeyDown('W'))
 	{
-		cout << "Camera W pressed\n";
 		Vector3D direction = localMatrix.getZDirection();
 		Vector3D newPos = Vector3D(
 			posX + direction.getValues().x * deltaTime * moveSpeed,
@@ -44,7 +43,6 @@ void Camera::update(float deltaTime)
 	}
 	if (InputSystem::getInstance()->isKeyDown('S'))
 	{
-		cout << "Camera S pressed\n";
 		Vector3D direction = localMatrix.getZDirection();
 		Vector3D newPos = Vector3D(
 			posX + direction.getValues().x * deltaTime * -moveSpeed,
@@ -56,7 +54,6 @@ void Camera::update(float deltaTime)
 	}
 	if (InputSystem::getInstance()->isKeyDown('A'))
 	{
-		cout << "Camera A pressed\n";
 		Vector3D direction = localMatrix.getXDirection();
 		Vector3D newPos = Vector3D(
 			posX + direction.getValues().x * deltaTime * -moveSpeed,
@@ -67,8 +64,7 @@ void Camera::update(float deltaTime)
 		updateViewMatrix();
 	}
 	if (InputSystem::getInstance()->isKeyDown('D'))
-	{
-		cout << "Camera D pressed\n";
+	{;
 		Vector3D direction = localMatrix.getXDirection();
 		Vector3D newPos = Vector3D(
 			posX + direction.getValues().x * deltaTime * moveSpeed,
@@ -80,7 +76,6 @@ void Camera::update(float deltaTime)
 	}
 	if (InputSystem::getInstance()->isKeyDown('Q'))
 	{
-		cout << "Camera Q pressed\n";
 		Vector3D direction = Vector3D(0,1,0);
 		Vector3D newPos = Vector3D(
 			posX + direction.getValues().x * deltaTime * -moveSpeed,
@@ -92,7 +87,6 @@ void Camera::update(float deltaTime)
 	}
 	if (InputSystem::getInstance()->isKeyDown('E'))
 	{
-		cout << "Camera E pressed\n";
 		Vector3D direction = Vector3D(0, 1, 0);
 		Vector3D newPos = Vector3D(
 			posX + direction.getValues().x * deltaTime * moveSpeed,

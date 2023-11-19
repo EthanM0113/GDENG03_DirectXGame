@@ -21,12 +21,16 @@ public:
 	Matrix4x4 multiplyTo(Matrix4x4 matrix);
 	void operator *= (const Matrix4x4& matrix);
 	void setMatrix(const Matrix4x4& newMatrix);
+	void setMatrix(float matrix[4][4]);
 	Vector3D getZDirection();
 	Vector3D getYDirection();
 	Vector3D getXDirection();
 	Vector3D getTranslation();
+	Vector3D getScale();
 	Matrix4x4 clone();
+	float* getMatrixAsArray();
 	void setPerspectiveFovLH(float fov, float aspect, float znear, float zfar);
+
 
 	void debugPrint();
 
