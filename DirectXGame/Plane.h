@@ -1,28 +1,14 @@
 #pragma once
-#include "AGameObject.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "ConstantBuffer.h"
+#include "Cube.h"
 
-class Plane : public AGameObject
+//Plane implementation is just like cube with different scale
+class Plane : public Cube
 {
 public:
-	Plane(string name, void* shaderByteCode, size_t sizeShader);
+	Plane(string name);
 	~Plane();
 
 	void update(float deltaTime) override;
-	void draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader) override;
-	void setAnimSpeed(float speed);
+	void draw(int width, int height) override;
 
-private:
-	VertexBuffer* vertexBuffer;
-	IndexBuffer* indexBuffer;
-	ConstantBuffer* constantBuffer;
-	CBData cbData;
-	float ticks = 0.0f;
-	float deltaPos = 0.0f;
-	float deltaTime = 0.0f;
-	float speed = 10.0f;
-	float m_time = 0;
-	Vector3D oldScale = { 1.0f, 1.0f, 1.0f };
 };

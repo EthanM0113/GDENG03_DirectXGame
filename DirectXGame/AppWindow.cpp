@@ -19,12 +19,14 @@
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
+#include "ShaderLibrary.h"
 
 void AppWindow::onCreate()
 {
 	GraphicsEngine::get()->init();
 	GraphicsEngine* graphEngine = GraphicsEngine::get();
 	EngineTime::initialize();
+	ShaderLibrary::initialize();
 	InputSystem::initialize();
 	InputSystem::getInstance()->addListener(this);
 	SceneCameraHandler::initialize();
@@ -36,8 +38,8 @@ void AppWindow::onCreate()
 
 	RECT rc = getClientWindowRect();
 
-	m_vertex_buffer = GraphicsEngine::get()->createVertexBuffer();
-	m_index_buffer = GraphicsEngine::get()->createIndexBuffer();
+	//m_vertex_buffer = GraphicsEngine::get()->createVertexBuffer();
+	//m_index_buffer = GraphicsEngine::get()->createIndexBuffer();
 
 	std::cout << "hwnd: " << this->m_hwnd;
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
@@ -46,8 +48,8 @@ void AppWindow::onCreate()
 	size_t sizeShader = 0;
 
 	//compile basic vertex shader
-	graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
-	this->m_vertex_shader = graphEngine->createVertexShader(shaderByteCode, sizeShader);
+	//graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
+	//this->m_vertex_shader = graphEngine->createVertexShader(shaderByteCode, sizeShader);
 
 	// Get the system time.
 	unsigned seed = time(0);
@@ -87,17 +89,17 @@ void AppWindow::onCreate()
 	}
 	*/
 
-	shader_byte_code = nullptr;
-	size_shader = 0;
-	GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
-	m_vertex_shader = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
+	//shader_byte_code = nullptr;
+	//size_shader = 0;
+	//GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
+	//m_vertex_shader = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
 
-	graphEngine->releaseCompiledShader(); // this must be called after compilation of each shader
+	//graphEngine->releaseCompiledShader(); // this must be called after compilation of each shader
 
 	//compile basic pixel shader
-	graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &sizeShader);
-	this->m_pixel_shader = graphEngine->createPixelShader(shaderByteCode, sizeShader);
-	graphEngine->releaseCompiledShader();
+	//graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &sizeShader);
+	//this->m_pixel_shader = graphEngine->createPixelShader(shaderByteCode, sizeShader);
+	//graphEngine->releaseCompiledShader();
 
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
@@ -231,7 +233,7 @@ void AppWindow::onUpdate()
 	BaseComponentSystem::getInstance()->getPhysicsSystem()->updateAllComponents(EngineTime::getDeltaTime());
 
 	// Game Object Rendering
-	GameObjectManager::getInstance()->renderAll(width, height, m_vertex_shader, m_pixel_shader);
+	GameObjectManager::getInstance()->renderAll(width, height);
 
 	//updateCamera();
 	SceneCameraHandler::getInstance()->update(EngineTime::getDeltaTime());
@@ -254,10 +256,16 @@ void AppWindow::onDestroy()
 	m_pixel_shader->release();
 
 	InputSystem::destroy();
+	ShaderLibrary::destroy();
 
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
+
+	BaseComponentSystem::destroy();
+	GameObjectManager::destroy();
+	GraphicsEngine::get()->release();
+	UIManager::destroy();
 	GraphicsEngine::get()->release();
 }
 

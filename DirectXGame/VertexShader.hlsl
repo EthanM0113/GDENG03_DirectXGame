@@ -24,7 +24,7 @@ cbuffer constant: register(b0)
 
 
 
-VS_OUTPUT vsmain(VS_INPUT input)
+VS_OUTPUT main(VS_INPUT input)
 {
 	VS_OUTPUT output = (VS_OUTPUT)0;
 

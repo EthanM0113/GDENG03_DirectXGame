@@ -14,11 +14,6 @@ DeviceContext::DeviceContext(ID3D11DeviceContext* device_context):m_device_conte
 
 void DeviceContext::clearRenderTargetColor(SwapChain* swap_chain, float red, float green, float blue, float alpha)
 {
-	/*
-	FLOAT clear_color[] = {red,green,blue,alpha};
-	m_device_context->ClearRenderTargetView(swap_chain->m_rtv, clear_color);
-	m_device_context->OMSetRenderTargets(1, &swap_chain->m_rtv, NULL);
-	*/
 
 	const FLOAT clear_color[] = { red, green, blue, alpha };
 
@@ -87,11 +82,18 @@ void DeviceContext::setConstantBuffer(VertexShader* vertex_shader, ConstantBuffe
 	m_device_context->VSSetConstantBuffers(0, 1, &buffer->m_buffer);
 }
 
-void DeviceContext::setConstantBuffer(PixelShader* pixel_shader, ConstantBuffer* buffer)
+void DeviceContext::setConstantBuffer(ConstantBuffer* buffer)
 {
-	m_device_context->PSSetConstantBuffers(0, 1, &buffer->m_buffer);
-
+	m_device_context->VSSetConstantBuffers(0, 1, &(buffer->m_buffer));
+	m_device_context->PSSetConstantBuffers(0, 1, &(buffer->m_buffer));
 }
+
+void DeviceContext::setRenderConfig(VertexShader* vertexShader, PixelShader* pixelShader)
+{
+	this->m_device_context->VSSetShader(vertexShader->getShader(), NULL, 0);
+	this->m_device_context->PSSetShader(pixelShader->getShader(), NULL, 0);
+}
+
 
 bool DeviceContext::release()
 {

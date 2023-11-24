@@ -50,15 +50,13 @@ void GameObjectManager::updateAll(float deltaTime)
 	}
 }
 
-void GameObjectManager::renderAll(int viewportWidth, int viewportHeight, VertexShader* vertexShader,
-	PixelShader* pixelShader)
+void GameObjectManager::renderAll(int viewportWidth, int viewportHeight)
 {
 	for(int i = 0; i < gameObjectList.size(); i++)
 	{
 		if(gameObjectList[i]->getEnabled())
 		{
-			gameObjectList[i]->draw(viewportWidth, viewportHeight, vertexShader, pixelShader);
-			//cout << "Position: " << gameObjectList[i]->getLocalPosition().getValues().x << " " << gameObjectList[i]->getLocalPosition().getValues().y << " " <<gameObjectList[i]->getLocalPosition().getValues().z << endl;
+			gameObjectList[i]->draw(viewportWidth, viewportHeight);
 		}
 	}
 }
@@ -73,15 +71,6 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 {
 	if(type == PrimitiveType::CUBE)
 	{
-		GraphicsEngine* graphEngine = GraphicsEngine::get();
-
-		VertexShader* m_vertex_shader;
-		PixelShader* m_pixel_shader;
-
-		//compile basic vertex shader
-		graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
-		m_vertex_shader = graphEngine->createVertexShader(shaderByteCode, sizeShader);
-
 		// Spawn a Cube at 0,0,0, 1.0 Scale, 0,0,0 Rotation, No Animation
 		string objName = "Cube";
 		if (cubeCount != 0)
@@ -90,23 +79,11 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 			objName.append(std::to_string(cubeCount));
 			objName.append(") ");
 		}
-		Cube* cubeObject = new Cube(objName, shaderByteCode, sizeShader);
+		Cube* cubeObject = new Cube(objName);
 		cubeObject->setAnimSpeed(0.0f);
 		cubeObject->setPosition(Vector3D(0, 0, 0));
 		cubeObject->setScale(Vector3D(1.0, 1.0, 1.0));
 		GameObjectManager::getInstance()->addObject(cubeObject);
-
-		shaderByteCode = nullptr;
-		sizeShader = 0;
-		GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
-		m_vertex_shader = GraphicsEngine::get()->createVertexShader(shaderByteCode, sizeShader);
-
-		graphEngine->releaseCompiledShader(); // this must be called after compilation of each shader
-
-		//compile basic pixel shader
-		graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &sizeShader);
-		m_pixel_shader = graphEngine->createPixelShader(shaderByteCode, sizeShader);
-		graphEngine->releaseCompiledShader();
 
 		cubeCount++;
 	}
@@ -114,15 +91,6 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 	{
 		for(int i = 0 ; i < 20; i++)
 		{
-			GraphicsEngine* graphEngine = GraphicsEngine::get();
-
-			VertexShader* m_vertex_shader;
-			PixelShader* m_pixel_shader;
-
-			//compile basic vertex shader
-			graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
-			m_vertex_shader = graphEngine->createVertexShader(shaderByteCode, sizeShader);
-
 			string objName = "Physics_Cube";
 			if (physicsCubeCount != 0)
 			{
@@ -130,44 +98,24 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 				objName.append(std::to_string(physicsCubeCount));
 				objName.append(") ");
 			}
-			Cube* cubeObject = new Cube(objName, shaderByteCode, sizeShader);
+			Cube* cubeObject = new Cube(objName);
 			cubeObject->setAnimSpeed(0.0f);
-			cubeObject->setPosition(Vector3D(0, 3, 0));
+			cubeObject->setPosition(Vector3D(0, 5, 0));
 			cubeObject->setScale(Vector3D(1.0, 1.0, 1.0));
 			GameObjectManager::getInstance()->addObject(cubeObject);
+			cubeObject->updateLocalMatrix();
 
 			// Attach Physics Component
 			string componentName = "PhysicsComponent_";
 			componentName.append(objName);
-			PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, cubeObject, BodyType::DYNAMIC, 1000.0f);
+			PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, cubeObject, BodyType::DYNAMIC, 3.0f);
 			cubeObject->attachComponent(physicsComponent);
-
-			shaderByteCode = nullptr;
-			sizeShader = 0;
-			GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
-			m_vertex_shader = GraphicsEngine::get()->createVertexShader(shaderByteCode, sizeShader);
-
-			graphEngine->releaseCompiledShader(); // this must be called after compilation of each shader
-
-			//compile basic pixel shader
-			graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &sizeShader);
-			m_pixel_shader = graphEngine->createPixelShader(shaderByteCode, sizeShader);
-			graphEngine->releaseCompiledShader();
 
 			physicsCubeCount++;
 		}
 	}
 	else if(type == PrimitiveType::PLANE)
 	{
-		GraphicsEngine* graphEngine = GraphicsEngine::get();
-
-		VertexShader* m_vertex_shader;
-		PixelShader* m_pixel_shader;
-
-		//compile basic vertex shader
-		graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
-		m_vertex_shader = graphEngine->createVertexShader(shaderByteCode, sizeShader);
-
 		// Spawn a Plane at 0,0,0, 1.0 Scale, 7.85,0,0 Rotation, No Animation
 		string objName = "Plane";
 		if (planeCount != 0)
@@ -176,38 +124,17 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 			objName.append(std::to_string(planeCount));
 			objName.append(") ");
 		}
-		Plane* planeObject = new Plane(objName, shaderByteCode, sizeShader);
+		Plane* planeObject = new Plane(objName);
 		planeObject->setAnimSpeed(0.0f);
 		planeObject->setPosition(Vector3D(0, 0, 0));
 		planeObject->setRotation(Vector3D(7.85, 0, 0));
-		planeObject->setScale(Vector3D(3.0, 3.0f, 1.0f));
+		planeObject->setScale(Vector3D(8.0f, 8.0f, 0.1f));
 		GameObjectManager::getInstance()->addObject(planeObject);
-
-		shaderByteCode = nullptr;
-		sizeShader = 0;
-		GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
-		m_vertex_shader = GraphicsEngine::get()->createVertexShader(shaderByteCode, sizeShader);
-
-		graphEngine->releaseCompiledShader(); // this must be called after compilation of each shader
-
-		//compile basic pixel shader
-		graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &sizeShader);
-		m_pixel_shader = graphEngine->createPixelShader(shaderByteCode, sizeShader);
-		graphEngine->releaseCompiledShader();
 
 		planeCount++;
 	}
 	else if (type == PrimitiveType::PHYSICS_PLANE)
 	{
-		GraphicsEngine* graphEngine = GraphicsEngine::get();
-
-		VertexShader* m_vertex_shader;
-		PixelShader* m_pixel_shader;
-
-		//compile basic vertex shader
-		graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
-		m_vertex_shader = graphEngine->createVertexShader(shaderByteCode, sizeShader);
-
 		// Spawn a Plane at 0,0,0, 1.0 Scale, 7.85,0,0 Rotation, No Animation
 		string objName = "Physics_Plane";
 		if (physicsPlaneCount != 0)
@@ -216,30 +143,20 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 			objName.append(std::to_string(physicsPlaneCount));
 			objName.append(") ");
 		}
-		Plane* planeObject = new Plane(objName, shaderByteCode, sizeShader);
+		Plane* planeObject = new Plane(objName);
 		planeObject->setAnimSpeed(0.0f);
 		planeObject->setPosition(Vector3D(0, 0, 0));
-		planeObject->setRotation(Vector3D(7.85, 0, 0));
-		planeObject->setScale(Vector3D(13.0f, 13.0f, 1.0f));
+		planeObject->setRotation(Vector3D(0, 0, 0));
+		planeObject->setScale(Vector3D(32.0f, 0.2f, 32.0f));
 		GameObjectManager::getInstance()->addObject(planeObject);
+		planeObject->updateLocalMatrix();
+
 
 		// Attach Physics Component
 		string componentName = "PhysicsComponent_";
 		componentName.append(objName);
-		PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, planeObject, BodyType::STATIC, 0.001f);
+		PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, planeObject, BodyType::KINEMATIC, 0.001f);
 		planeObject->attachComponent(physicsComponent);
-
-		shaderByteCode = nullptr;
-		sizeShader = 0;
-		GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
-		m_vertex_shader = GraphicsEngine::get()->createVertexShader(shaderByteCode, sizeShader);
-
-		graphEngine->releaseCompiledShader(); // this must be called after compilation of each shader
-
-		//compile basic pixel shader
-		graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &sizeShader);
-		m_pixel_shader = graphEngine->createPixelShader(shaderByteCode, sizeShader);
-		graphEngine->releaseCompiledShader();
 
 		physicsPlaneCount++;
 		}

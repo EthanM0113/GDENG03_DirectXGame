@@ -20,40 +20,18 @@ PhysicsComponent::PhysicsComponent(String name, AGameObject* owner, BodyType typ
 	Transform transform;
 	transform.setFromOpenGL(this->getOwner()->getPhysicsLocalMatrix());
 
-	if(type == BodyType::DYNAMIC) 	// Game Objects
-	{
-		BoxShape* boxShape = physicsCommon->createBoxShape(Vector3(scaleVect.x / 2, scaleVect.y / 2, scaleVect.z / 2));
-		rigidBody = physicsWorld->createRigidBody(transform);
-		rigidBody->addCollider(boxShape, transform);
-		rigidBody->updateMassPropertiesFromColliders();
-		rigidBody->setMass(mass);
-		rigidBody->setType(type);
-		rigidBody->setLocalCenterOfMass(Vector3(0, 0, 0));
-		//rigidBody->setIsSleeping(true);
+	BoxShape* boxShape = physicsCommon->createBoxShape(Vector3(scaleVect.x / 2, scaleVect.y / 2, scaleVect.z / 2));
+	rigidBody = physicsWorld->createRigidBody(transform);
+	rigidBody->addCollider(boxShape, transform);
+	rigidBody->updateMassPropertiesFromColliders();
+	rigidBody->setMass(mass);
+	rigidBody->setType(type);
 
-		transform = rigidBody->getTransform();
-		float matrix[16];
-		transform.getOpenGLMatrix(matrix);
+	transform = rigidBody->getTransform();
+	float matrix[16];
+	transform.getOpenGLMatrix(matrix);
 
-		this->getOwner()->recomputeMatrix(matrix);
-	}
-	else if(type == BodyType::STATIC) // Plane Floor
-	{
-		BoxShape* boxShape = physicsCommon->createBoxShape(Vector3(scaleVect.x, scaleVect.z * 2.78, scaleVect.y)); // z and y should be swapped for some reason
-		rigidBody = physicsWorld->createRigidBody(transform);
-		rigidBody->addCollider(boxShape, transform);
-		rigidBody->updateMassPropertiesFromColliders();
-		rigidBody->setMass(mass);
-		rigidBody->setType(type);
-		rigidBody->setLocalCenterOfMass(Vector3(0, 0, 0));
-
-		transform = rigidBody->getTransform();
-		float matrix[16];
-		transform.getOpenGLMatrix(matrix);
-
-		this->getOwner()->recomputeMatrix(matrix);
-	}
-
+	this->getOwner()->recomputeMatrix(matrix);
 }
 
 PhysicsComponent::~PhysicsComponent()
@@ -69,14 +47,6 @@ void PhysicsComponent::perform(float deltaTime)
 	transform.getOpenGLMatrix(matrix);
 
 	getOwner()->recomputeMatrix(matrix);
-
-	if(rigidBody->getType() != BodyType::STATIC)
-	{
-		getOwner()->setRotation(transform.getOrientation().x, transform.getOrientation().y, transform.getOrientation().z);
-		getOwner()->setPosition(transform.getPosition().x, transform.getPosition().y, transform.getPosition().z);
-	}
-
-	//cout << "My component is updating: " << name << " owned by " << owner->getName() << endl;
 }
 
 RigidBody* PhysicsComponent::getRigidBody()

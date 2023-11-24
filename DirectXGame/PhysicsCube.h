@@ -1,28 +1,14 @@
 #pragma once
-#include "AGameObject.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "ConstantBuffer.h"
-
-class PhysicsCube : public AGameObject
+#include "Cube.h"
+class PhysicsCube : public Cube
 {
-	PhysicsCube(string name, void* shaderByteCode, size_t sizeShader);
+public:
+	PhysicsCube(String name, bool skipInit = false);
 	~PhysicsCube();
 
 	void update(float deltaTime) override;
-	void draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader) override;
-	void setAnimSpeed(float speed);
+	void draw(int width, int height) override;
 
-private:
-	VertexBuffer* vertexBuffer;
-	IndexBuffer* indexBuffer;
-	ConstantBuffer* constantBuffer;
-	CBData cbData;
-	float ticks = 0.0f;
-	float deltaPos = 0.0f;
-	float deltaTime = 0.0f;
-	float speed = 10.0f;
-	float m_time = 0;
-	Vector3D oldScale = { 1.0f, 1.0f, 1.0f };
+protected:
+	float mass = 3.0f;
 };
-

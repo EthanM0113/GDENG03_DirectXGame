@@ -240,6 +240,9 @@
     <ClCompile Include="ScenePlayWindow.cpp">
       <Filter>GameEngine\UI\Screens</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderLibrary.cpp">
+      <Filter>GameEngine\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -392,12 +395,21 @@
     <ClInclude Include="ScenePlayWindow.h">
       <Filter>GameEngine\UI\Screens</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderLibrary.h">
+      <Filter>GameEngine\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
       <Filter>App</Filter>
     </FxCompile>
     <FxCompile Include="PixelShader.hlsl">
+      <Filter>App</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedVertexShader.hlsl">
+      <Filter>App</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedPixelShader.hlsl">
       <Filter>App</Filter>
     </FxCompile>
   </ItemGroup>

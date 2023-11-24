@@ -11,6 +11,7 @@ using namespace std;
 
 class VertexShader;
 class PixelShader;
+class GameObjectManager;
 
 class AGameObject
 {
@@ -30,9 +31,17 @@ public:
 	AGameObject(string name);
 	~AGameObject();
 
+	struct AQuaternion
+	{
+		float w = 0.0f;
+		float x = 0.0f;
+		float y = 0.0f;
+		float z = 0.0f;
+	};
+
 	// Abstract Methods
 	virtual void update(float deltaTime) = 0;
-	virtual void draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader) = 0;
+	virtual void draw(int width, int height) = 0;
 
 	void setPosition(float x, float y, float z);
 	void setPosition(Vector3D pos);
@@ -56,6 +65,7 @@ public:
 
 	void recomputeMatrix(float matrix[16]);
 	float* getPhysicsLocalMatrix();
+	void updateLocalMatrix();
 
 	struct Vertex {
 		Vector3D position;
@@ -77,6 +87,7 @@ protected:
 	string name;
 	Vector3D localPosition;
 	Vector3D localScale;
+	AQuaternion orientation;
 	Vector3D localRotation;
 	Matrix4x4 localMatrix;
 	//reactphysics3d::decimal* phyiscsLocalMatrix;
@@ -85,4 +96,6 @@ protected:
 	// ECS Variables
 	ComponentList componentList;
 	ComponentTable componentTable;
+
+	bool overrideMatrix = false;
 };

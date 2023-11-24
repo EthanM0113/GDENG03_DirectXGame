@@ -1,26 +1,35 @@
 #include "PixelShader.h"
 #include "GraphicsEngine.h"
+#include "Utilities.h"
 
 PixelShader::PixelShader()
 {
+	m_ps = nullptr;
 }
 
 void PixelShader::release()
 {
-	m_ps->Release();
+	if (m_ps)
+		m_ps->Release();
 	delete this;
+
 }
 
 PixelShader::~PixelShader()
 {
 }
 
+ID3D11PixelShader* PixelShader::getShader()
+{
+	return m_ps;
+}
+
 bool PixelShader::init(const void* shader_byte_code, size_t byte_code_size)
 {
-	if(!SUCCEEDED(GraphicsEngine::get()->m_d3d_device->CreatePixelShader(shader_byte_code, byte_code_size, nullptr, &m_ps)))
-	{
+	HRESULT hr = GraphicsEngine::get()->getDevice()->CreatePixelShader(shader_byte_code, byte_code_size, nullptr, &m_ps);
+	if (FAILED(hr)) {
+		Utilities::PrintHResult("CreatePixelShader:", hr);
 		return false;
 	}
-
 	return true;
 }
