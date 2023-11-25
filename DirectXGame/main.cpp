@@ -1,7 +1,7 @@
 #include <iostream>
 #include "AppWindow.h"
 
-using namespace std;
+//using namespace std;
 
 int main()
 {
@@ -18,9 +18,11 @@ int main()
     }
     catch (const std::exception& err)
     {
-        cout << err.what();
+	    std::cout << err.what();
         return -1;
     }
+
+    app.onDestroy();
 
     return 0;
 }

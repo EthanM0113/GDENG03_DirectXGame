@@ -20,13 +20,13 @@ void ShaderLibrary::destroy()
 	delete sharedInstance;
 }
 
-void ShaderLibrary::requestVertexShaderData(String vertexShaderName, void** shaderByteCode, size_t* sizeShader)
+void ShaderLibrary::requestVertexShaderData(std::wstring vertexShaderName, void** shaderByteCode, size_t* sizeShader)
 {
 	GraphicsEngine* graphEngine = GraphicsEngine::get();
 	graphEngine->compileVertexShader(vertexShaderName.c_str(), "main", shaderByteCode, sizeShader);
 }
 
-VertexShader* ShaderLibrary::getVertexShader(String vertexShaderName)
+VertexShader* ShaderLibrary::getVertexShader(std::wstring vertexShaderName)
 {
 	if (this->activeVertexShaders[vertexShaderName] == NULL) {
 		std::cout << "Vertex shader " << vertexShaderName.c_str() << " not found. Have you initialized it? \n";
@@ -34,7 +34,7 @@ VertexShader* ShaderLibrary::getVertexShader(String vertexShaderName)
 	return this->activeVertexShaders[vertexShaderName];
 }
 
-PixelShader* ShaderLibrary::getPixelShader(String pixelShaderName)
+PixelShader* ShaderLibrary::getPixelShader(std::wstring pixelShaderName)
 {
 	if (this->activePixelShaders[pixelShaderName] == NULL) {
 		std::cout << "Pixel shader " << pixelShaderName.c_str() << " not found. Have you initialized it? \n";
@@ -69,6 +69,12 @@ ShaderLibrary::~ShaderLibrary()
 	ShaderNames shaderNames;
 	this->activeVertexShaders[shaderNames.BASE_VERTEX_SHADER_NAME]->release();
 	this->activePixelShaders[shaderNames.BASE_PIXEL_SHADER_NAME]->release();
+
+	for (auto& vs : this->activeVertexShaders)
+		vs.second->release();
+
+	for (auto& ps : this->activePixelShaders)
+		ps.second->release();
 
 	this->activeVertexShaders.clear();
 	this->activePixelShaders.clear();

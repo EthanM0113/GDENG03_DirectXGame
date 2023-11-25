@@ -88,6 +88,13 @@ void DeviceContext::setConstantBuffer(ConstantBuffer* buffer)
 	m_device_context->PSSetConstantBuffers(0, 1, &(buffer->m_buffer));
 }
 
+void DeviceContext::setTexture(Texture* texture)
+{
+	ID3D11ShaderResourceView* shaderRes = texture->getShaderResource();
+	this->m_device_context->VSSetShaderResources(0, 1, &shaderRes);
+	this->m_device_context->PSSetShaderResources(0, 1, &shaderRes);
+}
+
 void DeviceContext::setRenderConfig(VertexShader* vertexShader, PixelShader* pixelShader)
 {
 	this->m_device_context->VSSetShader(vertexShader->getShader(), NULL, 0);

@@ -7,7 +7,7 @@
 #include "Matrix4x4.h"
 #include "BaseComponentSystem.h"
 
-using namespace std;
+//using namespace std;
 
 class VertexShader;
 class PixelShader;
@@ -28,7 +28,7 @@ public:
 		float time;
 	};
 
-	AGameObject(string name);
+	AGameObject(std::string name);
 	~AGameObject();
 
 	struct AQuaternion
@@ -58,7 +58,7 @@ public:
 	void setEnabled(bool flag);
 	bool getEnabled();
 
-	string getName();
+	String getName();
 
 	Matrix4x4 getLocalMatrix();
 	void setLocalMatrix(Matrix4x4 matrix);
@@ -84,7 +84,7 @@ public:
 	ComponentList getComponentsOfTypeRecursive(AComponent::ComponentType type);
 
 protected:
-	string name;
+	std::string name;
 	Vector3D localPosition;
 	Vector3D localScale;
 	AQuaternion orientation;

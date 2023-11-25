@@ -3,6 +3,7 @@
 #include "GraphicsEngine.h"
 #include "PhysicsComponent.h"
 #include "Plane.h"
+#include "TexturedCube.h"
 
 GameObjectManager* GameObjectManager::sharedInstance = NULL;
 
@@ -21,7 +22,7 @@ void GameObjectManager::destroy()
 	delete sharedInstance;
 }
 
-AGameObject* GameObjectManager::findObjectByName(string name)
+AGameObject* GameObjectManager::findObjectByName(std::string name)
 {
 	// Chance that object cannot be found
 	AGameObject* gameObject = gameObjectMap[name];
@@ -72,7 +73,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 	if(type == PrimitiveType::CUBE)
 	{
 		// Spawn a Cube at 0,0,0, 1.0 Scale, 0,0,0 Rotation, No Animation
-		string objName = "Cube";
+		std::string objName = "Cube";
 		if (cubeCount != 0)
 		{
 			objName.append(" (");
@@ -91,7 +92,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 	{
 		for(int i = 0 ; i < 20; i++)
 		{
-			string objName = "Physics_Cube";
+			std::string objName = "Physics_Cube";
 			if (physicsCubeCount != 0)
 			{
 				objName.append(" (");
@@ -106,7 +107,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 			cubeObject->updateLocalMatrix();
 
 			// Attach Physics Component
-			string componentName = "PhysicsComponent_";
+			std::string componentName = "PhysicsComponent_";
 			componentName.append(objName);
 			PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, cubeObject, BodyType::DYNAMIC, 3.0f);
 			cubeObject->attachComponent(physicsComponent);
@@ -114,10 +115,28 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 			physicsCubeCount++;
 		}
 	}
+	else if (type == PrimitiveType::TEXTURED_CUBE)
+	{
+		// Spawn a Plane at 0,0,0, 1.0 Scale, 7.85,0,0 Rotation, No Animation
+		std::string objName = "Textured_Cube";
+		if (texturedCubeCount != 0)
+		{
+			objName.append(" (");
+			objName.append(std::to_string(texturedCubeCount));
+			objName.append(") ");
+		}
+		TexturedCube* cubeObject = new TexturedCube(objName);
+		cubeObject->setAnimSpeed(0.0f);
+		cubeObject->setPosition(Vector3D(0, 5, 0));
+		cubeObject->setScale(Vector3D(1.0, 1.0, 1.0));
+		GameObjectManager::getInstance()->addObject(cubeObject);
+
+		texturedCubeCount++;
+	}
 	else if(type == PrimitiveType::PLANE)
 	{
 		// Spawn a Plane at 0,0,0, 1.0 Scale, 7.85,0,0 Rotation, No Animation
-		string objName = "Plane";
+		std::string objName = "Plane";
 		if (planeCount != 0)
 		{
 			objName.append(" (");
@@ -136,7 +155,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 	else if (type == PrimitiveType::PHYSICS_PLANE)
 	{
 		// Spawn a Plane at 0,0,0, 1.0 Scale, 7.85,0,0 Rotation, No Animation
-		string objName = "Physics_Plane";
+		std::string objName = "Physics_Plane";
 		if (physicsPlaneCount != 0)
 		{
 			objName.append(" (");
@@ -153,7 +172,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 
 
 		// Attach Physics Component
-		string componentName = "PhysicsComponent_";
+		std::string componentName = "PhysicsComponent_";
 		componentName.append(objName);
 		PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, planeObject, BodyType::KINEMATIC, 0.001f);
 		planeObject->attachComponent(physicsComponent);
@@ -166,11 +185,11 @@ void GameObjectManager::deleteObject(AGameObject* gameObject)
 {
 }
 
-void GameObjectManager::deleteObjectByName(string name)
+void GameObjectManager::deleteObjectByName(std::string name)
 {
 }
 
-void GameObjectManager::setSelectedObject(string name)
+void GameObjectManager::setSelectedObject(std::string name)
 {
 	selectedObjectName = name;
 }

@@ -4,7 +4,7 @@
 #include "EngineTime.h"
 #include "PhysicsComponent.h"
 
-using namespace std;
+//using namespace std;
 
 PhysicsSystem::PhysicsSystem()
 {
@@ -15,7 +15,7 @@ PhysicsSystem::PhysicsSystem()
 	settings.gravity = Vector3(0, -9.81, 0);
 	physicsWorld = physicsCommon->createPhysicsWorld(settings);
 
-	cout << "Physics System Initialized" << endl;
+	std::cout << "Physics System Initialized" << std::endl;
 }
 
 PhysicsSystem::~PhysicsSystem()

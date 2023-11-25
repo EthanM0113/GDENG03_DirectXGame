@@ -7,7 +7,7 @@
 
 #include "EngineTime.h"
 
-using namespace std;
+//using namespace std;
 
 QuadPrimitive::QuadPrimitive()
 {

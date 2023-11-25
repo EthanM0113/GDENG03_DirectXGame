@@ -5,7 +5,7 @@
 class Plane : public Cube
 {
 public:
-	Plane(string name);
+	Plane(std::string name);
 	~Plane();
 
 	void update(float deltaTime) override;

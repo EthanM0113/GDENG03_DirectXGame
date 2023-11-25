@@ -2,7 +2,7 @@
 #include "GraphicsEngine.h"
 #include "ShaderLibrary.h"
 
-Plane::Plane(string name) : Cube(name)
+Plane::Plane(std::string name) : Cube(name)
 {
 	ShaderNames shaderNames;
 	void* shaderByteCode = NULL;
@@ -63,8 +63,8 @@ Plane::Plane(string name) : Cube(name)
 	this->constantBuffer = GraphicsEngine::get()->createConstantBuffer();
 	this->constantBuffer->load(&cbData, sizeof(CBData));
 
-	this->setScale(8.0f, 8.0f, 0.1f);
-	this->setRotation(90, 0.0f, 0.0f);
+	//this->setScale(8.0f, 8.0f, 0.1f);
+	//this->setRotation(90, 0.0f, 0.0f);
 }
 
 Plane::~Plane()

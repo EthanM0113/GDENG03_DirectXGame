@@ -88,6 +88,9 @@
     <Filter Include="GameEngine\Components\ComponentSystems">
       <UniqueIdentifier>{81963f31-c5c8-4c1b-9e5a-542cee3b6266}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Textures">
+      <UniqueIdentifier>{fd74985a-2a7f-40ee-bdd9-17022b2da676}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -240,8 +243,29 @@
     <ClCompile Include="ScenePlayWindow.cpp">
       <Filter>GameEngine\UI\Screens</Filter>
     </ClCompile>
+    <ClCompile Include="TexturedCube.cpp">
+      <Filter>GameEngine\GameObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>GameEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturedVertexBuffer.cpp">
+      <Filter>GameEngine\GraphicsEngine\VertexBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>GameEngine\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="AResourceManager.cpp">
+      <Filter>GameEngine\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>GameEngine\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="AResource.cpp">
+      <Filter>GameEngine\Textures</Filter>
+    </ClCompile>
     <ClCompile Include="ShaderLibrary.cpp">
-      <Filter>GameEngine\GameObject</Filter>
+      <Filter>GameEngine\Textures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -395,8 +419,29 @@
     <ClInclude Include="ScenePlayWindow.h">
       <Filter>GameEngine\UI\Screens</Filter>
     </ClInclude>
+    <ClInclude Include="TexturedCube.h">
+      <Filter>GameEngine\GameObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturedVertexBuffer.h">
+      <Filter>GameEngine\GraphicsEngine\VertexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>GameEngine\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="AResourceManager.h">
+      <Filter>GameEngine\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>GameEngine\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="AResource.h">
+      <Filter>GameEngine\Textures</Filter>
+    </ClInclude>
     <ClInclude Include="ShaderLibrary.h">
-      <Filter>GameEngine\GameObject</Filter>
+      <Filter>GameEngine\Textures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

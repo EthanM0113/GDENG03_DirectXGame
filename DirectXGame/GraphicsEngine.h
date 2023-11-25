@@ -7,6 +7,7 @@
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "ConstantBuffer.h"
+#include "TexturedVertexBuffer.h"
 
 class GraphicsEngine
 {
@@ -33,6 +34,7 @@ public:
 
 
 	VertexBuffer* createVertexBuffer();
+	TexturedVertexBuffer* createTexturedBuffer();
 	IndexBuffer* createIndexBuffer();
 	ConstantBuffer* createConstantBuffer();
 

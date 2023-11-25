@@ -4,7 +4,7 @@
 #include "ShaderLibrary.h"
 #include "SwapChain.h"
 
-Cube::Cube(string name, bool skipInit) :AGameObject(name)
+Cube::Cube(std::string name, bool skipInit) :AGameObject(name)
 {
 	if (skipInit)
 		return;

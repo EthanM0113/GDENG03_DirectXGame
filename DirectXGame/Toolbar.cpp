@@ -34,6 +34,10 @@ void Toolbar::drawUI(void* shaderByteCode, size_t sizeShader)
 			{
 				GameObjectManager::getInstance()->createObject(GameObjectManager::CUBE, shaderByteCode, sizeShader);
 			}
+			if (ImGui::MenuItem("Create Textured Cube"))
+			{
+				GameObjectManager::getInstance()->createObject(GameObjectManager::TEXTURED_CUBE, shaderByteCode, sizeShader);
+			}
 			if (ImGui::MenuItem("Create Physics Cube"))
 			{
 				GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_CUBE, shaderByteCode, sizeShader);

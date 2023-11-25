@@ -3,7 +3,7 @@
 #include "EngineTime.h"
 #include "InputSystem.h"
 
-Camera::Camera(string name) : AGameObject(name)
+Camera::Camera(std::string name) : AGameObject(name)
 {
 	this->forwardDirection = Vector3D(1.0f, 0.0f, 1.0f);
 	this->backwardDirection = Vector3D(-1.0f, 0.0f, -1.0f);

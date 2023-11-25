@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="AComponent.cpp" />
     <ClCompile Include="AppWindow.cpp" />
+    <ClCompile Include="AResource.cpp" />
     <ClCompile Include="AUIScreen.cpp" />
     <ClCompile Include="BaseComponentSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -55,6 +56,7 @@
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="QuadPrimitive.cpp" />
+    <ClCompile Include="AResourceManager.cpp" />
     <ClCompile Include="SceneCameraHandler.cpp" />
     <ClCompile Include="SceneOutliner.cpp" />
     <ClCompile Include="ScenePlayWindow.cpp" />
@@ -66,11 +68,16 @@
     </ClCompile>
     <ClCompile Include="ShaderLibrary.cpp" />
     <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TexturedCube.cpp" />
+    <ClCompile Include="TexturedVertexBuffer.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Toolbar.cpp" />
     <ClCompile Include="TrianglePrimitive.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="UINames.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Vector3D.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="VertexShader.cpp" />
@@ -79,6 +86,7 @@
   <ItemGroup>
     <ClInclude Include="AComponent.h" />
     <ClInclude Include="AppWindow.h" />
+    <ClInclude Include="AResource.h" />
     <ClInclude Include="AUIScreen.h" />
     <ClInclude Include="BaseComponentSystem.h" />
     <ClInclude Include="Camera.h" />
@@ -113,16 +121,22 @@
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="QuadPrimitive.h" />
+    <ClInclude Include="AResourceManager.h" />
     <ClInclude Include="SceneCameraHandler.h" />
     <ClInclude Include="SceneOutliner.h" />
     <ClInclude Include="ScenePlayWindow.h" />
     <ClInclude Include="ShaderLibrary.h" />
     <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TexturedCube.h" />
+    <ClInclude Include="TexturedVertexBuffer.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Toolbar.h" />
     <ClInclude Include="TrianglePrimitive.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="UINames.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="Vector4D.h" />
     <ClInclude Include="VertexBuffer.h" />
@@ -205,7 +219,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(ProjectDir)GUI\ImGui\;$(ProjectDir)GUI\ImGui\backends;$(ProjectDir)GUI\ImGui\misc\cpp;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\GDENG03_Repos\DirectXGame\DirectXGame\reactphysics3d;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\GDENG03_Repos\DirectXGame\DirectXGame\reactphysics3d;D:\GDENG03_Repos\DirectXGame\DirectXGame\DirectXTex;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -241,12 +255,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;NOMINMAX;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\GDENG03_Repos\DirectXGame\DirectXGame\reactphysics3d\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GDENG03_Repos\DirectXGame\DirectXGame\reactphysics3d\include;D:\GDENG03_Repos\DirectXGame\DirectXGame\DirectXTex\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;reactphysics3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;reactphysics3d.lib;DirectXTex.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -20,6 +20,7 @@
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
 #include "ShaderLibrary.h"
+#include "TextureManager.h"
 
 void AppWindow::onCreate()
 {
@@ -27,6 +28,7 @@ void AppWindow::onCreate()
 	GraphicsEngine* graphEngine = GraphicsEngine::get();
 	EngineTime::initialize();
 	ShaderLibrary::initialize();
+	TextureManager::initialize();
 	InputSystem::initialize();
 	InputSystem::getInstance()->addListener(this);
 	SceneCameraHandler::initialize();
