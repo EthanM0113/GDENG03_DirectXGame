@@ -91,6 +91,9 @@
     <Filter Include="GameEngine\Textures">
       <UniqueIdentifier>{fd74985a-2a7f-40ee-bdd9-17022b2da676}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\FileBrowser">
+      <UniqueIdentifier>{e2e30c15-b9c9-4344-af09-f4e40930d1bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -267,6 +270,12 @@
     <ClCompile Include="ShaderLibrary.cpp">
       <Filter>GameEngine\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectRenderer.cpp">
+      <Filter>GameEngine\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialScreen.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -442,6 +451,15 @@
     </ClInclude>
     <ClInclude Include="ShaderLibrary.h">
       <Filter>GameEngine\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectRenderer.h">
+      <Filter>GameEngine\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialScreen.h">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="imfilebrowser.h">
+      <Filter>GameEngine\FileBrowser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

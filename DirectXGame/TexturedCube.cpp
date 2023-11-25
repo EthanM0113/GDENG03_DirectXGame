@@ -1,10 +1,11 @@
 #include "TexturedCube.h"
 #include "GraphicsEngine.h"
+#include "ObjectRenderer.h"
 #include "ShaderLibrary.h"
 #include "SceneCameraHandler.h"
 #include "TextureManager.h"
 
-TexturedCube::TexturedCube(String name) : Cube(name, true)
+TexturedCube::TexturedCube(String name, bool skipInit) : Cube(name, skipInit)
 {
 	ShaderNames shaderNames;
 	void* shaderByteCode = NULL;
@@ -110,20 +111,34 @@ TexturedCube::TexturedCube(String name) : Cube(name, true)
 	deviceContext->setRenderConfig(ShaderLibrary::getInstance()->getVertexShader(shaderNames.TEXTURED_VERTEX_SHADER_NAME),
 		ShaderLibrary::getInstance()->getPixelShader(shaderNames.TEXTURED_PIXEL_SHADER_NAME));
 
+	// Assign object renderer
+	renderer = new ObjectRenderer();
+	this->getRenderer()->setRenderer("D:/GDENG03_Repos/DirectXGame/DirectXGame/Assets/Textures/wood.jpg");
 }
 
 TexturedCube::~TexturedCube()
 {
 }
 
+void TexturedCube::attachRenderer(ObjectRenderer* renderer)
+{
+	this->renderer = renderer;
+}
+
 void TexturedCube::draw(int width, int height)
 {
 	ShaderNames shaderNames;
 	DeviceContext* deviceContext = GraphicsEngine::get()->getImmediateDeviceContext();
-	Texture* woodTex = (Texture*)TextureManager::getInstance()->createTextureFromFile(L"D:/GDENG03_Repos/DirectXGame/DirectXGame/Assets/Textures/wood.jpg");
+
+	std::string materialPath = this->getRenderer()->getMaterialPath();
+	std::replace(materialPath.begin(), materialPath.end(), '\\', '/');
+	std::wstring widestr = std::wstring(materialPath.begin(), materialPath.end());
+	const wchar_t* texturePath = widestr.c_str();
+
+	Texture* objTex = TextureManager::getInstance()->createTextureFromFile(texturePath);
 
 	//set vertex shader and pixel shader for the object
-	deviceContext->setTexture(woodTex);
+	deviceContext->setTexture(objTex);
 	deviceContext->setRenderConfig(ShaderLibrary::getInstance()->getVertexShader(shaderNames.TEXTURED_VERTEX_SHADER_NAME), ShaderLibrary::getInstance()->getPixelShader(shaderNames.TEXTURED_PIXEL_SHADER_NAME));
 
 	CBData cbData = {};
@@ -156,4 +171,9 @@ void TexturedCube::draw(int width, int height)
 	deviceContext->setVertexBuffer(this->vertexBuffer);
 
 	deviceContext->drawIndexedTriangleList(this->indexBuffer->getSizeIndexList(), 0, 0);
+}
+
+ObjectRenderer* TexturedCube::getRenderer() const
+{
+	return renderer;
 }

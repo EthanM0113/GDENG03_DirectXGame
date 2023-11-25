@@ -2,23 +2,24 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include "AGameObject.h"
 
+enum PrimitiveType {
+	NONE,
+	TEXTURED_CUBE,
+	CUBE,
+	PHYSICS_CUBE,
+	PLANE,
+	PHYSICS_PLANE,
+	SPHERE
+};
+
+class AGameObject;
 class GameObjectManager
 {
 public:
 	typedef std::string String;
 	typedef std::vector<AGameObject*> List;
 	typedef std::unordered_map<String, AGameObject*> HashTable;
-
-	enum PrimitiveType {
-		TEXTURED_CUBE,
-		CUBE,
-		PHYSICS_CUBE,
-		PLANE,
-		PHYSICS_PLANE,
-		SPHERE
-	};
 
 	static GameObjectManager* getInstance();
 	static void initialize();

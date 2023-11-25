@@ -8,6 +8,7 @@ AGameObject::AGameObject(std::string name)
 	this->localScale = Vector3D::ones();
 	this->localMatrix.setIdentity();
 	this->isEnabled = true; // game objects are rendered by default
+	this->objectType = PrimitiveType::NONE;
 }
 
 AGameObject::~AGameObject()
@@ -58,6 +59,16 @@ void AGameObject::setRotation(Vector3D rot)
 Vector3D AGameObject::getLocalRotation()
 {
 	return this->localRotation;
+}
+
+void AGameObject::setObjectType(PrimitiveType objectType)
+{
+	this->objectType = objectType;
+}
+
+PrimitiveType AGameObject::getObjectType()
+{
+	return objectType;
 }
 
 void AGameObject::setEnabled(bool flag)

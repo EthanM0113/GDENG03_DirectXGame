@@ -84,6 +84,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 		cubeObject->setAnimSpeed(0.0f);
 		cubeObject->setPosition(Vector3D(0, 0, 0));
 		cubeObject->setScale(Vector3D(1.0, 1.0, 1.0));
+		cubeObject->setObjectType(type);
 		GameObjectManager::getInstance()->addObject(cubeObject);
 
 		cubeCount++;
@@ -103,6 +104,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 			cubeObject->setAnimSpeed(0.0f);
 			cubeObject->setPosition(Vector3D(0, 5, 0));
 			cubeObject->setScale(Vector3D(1.0, 1.0, 1.0));
+			cubeObject->setObjectType(type);
 			GameObjectManager::getInstance()->addObject(cubeObject);
 			cubeObject->updateLocalMatrix();
 
@@ -129,6 +131,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 		cubeObject->setAnimSpeed(0.0f);
 		cubeObject->setPosition(Vector3D(0, 5, 0));
 		cubeObject->setScale(Vector3D(1.0, 1.0, 1.0));
+		cubeObject->setObjectType(type);
 		GameObjectManager::getInstance()->addObject(cubeObject);
 
 		texturedCubeCount++;
@@ -148,6 +151,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 		planeObject->setPosition(Vector3D(0, 0, 0));
 		planeObject->setRotation(Vector3D(7.85, 0, 0));
 		planeObject->setScale(Vector3D(8.0f, 8.0f, 0.1f));
+		planeObject->setObjectType(type);
 		GameObjectManager::getInstance()->addObject(planeObject);
 
 		planeCount++;
@@ -167,6 +171,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 		planeObject->setPosition(Vector3D(0, 0, 0));
 		planeObject->setRotation(Vector3D(0, 0, 0));
 		planeObject->setScale(Vector3D(32.0f, 0.2f, 32.0f));
+		planeObject->setObjectType(type);
 		GameObjectManager::getInstance()->addObject(planeObject);
 		planeObject->updateLocalMatrix();
 

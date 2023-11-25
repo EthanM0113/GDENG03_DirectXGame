@@ -2,6 +2,7 @@
 
 #include "EngineProfiler.h"
 #include "InspectorWindow.h"
+#include "MaterialScreen.h"
 #include "SceneOutliner.h"
 #include "ScenePlayWindow.h"
 
@@ -30,16 +31,43 @@ void UIManager::drawAllUI(void* shaderByteCode, size_t sizeShader)
     ImGui::NewFrame();
 
     for (int i = 0; i < this->uiList.size(); i++) {
-        uiList[i]->drawUI(shaderByteCode, sizeShader);
+        if(uiList[i]->getEnabled())
+        {
+            uiList[i]->drawUI(shaderByteCode, sizeShader);
+        }
     }
 
     ImGui::Render();
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
+void UIManager::setEnabled(String uiName, bool isPopupOpen)
+{
+    for (int i = 0; i < this->uiList.size(); i++) {
+        if(uiList[i]->getName() == uiName)
+        {
+            uiList[i]->setEnabled(isPopupOpen);
+        }
+    }
+}
+
+
+AUIScreen* UIManager::findUIByName(String uiName)
+{
+    for (int i = 0; i < this->uiList.size(); i++) {
+        if (uiList[i]->getName() == uiName)
+            return uiList[i];
+    }
+
+    return NULL;
+}
 
 UIManager::UIManager(HWND windowHandle)
 {
+    // Setup File Explorer
+    fileDialog.SetTitle("Open Scene");
+    fileDialog.SetTypeFilters({ ".jpg", ".png" });
+
     // Add Toolbar (Menu)
     Toolbar* toolbar = new Toolbar(uiNames.MENU_SCREEN);
     uiList.push_back(toolbar);
@@ -59,6 +87,12 @@ UIManager::UIManager(HWND windowHandle)
     // Add Scene Play Window
     ScenePlayWindow* scenePlayWindow = new ScenePlayWindow(uiNames.SCENEPLAY_SCREEN);
     uiList.push_back(scenePlayWindow);
+
+    // Add Material Screen Window
+    MaterialScreen* materialScreen = new MaterialScreen(uiNames.MATERIAL_SCREEN, fileDialog);
+    materialScreen->setEnabled(false);
+    uiList.push_back(materialScreen);
+  
 }
 
 UIManager::~UIManager()

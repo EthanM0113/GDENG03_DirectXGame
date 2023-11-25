@@ -6,8 +6,8 @@
 #include "Vector3D.h"
 #include "Matrix4x4.h"
 #include "BaseComponentSystem.h"
+#include "GameObjectManager.h"
 
-//using namespace std;
 
 class VertexShader;
 class PixelShader;
@@ -55,6 +55,9 @@ public:
 	void setRotation(Vector3D rot);
 	Vector3D getLocalRotation();
 
+	void setObjectType(PrimitiveType objectType);
+	PrimitiveType getObjectType();
+
 	void setEnabled(bool flag);
 	bool getEnabled();
 
@@ -92,6 +95,7 @@ protected:
 	Matrix4x4 localMatrix;
 	//reactphysics3d::decimal* phyiscsLocalMatrix;
 	bool isEnabled;
+	PrimitiveType objectType;
 
 	// ECS Variables
 	ComponentList componentList;

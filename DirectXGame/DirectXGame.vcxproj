@@ -46,8 +46,10 @@
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="InspectorWindow.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MaterialScreen.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
+    <ClCompile Include="ObjectRenderer.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="PhysicsCube.cpp" />
     <ClCompile Include="PhysicsPlane.cpp" />
@@ -107,12 +109,15 @@
     <ClInclude Include="GUI\ImGui\imstb_textedit.h" />
     <ClInclude Include="GUI\ImGui\imstb_truetype.h" />
     <ClInclude Include="GUI\ImGui\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="imfilebrowser.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="InputListener.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="InspectorWindow.h" />
+    <ClInclude Include="MaterialScreen.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Matrix4x4.h" />
+    <ClInclude Include="ObjectRenderer.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="PhysicsCube.h" />
     <ClInclude Include="PhysicsPlane.h" />

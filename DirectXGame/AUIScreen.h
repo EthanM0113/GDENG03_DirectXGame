@@ -15,10 +15,14 @@ protected:
 	AUIScreen(String name);
 	~AUIScreen();
 
+	void setEnabled(bool flag);
+
 	String getName();
+	bool getEnabled();
 	virtual void drawUI(void* shaderByteCode, size_t sizeShader) = 0;
 
 	String name;
+	bool isEnabled;
 
 	friend class UIManager;
 };

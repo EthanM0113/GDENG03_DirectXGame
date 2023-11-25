@@ -1,6 +1,16 @@
 #include "InspectorWindow.h"
 
 #include "GameObjectManager.h"
+#include "ObjectRenderer.h"
+#include "TexturedCube.h"
+#include "TextureManager.h"
+#include <string>
+#include <algorithm>
+
+#include "MaterialScreen.h"
+#include "UIManager.h"
+#include "UINames.h"
+
 
 InspectorWindow::InspectorWindow(String name) : AUIScreen(name)
 {
@@ -50,7 +60,76 @@ void InspectorWindow::drawUI(void* shaderByteCode, size_t sizeShader)
 			ImGui::DragFloat3("Scale", newScale, 0.1f);
 			selectedObj->setScale(Vector3D(newScale[0], newScale[1], newScale[2]));
 
+			// Draw Materials Tab
+			drawMaterialsTab();
 		}
 	}
 	ImGui::End();
+}
+
+void InspectorWindow::drawMaterialsTab()
+{
+	GameObjectManager* gameObjManager = GameObjectManager::getInstance();
+
+	int BUTTON_WIDTH = 225;
+	int BUTTON_HEIGHT = 20;
+
+	if(gameObjManager->getSelectedObject()->getObjectType() != TEXTURED_CUBE)
+	{
+		return;
+	}
+
+	TexturedCube* texturedObj = static_cast<TexturedCube*>(gameObjManager->getSelectedObject());
+	this->materialPath = texturedObj->getRenderer()->getMaterialPath();
+	this->FormatMatImage();
+	ImGui::SetCursorPosX(50);
+	ImGui::Image(static_cast<void*>(materialDisplay->getShaderResource()), ImVec2(150, 150));
+
+	// replace '\' with '/'
+	std::replace(materialPath.begin(), materialPath.end(), '\\', '/');
+
+	//Get file name from path
+	std::string outputName;
+	for(int i = materialPath.length(); i > 0; i--)
+	{
+		if (materialPath[i] != '/')
+		{
+			outputName.insert(outputName.begin(), materialPath[i]);
+		}
+		else
+		{
+			i = 0;
+		}
+	}
+
+	materialName = outputName;
+	std::string displayText = "Material: ";
+	displayText.append(materialName);
+	ImGui::Text(displayText.c_str());
+	if(ImGui::Button("Add Material", ImVec2(BUTTON_WIDTH, BUTTON_HEIGHT)))
+	{
+		popupOpen = !popupOpen;
+		std::cout << "Popup Open: " << popupOpen << std::endl;
+		UINames uiNames;
+		MaterialScreen* materialScreen = static_cast<MaterialScreen*>(UIManager::getInstance()->findUIByName(uiNames.MATERIAL_SCREEN));
+		materialScreen->linkInspectorScreen(this, materialPath);
+		UIManager::getInstance()->setEnabled(uiNames.MATERIAL_SCREEN, popupOpen);
+	}
+}
+
+void InspectorWindow::FormatMatImage()
+{
+	// covert to wchar
+	std::string textureString = this->materialPath;
+	std::wstring widestr = std::wstring(textureString.begin(), textureString.end());
+	const wchar_t* texturePath = widestr.c_str();
+	this->materialDisplay = static_cast<Texture*>(TextureManager::getInstance()->createTextureFromFile(texturePath));
+}
+
+void InspectorWindow::SendResult(std::string materialPath)
+{
+	GameObjectManager* gameObjManager = GameObjectManager::getInstance();
+	TexturedCube* texturedObj = static_cast<TexturedCube*>(gameObjManager->getSelectedObject());
+	texturedObj->getRenderer()->setRenderer(materialPath);
+	this->popupOpen = false;
 }

@@ -32,24 +32,24 @@ void Toolbar::drawUI(void* shaderByteCode, size_t sizeShader)
 
 			if (ImGui::MenuItem("Create Cube"))
 			{
-				GameObjectManager::getInstance()->createObject(GameObjectManager::CUBE, shaderByteCode, sizeShader);
+				GameObjectManager::getInstance()->createObject(PrimitiveType::CUBE, shaderByteCode, sizeShader);
 			}
 			if (ImGui::MenuItem("Create Textured Cube"))
 			{
-				GameObjectManager::getInstance()->createObject(GameObjectManager::TEXTURED_CUBE, shaderByteCode, sizeShader);
+				GameObjectManager::getInstance()->createObject(PrimitiveType::TEXTURED_CUBE, shaderByteCode, sizeShader);
 			}
 			if (ImGui::MenuItem("Create Physics Cube"))
 			{
-				GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_CUBE, shaderByteCode, sizeShader);
+				GameObjectManager::getInstance()->createObject(PrimitiveType::PHYSICS_CUBE, shaderByteCode, sizeShader);
 			}
 			if (ImGui::MenuItem("Create Sphere")) {}
 			if (ImGui::MenuItem("Create Plane"))
 			{
-				GameObjectManager::getInstance()->createObject(GameObjectManager::PLANE, shaderByteCode, sizeShader);
+				GameObjectManager::getInstance()->createObject(PrimitiveType::PLANE, shaderByteCode, sizeShader);
 			}
 			if (ImGui::MenuItem("Create Physics Plane"))
 			{
-				GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_PLANE, shaderByteCode, sizeShader);
+				GameObjectManager::getInstance()->createObject(PrimitiveType::PHYSICS_PLANE, shaderByteCode, sizeShader);
 			}
 			if (ImGui::BeginMenu("Light"))
 			{

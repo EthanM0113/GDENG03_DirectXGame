@@ -1,6 +1,6 @@
 #include "SceneOutliner.h"
-
 #include "GameObjectManager.h"
+#include "AGameObject.h"
 
 SceneOutliner::SceneOutliner(String name) : AUIScreen(name)
 {
@@ -21,7 +21,7 @@ void SceneOutliner::drawUI(void* shaderByteCode, size_t sizeShader)
 	{
 		if(gameObjManager->activeObjects() != 0)
 		{
-			GameObjectManager::List objList = gameObjManager->getAllObjects();
+			std::vector<AGameObject*> objList = gameObjManager->getAllObjects();
 
 			for(int i = 0; i < gameObjManager->activeObjects(); i++)
 			{

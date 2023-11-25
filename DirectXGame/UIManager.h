@@ -3,6 +3,8 @@
 #include <vector>
 #include "AUIScreen.h"
 #include <unordered_map>
+
+#include "imfilebrowser.h"
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
@@ -22,9 +24,12 @@ public:
 	static void destroy();
 
 	void drawAllUI(void* shaderByteCode, size_t sizeShader);
+	void setEnabled(String uiName, bool isPopupOpen);
 
 	static const int WINDOW_WIDTH = 1440;
 	static const int WINDOW_HEIGHT = 900;
+
+	AUIScreen* findUIByName(String uiName);
 
 private:
 	UIManager(HWND windowHandle);
@@ -32,6 +37,7 @@ private:
 	UIManager(UIManager const&) {};
 	UIManager& operator=(UIManager const&) {};
 	static UIManager* sharedInstance;
+	ImGui::FileBrowser fileDialog;
 
 	UIList uiList;
 	UITable uiTable;
