@@ -188,15 +188,57 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 
 void GameObjectManager::deleteObject(AGameObject* gameObject)
 {
+	PrimitiveType deleteType = gameObject->getObjectType();
+
+	this->gameObjectMap.erase(gameObject->getName());
+
+	int index = -1;
+	for (int i = 0; i < this->gameObjectList.size(); i++) {
+		if (this->gameObjectList[i] == gameObject) {
+			index = i;
+			break;
+		}
+	}
+
+	if (index != -1) {
+		this->gameObjectList.erase(this->gameObjectList.begin() + index);
+	}
+
+	if (gameObject == gameObjectMap[selectedObjectName])
+		gameObjectMap[selectedObjectName] = nullptr;
+
+	delete gameObject;
+
+	// Clear selected object
+	selectedObjectName.clear();
+
+	if (deleteType == CUBE)
+		cubeCount--;
+	else if (deleteType == PHYSICS_CUBE)
+		physicsCubeCount--;
+	if (deleteType == PLANE)
+		planeCount--;
+	else if (deleteType == PHYSICS_CUBE)
+		physicsPlaneCount--;
 }
 
 void GameObjectManager::deleteObjectByName(std::string name)
 {
+	AGameObject* object = this->findObjectByName(name);
+
+	if (object != NULL) {
+		this->deleteObject(object);
+	}
 }
 
 void GameObjectManager::setSelectedObject(std::string name)
 {
 	selectedObjectName = name;
+}
+
+void GameObjectManager::setSelectedObject(AGameObject* gameObject)
+{
+	this->selectedObject = gameObject;
 }
 
 AGameObject* GameObjectManager::getSelectedObject()

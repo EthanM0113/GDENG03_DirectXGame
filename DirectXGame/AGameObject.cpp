@@ -206,10 +206,15 @@ AComponent* AGameObject::findComponentByName(String name)
 	return nullptr;
 }
 
-AComponent* AGameObject::findComponentOfType(AComponent::ComponentType type, String name)
+AComponent* AGameObject::findComponentOfType(AComponent::ComponentType type)
 {
-	if (componentTable[name] != nullptr && componentTable[name]->getType() == type)
-		return componentTable[name];
+	for(int i = 0 ; i < componentList.size(); i++)
+	{
+		if(componentList[i]->getType() == type)
+		{
+			return componentList[i];
+		}
+	}
 
 	return nullptr;
 }

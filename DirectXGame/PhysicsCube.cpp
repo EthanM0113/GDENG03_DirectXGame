@@ -7,6 +7,8 @@ PhysicsCube::PhysicsCube(String name, bool skipInit) : Cube(name, skipInit)
 
 PhysicsCube::~PhysicsCube()
 {
+	// Detach physics component
+	this->detachComponent(this->findComponentOfType(AComponent::Physics));
 	Cube::~Cube();
 }
 

@@ -1,6 +1,7 @@
 #include "ScenePlayWindow.h"
 
 #include "BaseComponentSystem.h"
+#include "EngineBackend.h"
 
 ScenePlayWindow::ScenePlayWindow(String name) : AUIScreen(name)
 {
@@ -12,30 +13,51 @@ ScenePlayWindow::~ScenePlayWindow()
 
 void ScenePlayWindow::drawUI(void* shaderByteCode, size_t sizeShader)
 {
-	if(isSleeping)
-	{
-		BaseComponentSystem::getInstance()->getPhysicsSystem()->setSleepOfAllComponents(true);
-	}
-	else if(!isSleeping)
-	{
-		BaseComponentSystem::getInstance()->getPhysicsSystem()->setSleepOfAllComponents(false);
-	}
+	EngineBackend* backend = EngineBackend::getInstance();
 
 	ImGuiIO& io = ImGui::GetIO();
 	ImGui::SetNextWindowSize(ImVec2(200, 80));
 	ImGui::Begin("Scene Play Options", nullptr, ImGuiWindowFlags_None);
 	{
-		if (ImGui::Button(sleepButtonLabel)) // Buttons return true when clicked (most widgets return true when edited/activated)
+		if (ImGui::Button(sleepButtonLabel)) 
 		{
-			if(isSleeping)
+			if(backend->getMode() == EngineBackend::EDITOR)
 			{
+				backend->setMode(EngineBackend::PLAY);
 				isSleeping = false;
 				sleepButtonLabel = "Stop";
 			}
-			else if(!isSleeping)
+			else if(backend->getMode() == EngineBackend::PLAY) 
 			{
-				isSleeping = true;
+				// Should reset physics objects but right now buggy, dont stop after playing
 				sleepButtonLabel = "Play";
+			}
+		}
+		if(!isSleeping)
+		{
+			ImGui::SameLine();
+			if (ImGui::Button(pauseButtonLabel)) 
+			{
+				if (backend->getMode() == EngineBackend::PAUSED)
+				{
+					backend->setMode(EngineBackend::PLAY);
+					pauseButtonLabel = "Pause";
+				}
+				else if (backend->getMode() == EngineBackend::PLAY)
+				{
+					backend->setMode(EngineBackend::PAUSED);
+					pauseButtonLabel = "Resume";
+				}
+			}
+
+			// Frame Step Button appears when paused
+			if(backend->getMode() == EngineBackend::PAUSED)
+			{
+				ImGui::SameLine();
+				if (ImGui::Button("Frame Step"))
+				{
+					backend->startFrameStep();
+				}
 			}
 		}
 	}

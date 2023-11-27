@@ -35,6 +35,7 @@ public:
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(std::string name);
 	void setSelectedObject(std::string name);
+	void setSelectedObject(AGameObject* gameObject);
 	AGameObject* getSelectedObject();
 
 private:
@@ -46,6 +47,7 @@ private:
 	List gameObjectList;
 	HashTable gameObjectMap;
 	std::string selectedObjectName;
+	AGameObject* selectedObject;
 	int cubeCount = 0;
 	int planeCount = 0;
 	int physicsCubeCount = 0;

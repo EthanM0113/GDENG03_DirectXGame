@@ -37,6 +37,12 @@ void InspectorWindow::drawUI(void* shaderByteCode, size_t sizeShader)
 			ImGui::SameLine();
 			ImGui::Text(selectedObj->getName().c_str());
 
+			// Delete Button
+			if (ImGui::Button("Delete", ImVec2(60, 20)))
+			{
+				GameObjectManager::getInstance()->deleteObject(selectedObj);
+			}
+
 			// Set Enabled Bool
 			bool enabled = selectedObj->getEnabled();
 			ImGui::Checkbox("Enabled", &enabled);
@@ -74,46 +80,49 @@ void InspectorWindow::drawMaterialsTab()
 	int BUTTON_WIDTH = 225;
 	int BUTTON_HEIGHT = 20;
 
-	if(gameObjManager->getSelectedObject()->getObjectType() != TEXTURED_CUBE)
+	if(gameObjManager->getSelectedObject() != nullptr)
 	{
-		return;
-	}
-
-	TexturedCube* texturedObj = static_cast<TexturedCube*>(gameObjManager->getSelectedObject());
-	this->materialPath = texturedObj->getRenderer()->getMaterialPath();
-	this->FormatMatImage();
-	ImGui::SetCursorPosX(50);
-	ImGui::Image(static_cast<void*>(materialDisplay->getShaderResource()), ImVec2(150, 150));
-
-	// replace '\' with '/'
-	std::replace(materialPath.begin(), materialPath.end(), '\\', '/');
-
-	//Get file name from path
-	std::string outputName;
-	for(int i = materialPath.length(); i > 0; i--)
-	{
-		if (materialPath[i] != '/')
+		if (gameObjManager->getSelectedObject()->getObjectType() != TEXTURED_CUBE)
 		{
-			outputName.insert(outputName.begin(), materialPath[i]);
+			return;
 		}
-		else
-		{
-			i = 0;
-		}
-	}
 
-	materialName = outputName;
-	std::string displayText = "Material: ";
-	displayText.append(materialName);
-	ImGui::Text(displayText.c_str());
-	if(ImGui::Button("Add Material", ImVec2(BUTTON_WIDTH, BUTTON_HEIGHT)))
-	{
-		popupOpen = !popupOpen;
-		std::cout << "Popup Open: " << popupOpen << std::endl;
-		UINames uiNames;
-		MaterialScreen* materialScreen = static_cast<MaterialScreen*>(UIManager::getInstance()->findUIByName(uiNames.MATERIAL_SCREEN));
-		materialScreen->linkInspectorScreen(this, materialPath);
-		UIManager::getInstance()->setEnabled(uiNames.MATERIAL_SCREEN, popupOpen);
+		TexturedCube* texturedObj = static_cast<TexturedCube*>(gameObjManager->getSelectedObject());
+		this->materialPath = texturedObj->getRenderer()->getMaterialPath();
+		this->FormatMatImage();
+		ImGui::SetCursorPosX(50);
+		ImGui::Image(static_cast<void*>(materialDisplay->getShaderResource()), ImVec2(150, 150));
+
+		// replace '\' with '/'
+		std::replace(materialPath.begin(), materialPath.end(), '\\', '/');
+
+		//Get file name from path
+		std::string outputName;
+		for (int i = materialPath.length(); i > 0; i--)
+		{
+			if (materialPath[i] != '/')
+			{
+				outputName.insert(outputName.begin(), materialPath[i]);
+			}
+			else
+			{
+				i = 0;
+			}
+		}
+
+		materialName = outputName;
+		std::string displayText = "Material: ";
+		displayText.append(materialName);
+		ImGui::Text(displayText.c_str());
+		if (ImGui::Button("Add Material", ImVec2(BUTTON_WIDTH, BUTTON_HEIGHT)))
+		{
+			popupOpen = !popupOpen;
+			std::cout << "Popup Open: " << popupOpen << std::endl;
+			UINames uiNames;
+			MaterialScreen* materialScreen = static_cast<MaterialScreen*>(UIManager::getInstance()->findUIByName(uiNames.MATERIAL_SCREEN));
+			materialScreen->linkInspectorScreen(this, materialPath);
+			UIManager::getInstance()->setEnabled(uiNames.MATERIAL_SCREEN, popupOpen);
+		}
 	}
 }
 

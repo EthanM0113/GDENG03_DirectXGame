@@ -12,5 +12,8 @@ public:
 private:
 	const char* sleepButtonLabel = "Play";
 	bool isSleeping = true;
+
+	const char* pauseButtonLabel = "Pause";
+	bool isPaused = false;
 };
 

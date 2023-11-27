@@ -15,6 +15,7 @@
 #include "UIManager.h"
 #include "GameObjectManager.h"
 #include "BaseComponentSystem.h"
+#include "EngineBackend.h"
 
 #include "imgui.h"
 #include "imgui_impl_win32.h"
@@ -35,6 +36,7 @@ void AppWindow::onCreate()
 	UIManager::initialize(m_hwnd);
 	BaseComponentSystem::initialize();
 	GameObjectManager::getInstance()->initialize();
+	EngineBackend::getInstance()->initialize();
 
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
 
@@ -222,17 +224,24 @@ void AppWindow::onUpdate()
 
 	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(width, height);
 
-	// Game Object Updates
-	/*
-	for (int i = 0; i < cubeList.size(); i++) {
-		cubeList[i]->update(EngineTime::getDeltaTime());
-		cubeList[i]->draw(width, height, m_vertex_shader, m_pixel_shader);
+	// Update sytems according to engine states
+	EngineBackend* backend = EngineBackend::getInstance();
+	switch(backend->getMode())
+	{
+		case EngineBackend::EditorMode::EDITOR:
+			GameObjectManager::getInstance()->updateAll(EngineTime::getDeltaTime());
+			break;
+		case EngineBackend::EditorMode::PLAY:
+			BaseComponentSystem::getInstance()->getPhysicsSystem()->updateAllComponents(EngineTime::getDeltaTime());
+			GameObjectManager::getInstance()->updateAll(EngineTime::getDeltaTime());
+		case EngineBackend::EditorMode::PAUSED:
+			if(backend->insideFrameStep())
+			{
+				BaseComponentSystem::getInstance()->getPhysicsSystem()->updateAllComponents(EngineTime::getDeltaTime());
+				GameObjectManager::getInstance()->updateAll(EngineTime::getDeltaTime());
+				backend->endFrameStep();
+			}
 	}
-	*/
-	GameObjectManager::getInstance()->updateAll(EngineTime::getDeltaTime());
-
-	// Physics System Update
-	BaseComponentSystem::getInstance()->getPhysicsSystem()->updateAllComponents(EngineTime::getDeltaTime());
 
 	// Game Object Rendering
 	GameObjectManager::getInstance()->renderAll(width, height);

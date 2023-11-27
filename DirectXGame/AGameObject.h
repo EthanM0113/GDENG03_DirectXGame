@@ -82,7 +82,7 @@ public:
 	void detachComponent(AComponent* component);
 
 	AComponent* findComponentByName(String name);
-	AComponent* findComponentOfType(AComponent::ComponentType type, String name);
+	AComponent* findComponentOfType(AComponent::ComponentType type);
 	ComponentList getComponentsOfType(AComponent::ComponentType type);
 	ComponentList getComponentsOfTypeRecursive(AComponent::ComponentType type);
 

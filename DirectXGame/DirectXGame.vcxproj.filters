@@ -94,6 +94,9 @@
     <Filter Include="GameEngine\FileBrowser">
       <UniqueIdentifier>{e2e30c15-b9c9-4344-af09-f4e40930d1bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\EngineStates">
+      <UniqueIdentifier>{3fbd1397-e5f0-43d1-b106-77d0b1265454}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -275,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="MaterialScreen.cpp">
       <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineBackend.cpp">
+      <Filter>GameEngine\EngineStates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -460,6 +466,9 @@
     </ClInclude>
     <ClInclude Include="imfilebrowser.h">
       <Filter>GameEngine\FileBrowser</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineBackend.h">
+      <Filter>GameEngine\EngineStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
