@@ -97,6 +97,9 @@
     <Filter Include="GameEngine\EngineStates">
       <UniqueIdentifier>{3fbd1397-e5f0-43d1-b106-77d0b1265454}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Scenes">
+      <UniqueIdentifier>{e0f1317f-d0eb-4f6b-bde5-97aa958e67f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -210,7 +213,7 @@
     <ClCompile Include="AUIScreen.cpp">
       <Filter>GameEngine\UI\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="Toolbar.cpp">
+    <ClCompile Include="MenuBar.cpp">
       <Filter>GameEngine\UI\Screens</Filter>
     </ClCompile>
     <ClCompile Include="SceneOutliner.cpp">
@@ -281,6 +284,27 @@
     </ClCompile>
     <ClCompile Include="EngineBackend.cpp">
       <Filter>GameEngine\EngineStates</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorAction.cpp">
+      <Filter>GameEngine\EngineStates</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionMemento.cpp">
+      <Filter>GameEngine\EngineStates</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionHistory.cpp">
+      <Filter>GameEngine\EngineStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneWriter.cpp">
+      <Filter>GameEngine\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
+      <Filter>GameEngine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneReader.cpp">
+      <Filter>GameEngine\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionWindow.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -395,7 +419,7 @@
     <ClInclude Include="AUIScreen.h">
       <Filter>GameEngine\UI\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="Toolbar.h">
+    <ClInclude Include="MenuBar.h">
       <Filter>GameEngine\UI\Screens</Filter>
     </ClInclude>
     <ClInclude Include="SceneOutliner.h">
@@ -469,6 +493,27 @@
     </ClInclude>
     <ClInclude Include="EngineBackend.h">
       <Filter>GameEngine\EngineStates</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorAction.h">
+      <Filter>GameEngine\EngineStates</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMemento.h">
+      <Filter>GameEngine\EngineStates</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionHistory.h">
+      <Filter>GameEngine\EngineStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneWriter.h">
+      <Filter>GameEngine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>GameEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneReader.h">
+      <Filter>GameEngine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionWindow.h">
+      <Filter>GameEngine\UI\Screens</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

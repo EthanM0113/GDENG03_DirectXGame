@@ -8,7 +8,6 @@
 #include "BaseComponentSystem.h"
 #include "GameObjectManager.h"
 
-
 class VertexShader;
 class PixelShader;
 class GameObjectManager;
@@ -54,6 +53,7 @@ public:
 	void setRotation(float x, float y, float z);
 	void setRotation(Vector3D rot);
 	Vector3D getLocalRotation();
+	AQuaternion getLocalOrientation();
 
 	void setObjectType(PrimitiveType objectType);
 	PrimitiveType getObjectType();

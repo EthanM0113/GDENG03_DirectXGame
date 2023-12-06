@@ -1,7 +1,9 @@
 #include "GameObjectManager.h"
 #include "Cube.h"
 #include "GraphicsEngine.h"
+#include "ObjectRenderer.h"
 #include "PhysicsComponent.h"
+#include "PhysicsCube.h"
 #include "Plane.h"
 #include "TexturedCube.h"
 
@@ -20,6 +22,11 @@ void GameObjectManager::initialize()
 void GameObjectManager::destroy()
 {
 	delete sharedInstance;
+}
+
+void GameObjectManager::applyEditorAction(EditorAction* action)
+{
+
 }
 
 AGameObject* GameObjectManager::findObjectByName(std::string name)
@@ -68,10 +75,11 @@ void GameObjectManager::addObject(AGameObject* gameObject)
 	gameObjectMap[gameObject->getName()] = gameObject; // add game object to unordered map
 }
 
-void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, size_t sizeShader)
+void GameObjectManager::createObject(PrimitiveType type)
 {
 	if(type == PrimitiveType::CUBE)
 	{
+		std::cout << "Cube count " << cubeCount << std::endl;
 		// Spawn a Cube at 0,0,0, 1.0 Scale, 0,0,0 Rotation, No Animation
 		std::string objName = "Cube";
 		if (cubeCount != 0)
@@ -82,7 +90,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 		}
 		Cube* cubeObject = new Cube(objName);
 		cubeObject->setAnimSpeed(0.0f);
-		cubeObject->setPosition(Vector3D(0, 0, 0));
+		cubeObject->setPosition(Vector3D(0, 5, 0)); // buggy
 		cubeObject->setScale(Vector3D(1.0, 1.0, 1.0));
 		cubeObject->setObjectType(type);
 		GameObjectManager::getInstance()->addObject(cubeObject);
@@ -127,7 +135,7 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 			objName.append(std::to_string(texturedCubeCount));
 			objName.append(") ");
 		}
-		TexturedCube* cubeObject = new TexturedCube(objName);
+		TexturedCube* cubeObject = new TexturedCube(objName, true);
 		cubeObject->setAnimSpeed(0.0f);
 		cubeObject->setPosition(Vector3D(0, 5, 0));
 		cubeObject->setScale(Vector3D(1.0, 1.0, 1.0));
@@ -186,6 +194,97 @@ void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, s
 		}
 }
 
+void GameObjectManager::createObjectFromFile(std::string objectName, PrimitiveType objectType, Vector3D position,
+	Vector3D rotation, Vector3D scale)
+{
+	if (objectType == PrimitiveType::CUBE)
+	{
+		// Spawn a Cube at 0,0,0, 1.0 Scale, 0,0,0 Rotation, No Animation
+		std::string objName = objectName;
+		Cube* cubeObject = new Cube(objName);
+		cubeObject->setAnimSpeed(0.0f);
+		cubeObject->setPosition(position); // buggy
+		cubeObject->setScale(scale);
+		cubeObject->setRotation(rotation);
+		cubeObject->setObjectType(objectType);
+		GameObjectManager::getInstance()->addObject(cubeObject);
+	}
+	if (objectType == PrimitiveType::PHYSICS_CUBE)
+	{
+		std::string objName = objectName;
+		Cube* cubeObject = new Cube(objName);
+		cubeObject->setAnimSpeed(0.0f);
+		cubeObject->setPosition(position);
+		cubeObject->setScale(scale);
+		cubeObject->setRotation(rotation);
+		cubeObject->setObjectType(objectType);
+		GameObjectManager::getInstance()->addObject(cubeObject);
+		cubeObject->updateLocalMatrix();
+
+		// Attach Physics Component
+		std::string componentName = "PhysicsComponent_";
+		componentName.append(objName);
+		PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, cubeObject, BodyType::DYNAMIC, 3.0f);
+		cubeObject->attachComponent(physicsComponent);
+	}
+	else if (objectType == PrimitiveType::PLANE)
+	{
+		// Spawn a Plane at 0,0,0, 1.0 Scale, 7.85,0,0 Rotation, No Animation
+		std::string objName = objectName;
+		if (planeCount != 0)
+		{
+			objName.append(" (");
+			objName.append(std::to_string(planeCount));
+			objName.append(") ");
+		}
+		Plane* planeObject = new Plane(objName);
+		planeObject->setAnimSpeed(0.0f);
+		planeObject->setPosition(position);
+		planeObject->setRotation(rotation);
+		planeObject->setScale(scale);
+		planeObject->setObjectType(objectType);
+		GameObjectManager::getInstance()->addObject(planeObject);
+	}
+	else if (objectType == PrimitiveType::PHYSICS_PLANE)
+	{
+		// Spawn a Plane at 0,0,0, 1.0 Scale, 7.85,0,0 Rotation, No Animation
+		std::string objName = objectName;
+		Plane* planeObject = new Plane(objName);
+		planeObject->setAnimSpeed(0.0f);
+		planeObject->setPosition(position);
+		planeObject->setRotation(rotation);
+		planeObject->setScale(scale);
+		planeObject->setObjectType(objectType);
+		GameObjectManager::getInstance()->addObject(planeObject);
+		planeObject->updateLocalMatrix();
+
+		// Attach Physics Component
+		std::string componentName = "PhysicsComponent_";
+		componentName.append(objName);
+		PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, planeObject, BodyType::KINEMATIC, 0.001f);
+		planeObject->attachComponent(physicsComponent);
+	}
+}
+
+void GameObjectManager::createTexturedObjectFromFile(std::string objectName, PrimitiveType objectType,
+	Vector3D position, Vector3D rotation, Vector3D scale, std::string materialPath)
+{
+		if (objectType == PrimitiveType::TEXTURED_CUBE)
+		{
+			// Spawn a Plane at 0,0,0, 1.0 Scale, 7.85,0,0 Rotation, No Animation
+			std::string objName = objectName;
+			TexturedCube* cubeObject = new TexturedCube(objName, true);
+			cubeObject->setAnimSpeed(0.0f);
+			cubeObject->setPosition(position);
+			cubeObject->setScale(scale);
+			cubeObject->setRotation(rotation);
+			cubeObject->setObjectType(objectType);
+			cubeObject->getRenderer()->setRenderer(materialPath);
+			GameObjectManager::getInstance()->addObject(cubeObject);
+	}
+
+}
+
 void GameObjectManager::deleteObject(AGameObject* gameObject)
 {
 	PrimitiveType deleteType = gameObject->getObjectType();
@@ -193,8 +292,11 @@ void GameObjectManager::deleteObject(AGameObject* gameObject)
 	this->gameObjectMap.erase(gameObject->getName());
 
 	int index = -1;
-	for (int i = 0; i < this->gameObjectList.size(); i++) {
-		if (this->gameObjectList[i] == gameObject) {
+
+
+	for (int i = 0; i < gameObjectList.size(); i++) {
+		if (this->gameObjectList[i]->getName() == gameObject->getName()) {
+			//std::cout << "Object in List: " << gameObjectList[i]->getName() << ", Object: " << gameObject->getName() << std::endl;
 			index = i;
 			break;
 		}
@@ -220,6 +322,14 @@ void GameObjectManager::deleteObject(AGameObject* gameObject)
 		planeCount--;
 	else if (deleteType == PHYSICS_CUBE)
 		physicsPlaneCount--;
+}
+
+void GameObjectManager::deleteAllObjects()
+{
+	while(gameObjectList.size() > 0)
+	{
+		deleteObject(gameObjectList[0]);
+	}
 }
 
 void GameObjectManager::deleteObjectByName(std::string name)
@@ -252,6 +362,75 @@ AGameObject* GameObjectManager::getSelectedObject()
 	}
 
 	return nullptr;
+}
+
+void GameObjectManager::reattachAllPhysicsComponents()
+{
+	for (int i = 0; i < gameObjectList.size(); i++)
+	{
+		if(gameObjectList[i]->findComponentOfType(AComponent::Physics) != nullptr)
+		{
+			PhysicsComponent* physicsComponent = (PhysicsComponent*)gameObjectList[i]->findComponentOfType(AComponent::Physics);
+			gameObjectList[i]->detachComponent(physicsComponent);
+
+			// Reattach Physics Component
+			std::string objName = gameObjectList[i]->getName();
+			std::string componentName = "PhysicsComponent_";
+			componentName.append(objName);
+			physicsComponent = new PhysicsComponent(componentName, gameObjectList[i], BodyType::DYNAMIC, 3.0f);
+			gameObjectList[i]->attachComponent(physicsComponent);
+		}
+	}
+}
+
+int GameObjectManager::getCubeCount()
+{
+	return cubeCount;
+}
+
+int GameObjectManager::getPlaneCount()
+{
+	return planeCount;
+}
+
+int GameObjectManager::getPhysicsCubeCount()
+{
+	return physicsCubeCount;
+}
+
+int GameObjectManager::getPhysicsPlaneCount()
+{
+	return physicsPlaneCount;
+}
+
+int GameObjectManager::getTexturedCubeCount()
+{
+	return texturedCubeCount;
+}
+
+void GameObjectManager::setCubeCount(int count)
+{
+	this->cubeCount = count;
+}
+
+void GameObjectManager::setPlaneCount(int count)
+{
+	this->planeCount = count;
+}
+
+void GameObjectManager::setPhysicsCubeCount(int count)
+{
+	this->physicsCubeCount = count;
+}
+
+void GameObjectManager::setPhysicsPlaneCount(int count)
+{
+	this->physicsPlaneCount = count;
+}
+
+void GameObjectManager::setTexturedCubeCount(int count)
+{
+	this->texturedCubeCount = count;
 }
 
 GameObjectManager::GameObjectManager()

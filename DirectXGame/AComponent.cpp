@@ -38,6 +38,7 @@ AComponent::String AComponent::getName()
 	return name;
 }
 
+
 void AComponent::perform(float deltaTime)
 {
 }

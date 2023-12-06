@@ -20,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AComponent.cpp" />
+    <ClCompile Include="ActionHistory.cpp" />
+    <ClCompile Include="ActionMemento.cpp" />
+    <ClCompile Include="ActionWindow.cpp" />
     <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="AResource.cpp" />
     <ClCompile Include="AUIScreen.cpp" />
@@ -28,6 +31,7 @@
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
+    <ClCompile Include="EditorAction.cpp" />
     <ClCompile Include="EngineBackend.cpp" />
     <ClCompile Include="EngineProfiler.cpp" />
     <ClCompile Include="EngineTime.cpp" />
@@ -63,6 +67,8 @@
     <ClCompile Include="SceneCameraHandler.cpp" />
     <ClCompile Include="SceneOutliner.cpp" />
     <ClCompile Include="ScenePlayWindow.cpp" />
+    <ClCompile Include="SceneReader.cpp" />
+    <ClCompile Include="SceneWriter.cpp" />
     <ClCompile Include="shader.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
@@ -70,12 +76,13 @@
       </DeploymentContent>
     </ClCompile>
     <ClCompile Include="ShaderLibrary.cpp" />
+    <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturedCube.cpp" />
     <ClCompile Include="TexturedVertexBuffer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="Toolbar.cpp" />
+    <ClCompile Include="MenuBar.cpp" />
     <ClCompile Include="TrianglePrimitive.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="UINames.cpp" />
@@ -88,6 +95,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AComponent.h" />
+    <ClInclude Include="ActionHistory.h" />
+    <ClInclude Include="ActionMemento.h" />
+    <ClInclude Include="ActionWindow.h" />
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="AResource.h" />
     <ClInclude Include="AUIScreen.h" />
@@ -96,6 +106,7 @@
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DeviceContext.h" />
+    <ClInclude Include="EditorAction.h" />
     <ClInclude Include="EngineBackend.h" />
     <ClInclude Include="EngineProfiler.h" />
     <ClInclude Include="EngineTime.h" />
@@ -132,13 +143,16 @@
     <ClInclude Include="SceneCameraHandler.h" />
     <ClInclude Include="SceneOutliner.h" />
     <ClInclude Include="ScenePlayWindow.h" />
+    <ClInclude Include="SceneReader.h" />
+    <ClInclude Include="SceneWriter.h" />
     <ClInclude Include="ShaderLibrary.h" />
+    <ClInclude Include="StringUtils.h" />
     <ClInclude Include="SwapChain.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TexturedCube.h" />
     <ClInclude Include="TexturedVertexBuffer.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="Toolbar.h" />
+    <ClInclude Include="MenuBar.h" />
     <ClInclude Include="TrianglePrimitive.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="UINames.h" />

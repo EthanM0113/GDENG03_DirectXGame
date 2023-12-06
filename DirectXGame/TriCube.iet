@@ -1,0 +1,20 @@
+Cube
+Type: 2
+Position: 1 5 0
+Rotation: 0 0 0
+Scale: 1 1 1
+Cube (1) 
+Type: 2
+Position: -1 5 0
+Rotation: 0 0 0
+Scale: 1 1 1
+Cube (2) 
+Type: 2
+Position: 0 7 0
+Rotation: 0 0 0
+Scale: 1 1 1
+CubeCount: 3
+PlaneCount: 0
+PhysicsCubeCount: 0
+PhysicsPlaneCount: 0
+TexturedCubeCount: 0

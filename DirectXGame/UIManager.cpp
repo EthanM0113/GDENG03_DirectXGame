@@ -5,6 +5,7 @@
 #include "MaterialScreen.h"
 #include "SceneOutliner.h"
 #include "ScenePlayWindow.h"
+#include "ActionWindow.h"
 
 UIManager* UIManager::sharedInstance = NULL;
 UINames uiNames;
@@ -68,8 +69,8 @@ UIManager::UIManager(HWND windowHandle)
     fileDialog.SetTitle("Open Scene");
     fileDialog.SetTypeFilters({ ".jpg", ".png" });
 
-    // Add Toolbar (Menu)
-    Toolbar* toolbar = new Toolbar(uiNames.MENU_SCREEN);
+    // Add Menu Bar
+    MenuBar* toolbar = new MenuBar(uiNames.MENU_SCREEN);
     uiList.push_back(toolbar);
 
     // Add Scene Outliner
@@ -92,7 +93,10 @@ UIManager::UIManager(HWND windowHandle)
     MaterialScreen* materialScreen = new MaterialScreen(uiNames.MATERIAL_SCREEN, fileDialog);
     materialScreen->setEnabled(false);
     uiList.push_back(materialScreen);
-  
+
+    // Add Action Window
+    ActionWindow* actionWindow = new ActionWindow(uiNames.ACTION_SCREEN);
+    uiList.push_back(actionWindow);
 }
 
 UIManager::~UIManager()

@@ -1,0 +1,32 @@
+Cube
+Type: 2
+Position: 1 5 0
+Rotation: 0 0 0
+Scale: 1 1 1
+Cube (1) 
+Type: 2
+Position: -1 5 0
+Rotation: 0 0 0
+Scale: 1 1 1
+Cube (2) 
+Type: 2
+Position: 0 7 0
+Rotation: 0 0 0
+Scale: 1 1 1
+Textured_Cube
+Type: 1
+Position: -1 8.3 0
+Rotation: 0 0 0
+Scale: 8 0.5 6.8
+D:\GDENG03_Repos\DirectXGame\DirectXGame\Assets\Textures\earth_night.jpg
+Textured_Cube (1) 
+Type: 1
+Position: 7.7 5.1 0
+Rotation: 0 0.9 0
+Scale: 7 7 7
+D:\GDENG03_Repos\DirectXGame\DirectXGame\Assets\Textures\stars_map.jpg
+CubeCount: 3
+PlaneCount: 0
+PhysicsCubeCount: 0
+PhysicsPlaneCount: 0
+TexturedCubeCount: 2

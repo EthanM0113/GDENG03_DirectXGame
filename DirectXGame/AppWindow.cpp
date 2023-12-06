@@ -3,6 +3,7 @@
 #include <iostream>
 #include <math.h>
 
+#include "ActionHistory.h"
 #include "Cube.h"
 #include "Vector3D.h"
 #include "EngineTime.h"
@@ -37,6 +38,7 @@ void AppWindow::onCreate()
 	BaseComponentSystem::initialize();
 	GameObjectManager::getInstance()->initialize();
 	EngineBackend::getInstance()->initialize();
+	ActionHistory::getInstance()->initialize();
 
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
 

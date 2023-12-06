@@ -12,7 +12,23 @@ public:
 	void perform(float deltaTime) override;
 	RigidBody* getRigidBody();
 
+	void setIsActive(bool flag);
+	bool getIsActive();
+
+	void setIsStatic(bool flag);
+	bool getIsStatic();
+
+	void setIsGravity(bool flag);
+	bool getIsGravity();
+
+	void setMass(float newMass);
+	float getMass();
+
+	void applyForce(Vector3 forceVector);
+
 private:
 	RigidBody* rigidBody;
 };
+
+
 

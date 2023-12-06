@@ -53,3 +53,61 @@ RigidBody* PhysicsComponent::getRigidBody()
 {
 	return rigidBody;
 }
+
+void PhysicsComponent::setIsActive(bool flag)
+{
+	this->rigidBody->setIsActive(flag);
+}
+
+bool PhysicsComponent::getIsActive()
+{
+	if (rigidBody->isActive())
+		return true;
+	
+	return  false;
+}
+
+void PhysicsComponent::setIsStatic(bool flag)
+{
+	if (flag)
+		rigidBody->setType(BodyType::STATIC);
+	else
+		rigidBody->setType(BodyType::DYNAMIC);
+}
+
+bool PhysicsComponent::getIsStatic()
+{
+	if (rigidBody->getType() == BodyType::STATIC)
+		return true;
+	
+	return false;
+}
+
+void PhysicsComponent::setIsGravity(bool flag)
+{
+	rigidBody->enableGravity(flag);
+}
+
+bool PhysicsComponent::getIsGravity()
+{
+	if (rigidBody->isGravityEnabled())
+		return  true;
+
+	return false;
+}
+
+void PhysicsComponent::setMass(float newMass)
+{
+	rigidBody->setMass(newMass);
+}
+
+float PhysicsComponent::getMass()
+{
+	return rigidBody->getMass();
+}
+
+void PhysicsComponent::applyForce(Vector3 forceVector)
+{
+	rigidBody->applyLocalForceAtCenterOfMass(forceVector);
+}
+

@@ -2,6 +2,7 @@
 
 #include "BaseComponentSystem.h"
 #include "EngineBackend.h"
+#include "GameObjectManager.h"
 
 ScenePlayWindow::ScenePlayWindow(String name) : AUIScreen(name)
 {
@@ -21,16 +22,20 @@ void ScenePlayWindow::drawUI(void* shaderByteCode, size_t sizeShader)
 	{
 		if (ImGui::Button(sleepButtonLabel)) 
 		{
-			if(backend->getMode() == EngineBackend::EDITOR)
+			if(isSleeping)
 			{
 				backend->setMode(EngineBackend::PLAY);
 				isSleeping = false;
 				sleepButtonLabel = "Stop";
 			}
-			else if(backend->getMode() == EngineBackend::PLAY) 
+			else if(!isSleeping) 
 			{
-				// Should reset physics objects but right now buggy, dont stop after playing
+				backend->setMode(EngineBackend::EDITOR);
+				isSleeping = true;
 				sleepButtonLabel = "Play";
+
+				// Reattach all physics components
+				GameObjectManager::getInstance()->reattachAllPhysicsComponents();
 			}
 		}
 		if(!isSleeping)

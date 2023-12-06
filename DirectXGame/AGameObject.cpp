@@ -61,6 +61,11 @@ Vector3D AGameObject::getLocalRotation()
 	return this->localRotation;
 }
 
+AGameObject::AQuaternion AGameObject::getLocalOrientation()
+{
+	return this->orientation;
+}
+
 void AGameObject::setObjectType(PrimitiveType objectType)
 {
 	this->objectType = objectType;
@@ -108,14 +113,17 @@ void AGameObject::recomputeMatrix(float matrix[16])
 	matrix4x4[0][1] = matrix[1];
 	matrix4x4[0][2] = matrix[2];
 	matrix4x4[0][3] = matrix[3];
+
 	matrix4x4[1][0] = matrix[4];
 	matrix4x4[1][1] = matrix[5];
 	matrix4x4[1][2] = matrix[6];
 	matrix4x4[1][3] = matrix[7];
+
 	matrix4x4[2][0] = matrix[8];
 	matrix4x4[2][1] = matrix[9];
 	matrix4x4[2][2] = matrix[10];
 	matrix4x4[2][3] = matrix[11];
+
 	matrix4x4[3][0] = matrix[12];
 	matrix4x4[3][1] = matrix[13];
 	matrix4x4[3][2] = matrix[14];
@@ -153,7 +161,8 @@ void AGameObject::updateLocalMatrix()
 {
 	//setup transformation matrix for drawing.
 	Matrix4x4 allMatrix; allMatrix.setIdentity();
-	Matrix4x4 translationMatrix; translationMatrix.setIdentity();  translationMatrix.setTranslation(this->getLocalPosition());
+	Matrix4x4 translationMatrix; translationMatrix.setIdentity();
+	translationMatrix.setTranslation(this->getLocalPosition());
 	Matrix4x4 scaleMatrix; scaleMatrix.setScale(this->getLocalScale());
 	Vector3D rotation = this->getLocalRotation();
 	Matrix4x4 xMatrix; xMatrix.setRotationX(rotation.getValues().x);
@@ -173,6 +182,7 @@ void AGameObject::attachComponent(AComponent* component)
 {
 	componentList.push_back(component);
 	componentTable[component->getName()] = component;
+	component->attachOwner(this);
 }
 
 void AGameObject::detachComponent(AComponent* component)

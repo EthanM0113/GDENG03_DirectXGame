@@ -1,0 +1,11 @@
+Textured_Cube
+Type: 1
+Position: 0 5 0
+Rotation: 0 0 0
+Scale: 1 1 1
+D:/GDENG03_Repos/DirectXGame/DirectXGame/Assets/Textures/wood.jpg
+CubeCount: 0
+PlaneCount: 0
+PhysicsCubeCount: 0
+PhysicsPlaneCount: 0
+TexturedCubeCount: 1
