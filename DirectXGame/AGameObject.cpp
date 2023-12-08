@@ -131,8 +131,9 @@ void AGameObject::recomputeMatrix(float matrix[16])
 
 	Matrix4x4 newMatrix; newMatrix.setMatrix(matrix4x4);
 	Matrix4x4 scaleMatrix; scaleMatrix.setScale(this->localScale);
-	Matrix4x4 transMatrix; transMatrix.setTranslation(this->localPosition);
-	this->localMatrix = scaleMatrix.multiplyTo(transMatrix.multiplyTo(newMatrix));
+	//Matrix4x4 transMatrix; transMatrix.setTranslation(this->localPosition);
+	//this->localMatrix = scaleMatrix.multiplyTo(transMatrix.multiplyTo(newMatrix));
+	this->localMatrix = scaleMatrix.multiplyTo(newMatrix);
 	this->overrideMatrix = true;
 }
 
@@ -193,7 +194,7 @@ void AGameObject::detachComponent(AComponent* component)
 		if (componentList[i]->getName() == component->getName())
 		{
 			componentList.erase(componentList.begin() + i);
-			return;
+			break;
 		}
 	}
 
@@ -203,7 +204,7 @@ void AGameObject::detachComponent(AComponent* component)
 		if (p.second->getName() == component->getName())
 		{
 			componentTable.erase(p.first);
-			return;
+			break;
 		}
 	}
 }

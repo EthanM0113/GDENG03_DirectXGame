@@ -1,0 +1,25 @@
+Plane
+Type: 4
+Position: 0 0 0
+Rotation: 0 0 0
+Scale: 6 0.01 6
+Cube
+Type: 2
+Position: -2.1 1 0
+Rotation: 0 0 0
+Scale: 1 1 1
+Cube (1) 
+Type: 2
+Position: 0.1 0.6 0.9
+Rotation: 0 0 0
+Scale: 1 1 1
+Cube (2) 
+Type: 2
+Position: -3.5 1 3.2
+Rotation: 0 0 0
+Scale: 1 1 1
+CubeCount: 3
+PlaneCount: 1
+PhysicsCubeCount: 0
+PhysicsPlaneCount: 0
+TexturedCubeCount: 0

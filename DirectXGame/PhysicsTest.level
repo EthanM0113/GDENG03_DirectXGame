@@ -1,0 +1,21 @@
+Physics_Plane
+Type: 5
+Position: 0 0 0
+Rotation: 0 0 0
+Scale: 32 0.2 32
+Has Rigidbody
+0.001
+GravityEnabled
+Cube
+Type: 2
+Position: 0 5 0
+Rotation: 0 0 0
+Scale: 1 1 1
+Has Rigidbody
+1
+GravityDisabled
+CubeCount: 1
+PlaneCount: 0
+PhysicsCubeCount: 0
+PhysicsPlaneCount: 1
+TexturedCubeCount: 0

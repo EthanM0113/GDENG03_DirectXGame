@@ -69,7 +69,7 @@ void InspectorWindow::drawUI(void* shaderByteCode, size_t sizeShader)
 			newRot[1] = vector3DRot.getValues().y;
 			newRot[2] = vector3DRot.getValues().z;
 			newRot[3] = 1.0f;
-			if(ImGui::DragFloat3("Rotation", newRot, 0.01f))
+			if(ImGui::DragFloat3("Rotation", newRot, 0.1f))
 			{
 				onTransformUpdate();
 			}

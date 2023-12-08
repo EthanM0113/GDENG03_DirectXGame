@@ -24,6 +24,9 @@ public:
 	void setMass(float newMass);
 	float getMass();
 
+	void SetType(BodyType type);
+	BodyType getType();
+
 	void applyForce(Vector3 forceVector);
 
 private:

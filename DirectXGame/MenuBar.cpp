@@ -12,11 +12,11 @@ MenuBar::MenuBar(String name) : AUIScreen(name)
 
 	// Setup Save Scene Explorer
 	saveDialog->SetTitle("Save Scene");
-	saveDialog->SetTypeFilters({".iet"});
+	saveDialog->SetTypeFilters({".level"});
 
 	// Setup Load Scene Explorer
 	loadDialog->SetTitle("Load Scene");
-	loadDialog->SetTypeFilters({".iet"});
+	loadDialog->SetTypeFilters({".level", ".unity"});
 }
 
 MenuBar::~MenuBar()

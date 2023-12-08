@@ -22,7 +22,12 @@ PhysicsComponent::PhysicsComponent(String name, AGameObject* owner, BodyType typ
 
 	BoxShape* boxShape = physicsCommon->createBoxShape(Vector3(scaleVect.x / 2, scaleVect.y / 2, scaleVect.z / 2));
 	rigidBody = physicsWorld->createRigidBody(transform);
-	rigidBody->addCollider(boxShape, transform);
+
+	Transform zeroTransform;
+	zeroTransform.setPosition(Vector3::zero());
+	zeroTransform.setOrientation(Quaternion::fromEulerAngles(0, 0, 0));
+
+	rigidBody->addCollider(boxShape, zeroTransform);
 	rigidBody->updateMassPropertiesFromColliders();
 	rigidBody->setMass(mass);
 	rigidBody->setType(type);
@@ -104,6 +109,16 @@ void PhysicsComponent::setMass(float newMass)
 float PhysicsComponent::getMass()
 {
 	return rigidBody->getMass();
+}
+
+void PhysicsComponent::SetType(BodyType type)
+{
+	rigidBody->setType(type);
+}
+
+BodyType PhysicsComponent::getType()
+{
+	return rigidBody->getType();
 }
 
 void PhysicsComponent::applyForce(Vector3 forceVector)

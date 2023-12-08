@@ -5,6 +5,7 @@
 #include "AGameObject.h"
 #include "GameObjectManager.h"
 #include "ObjectRenderer.h"
+#include "PhysicsComponent.h"
 #include "TexturedCube.h"
 
 
@@ -21,9 +22,9 @@ void SceneWriter::writeToFile(std::string filePath)
 	std::string directory = filePath;
 	std::string fileDir;
 	fileDir = directory;
-	fileDir.append(".iet");
+	fileDir.append(".level");
 
-	if(directory.find(".iet") != std::string::npos)
+	if(directory.find(".level") != std::string::npos)
 	{
 		fileDir = directory;
 	}
@@ -47,11 +48,29 @@ void SceneWriter::writeToFile(std::string filePath)
 		sceneFile << "Rotation: " << rotation.getValues().x << " " << rotation.getValues().y << " " << rotation.getValues().z << std::endl;
 		sceneFile << "Scale: " << scale.getValues().x << " " << scale.getValues().y << " " << scale.getValues().z << std::endl;
 
-		// Write Material Path for Textured Cubes
+		// For Final Exam specs, objects can only have either texture or physics component, for simplicity
+
+		// Write Material Path for Textured Cubes 
 		if(allObjects[i]->getObjectType() == TEXTURED_CUBE)
 		{
 			TexturedCube* textureCube = (TexturedCube*)allObjects[i];
 			sceneFile << textureCube->getRenderer()->getMaterialPath() << std::endl;
+		}
+
+		// If Game Object has Rigidbody
+		if(allObjects[i]->findComponentOfType(AComponent::Physics) != nullptr)
+		{
+			PhysicsComponent* physicsComponent = (PhysicsComponent*)allObjects[i]->findComponentOfType(AComponent::Physics);
+			sceneFile << "Has Rigidbody" << std::endl; // Has Rigidbody
+			sceneFile << physicsComponent->getMass() << std::endl; // Mass
+			if(physicsComponent->getIsGravity())
+			{
+				sceneFile << "GravityEnabled" << std::endl; 
+			}
+			else
+			{
+				sceneFile << "GravityDisabled" << std::endl; 
+			}
 		}
 
 	}

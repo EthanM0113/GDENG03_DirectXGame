@@ -157,8 +157,8 @@ void GameObjectManager::createObject(PrimitiveType type)
 		Plane* planeObject = new Plane(objName);
 		planeObject->setAnimSpeed(0.0f);
 		planeObject->setPosition(Vector3D(0, 0, 0));
-		planeObject->setRotation(Vector3D(7.85, 0, 0));
-		planeObject->setScale(Vector3D(8.0f, 8.0f, 0.1f));
+		planeObject->setRotation(Vector3D(0, 0, 0));
+		planeObject->setScale(Vector3D(1, 0.01f, 1));
 		planeObject->setObjectType(type);
 		GameObjectManager::getInstance()->addObject(planeObject);
 
@@ -178,7 +178,7 @@ void GameObjectManager::createObject(PrimitiveType type)
 		planeObject->setAnimSpeed(0.0f);
 		planeObject->setPosition(Vector3D(0, 0, 0));
 		planeObject->setRotation(Vector3D(0, 0, 0));
-		planeObject->setScale(Vector3D(32.0f, 0.2f, 32.0f));
+		planeObject->setScale(Vector3D(32.f, 0.2f, 32.f));
 		planeObject->setObjectType(type);
 		GameObjectManager::getInstance()->addObject(planeObject);
 		planeObject->updateLocalMatrix();
@@ -187,7 +187,7 @@ void GameObjectManager::createObject(PrimitiveType type)
 		// Attach Physics Component
 		std::string componentName = "PhysicsComponent_";
 		componentName.append(objName);
-		PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, planeObject, BodyType::KINEMATIC, 0.001f);
+		PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, planeObject, BodyType::KINEMATIC, 1);
 		planeObject->attachComponent(physicsComponent);
 
 		physicsPlaneCount++;
@@ -195,7 +195,7 @@ void GameObjectManager::createObject(PrimitiveType type)
 }
 
 void GameObjectManager::createObjectFromFile(std::string objectName, PrimitiveType objectType, Vector3D position,
-	Vector3D rotation, Vector3D scale)
+	Vector3D rotation, Vector3D scale, bool hasRB, float mass, bool isGravity, bool isKinematic)
 {
 	if (objectType == PrimitiveType::CUBE)
 	{
@@ -208,6 +208,25 @@ void GameObjectManager::createObjectFromFile(std::string objectName, PrimitiveTy
 		cubeObject->setRotation(rotation);
 		cubeObject->setObjectType(objectType);
 		GameObjectManager::getInstance()->addObject(cubeObject);
+
+		if(hasRB)
+		{
+			PhysicsComponent* physicsComponent;
+			cubeObject->updateLocalMatrix();
+			// Attach Physics Component
+			std::string componentName = "PhysicsComponent_";
+			componentName.append(objName);
+			if (isKinematic)
+			{
+				physicsComponent = new PhysicsComponent(componentName, cubeObject, BodyType::KINEMATIC, mass);
+				physicsComponent->setIsStatic(true);
+			}
+			else
+				physicsComponent = new PhysicsComponent(componentName, cubeObject, BodyType::DYNAMIC, mass);
+
+			physicsComponent->setIsGravity(isGravity);
+			cubeObject->attachComponent(physicsComponent);
+		}
 	}
 	if (objectType == PrimitiveType::PHYSICS_CUBE)
 	{
@@ -224,7 +243,8 @@ void GameObjectManager::createObjectFromFile(std::string objectName, PrimitiveTy
 		// Attach Physics Component
 		std::string componentName = "PhysicsComponent_";
 		componentName.append(objName);
-		PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, cubeObject, BodyType::DYNAMIC, 3.0f);
+		PhysicsComponent* physicsComponent = new PhysicsComponent(componentName, cubeObject, BodyType::DYNAMIC, mass);
+		physicsComponent->setIsGravity(isGravity);
 		cubeObject->attachComponent(physicsComponent);
 	}
 	else if (objectType == PrimitiveType::PLANE)
@@ -267,7 +287,7 @@ void GameObjectManager::createObjectFromFile(std::string objectName, PrimitiveTy
 }
 
 void GameObjectManager::createTexturedObjectFromFile(std::string objectName, PrimitiveType objectType,
-	Vector3D position, Vector3D rotation, Vector3D scale, std::string materialPath)
+                                                     Vector3D position, Vector3D rotation, Vector3D scale, std::string materialPath)
 {
 		if (objectType == PrimitiveType::TEXTURED_CUBE)
 		{
@@ -366,19 +386,20 @@ AGameObject* GameObjectManager::getSelectedObject()
 
 void GameObjectManager::reattachAllPhysicsComponents()
 {
+	// Cannot spam makes engine slow
 	for (int i = 0; i < gameObjectList.size(); i++)
 	{
 		if(gameObjectList[i]->findComponentOfType(AComponent::Physics) != nullptr)
 		{
 			PhysicsComponent* physicsComponent = (PhysicsComponent*)gameObjectList[i]->findComponentOfType(AComponent::Physics);
+			PhysicsComponent* oldComponent = new PhysicsComponent(physicsComponent->getName(), physicsComponent->getOwner(), physicsComponent->getType(), physicsComponent->getMass());
+			oldComponent->setIsActive(physicsComponent->getIsActive());
+			oldComponent->setIsStatic(physicsComponent->getIsStatic());
+			oldComponent->setIsGravity(physicsComponent->getIsGravity());
 			gameObjectList[i]->detachComponent(physicsComponent);
 
 			// Reattach Physics Component
-			std::string objName = gameObjectList[i]->getName();
-			std::string componentName = "PhysicsComponent_";
-			componentName.append(objName);
-			physicsComponent = new PhysicsComponent(componentName, gameObjectList[i], BodyType::DYNAMIC, 3.0f);
-			gameObjectList[i]->attachComponent(physicsComponent);
+			gameObjectList[i]->attachComponent(oldComponent);
 		}
 	}
 }

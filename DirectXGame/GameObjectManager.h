@@ -40,7 +40,7 @@ public:
 	void renderAll(int viewportWidth, int viewportHeight);
 	void addObject(AGameObject* gameObject);
 	void createObject(PrimitiveType type);
-	void createObjectFromFile(std::string objectName, PrimitiveType objectType, Vector3D position, Vector3D rotation, Vector3D scale);
+	void createObjectFromFile(std::string objectName, PrimitiveType objectType, Vector3D position, Vector3D rotation, Vector3D scale, bool hasRB, float mass, bool isGravity, bool isKinematic = false);
 	void createTexturedObjectFromFile(std::string objectName, PrimitiveType objectType, Vector3D position, Vector3D rotation, Vector3D scale, std::string materialPath);
 	void deleteObject(AGameObject* gameObject);
 	void deleteAllObjects();

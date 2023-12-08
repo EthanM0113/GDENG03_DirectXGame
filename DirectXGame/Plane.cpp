@@ -11,19 +11,20 @@ Plane::Plane(std::string name) : Cube(name)
 
 	//override cube constructor with different renderer
 	//create buffers for drawing. vertex data that needs to be drawn are temporarily placed here.
+	float dist = 0.5f; // Increasing vertex distance to resemble Unity more
 	Vertex quadList[] = {
 		//X, Y, Z
 		//FRONT FACE
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,1,1),  Vector3D(0.2f,0,0) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,1), Vector3D(0.2f,0.2f,0) },
-		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,1),  Vector3D(0.2f,0.2f,0) },
-		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,1,1), Vector3D(0.2f,0,0) },
+		{Vector3D(-dist,-dist,-dist),    Vector3D(1,1,1),  Vector3D(0.2f,0,0) },
+		{Vector3D(-dist,dist,-dist),    Vector3D(1,1,1), Vector3D(0.2f,0.2f,0) },
+		{Vector3D(dist,dist,-dist),   Vector3D(1,1,1),  Vector3D(0.2f,0.2f,0) },
+		{Vector3D(dist,-dist,-dist),     Vector3D(1,1,1), Vector3D(0.2f,0,0) },
 
 		//BACK FACE
-		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(1,1,1), Vector3D(0,0.2f,0) },
-		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(1,1,1), Vector3D(0,0.2f,0.2f) },
-		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(1,1,1),  Vector3D(0,0.2f,0.2f) },
-		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(1,1,1), Vector3D(0,0.2f,0) },
+		{Vector3D(dist,-dist,dist),    Vector3D(1,1,1), Vector3D(0,0.2f,0) },
+		{Vector3D(dist,dist,dist),    Vector3D(1,1,1), Vector3D(0,0.2f,0.2f) },
+		{Vector3D(-dist,dist,dist),   Vector3D(1,1,1),  Vector3D(0,0.2f,0.2f) },
+		{Vector3D(-dist,-dist,dist),     Vector3D(1,1,1), Vector3D(0,0.2f,0) },
 	};
 
 	this->vertexBuffer->release();
