@@ -1,7 +1,7 @@
 
-# Rendering System for Test Case HO
+# Rendering System for Final Exam Programming Challenge
 
-Work in Progress 3D Rendering System for GDENG03 class. Last commit was setup for the last test case, which was to replicate an image consisting of cubes and a plane. 
+3D Rendering System for GDENG03 class. Last update added engine states, undo-redo, scene loading / saving and Unity support.
 Programmed by John Nathaniel P. Manucat.
 
 ## Instructions
